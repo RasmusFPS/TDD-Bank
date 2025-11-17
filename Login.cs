@@ -8,5 +8,9 @@ namespace TDD_Bank
 {
     internal class Login
     {
+            public List<> MyProperty { get; set; }
+        internal void SignIn()
+        {
+    }
     }
 }
