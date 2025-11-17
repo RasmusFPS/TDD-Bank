@@ -4,7 +4,9 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            RunBank runbank = new RunBank();
+
+            runbank.WelcomeMSG();
         }
     }
 }
