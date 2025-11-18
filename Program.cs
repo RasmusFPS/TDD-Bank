@@ -4,9 +4,13 @@
     {
         static void Main(string[] args)
         {
-            RunBank runbank = new RunBank();
+            //    RunBank runbank = new RunBank();
 
-            runbank.WelcomeMSG();
+            //    runbank.WelcomeMSG();
+
+            Login login = new Login();
+
+            login.SignIn();
         }
     }
 }
