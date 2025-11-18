@@ -21,10 +21,7 @@ namespace TDD_Bank
 
             Thread.Sleep(2000);
             Console.Clear();
-        }
 
-        public void ShowSignInMenu()
-        {
             Console.WriteLine("1. Login");
             Console.WriteLine("2. Exit");
 
@@ -37,7 +34,13 @@ namespace TDD_Bank
                     break;
                 case "2":
                     return;
+
             }
+        }
+
+        public void SignInMenu()
+        {
+          
         }
 
         public void AdminMenu()
