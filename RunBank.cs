@@ -40,7 +40,18 @@ namespace TDD_Bank
 
         public void SignInMenu()
         {
-          
+            Console.WriteLine("----Welcome To your Bank----");
+            Console.WriteLine("1. Show your accounts Balance");
+            Console.WriteLine("2. ");
+
+            var input = Console.ReadLine();
+
+            switch (input)
+            {
+                case "1":
+                    Console.WriteLine("");
+                    break;
+            }
         }
 
         public void AdminMenu()
