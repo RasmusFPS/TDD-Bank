@@ -24,7 +24,7 @@ namespace TDD_Bank
             string password = Console.ReadLine();
             int id = UserCollection.Count + 1;
             bool isAdmin = false;
-            UserCollection.Add(new User(id, name, password, isAdmin));
+            UserCollection.Add(new User(name, password, isAdmin));
 
 
 
@@ -32,7 +32,7 @@ namespace TDD_Bank
 
             foreach (var i in UserCollection)
             {
-                Console.WriteLine($"New client\nID: {i.Id}, Client: {i.Username}, Password: {i.Password}\n");
+                Console.WriteLine($"New Client:\n {i.Username}, Password: {i.Password}\n");
             }
         }
     }
