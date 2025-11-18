@@ -1,8 +1,8 @@
 ﻿namespace TDD_Bank
 {
-    internal class RunBank
+    internal static class UI
     {
-        public void WelcomeMSG()
+        internal static void WelcomeMSG()
         {
             Console.WriteLine("Welcome to TDD Bank\n");
             Console.WriteLine("___________________  ________    __________    _____    _______   ____  __.");
@@ -36,7 +36,18 @@
             }
         }
 
-        public void SignInMenu()
+        internal static string SignInInput()
+        {
+            //Dubbelkolla felhantering
+            Console.Write("User-ID:");
+            string username = Console.ReadLine();
+            Console.Write("Password:");
+            string userPassword = Console.ReadLine();
+
+            return username + userPassword;
+        }
+
+        internal static void SignInMenu()
         {
             Console.WriteLine("----Welcome To your Bank----");
             Console.WriteLine("1. Show your accounts Balance");
@@ -52,7 +63,7 @@
             }
         }
 
-        public void AdminMenu()
+        internal static void AdminMenu()
         {
             Console.WriteLine("1. Update Currency");
             Console.WriteLine("2. Create New account");
@@ -70,7 +81,7 @@
 
         }
 
-        public void NewAccount()
+        internal static void NewAccount()
         {
             Console.WriteLine();
             Console.WriteLine("1. Bank Account");

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TDD_Bank
 {
-    internal class Loans
+    internal class Loan
     {
     }
 }
