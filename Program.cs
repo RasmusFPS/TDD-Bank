@@ -9,8 +9,10 @@
             //    runbank.WelcomeMSG();
 
             Login login = new Login();
+            login.AddUser();
 
-            login.SignIn();
+            //login.SignIn();
+
         }
     }
 }
