@@ -28,7 +28,7 @@
             switch (input)
             {
                 case "1":
-                    Console.WriteLine("Going to Login");
+                    SignInInput();
                     break;
                 case "2":
                     return;
@@ -36,7 +36,7 @@
             }
         }
 
-        internal static string SignInInput()
+        internal static (string,string) SignInInput()
         {
             //Dubbelkolla felhantering
             Console.Write("User-ID:");
@@ -44,7 +44,12 @@
             Console.Write("Password:");
             string userPassword = Console.ReadLine();
 
-            return username + userPassword;
+            return (username,userPassword);
+        }
+
+        internal static void StartSignin()
+        {
+            User.SignIn();
         }
 
         internal static void SignInMenu()

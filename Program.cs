@@ -1,4 +1,7 @@
-﻿namespace TDD_Bank
+﻿using System.Reflection.Metadata;
+using System.Text.Json.Serialization;
+
+namespace TDD_Bank
 {
     internal class Program
     {
@@ -8,10 +11,10 @@
 
             //    runbank.WelcomeMSG();
 
-            Login login = new Login();
-            login.AddUser();
+            UI.StartSignin();
 
-            //login.SignIn();
+
+
 
         }
     }
