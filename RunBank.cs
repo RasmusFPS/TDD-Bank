@@ -6,10 +6,15 @@
         {
             Console.WriteLine("Welcome to TDD Bank\n");
             Console.WriteLine("___________________  ________    __________    _____    _______   ____  __.");
+            Thread.Sleep(400);
             Console.WriteLine("\\__    ___/\\______ \\ \\______ \\   \\______   \\  /  _  \\   \\      \\ |    |/ _|");
+            Thread.Sleep(400);
             Console.WriteLine("  |    |    |    |  \\ |    |  \\   |    |  _/ /  /_\\  \\  /   |   \\|      <  ");
+            Thread.Sleep(400);
             Console.WriteLine("  |    |    |    `   \\|    `   \\  |    |   \\/    |    \\/    |    \\    |  \\ ");
+            Thread.Sleep(400);
             Console.WriteLine("  |____|   /_______  /_______  /  |______  /\\____|__  /\\____|__  /____|__ \\");
+            Thread.Sleep(400);
             Console.WriteLine("                   \\/        \\/          \\/         \\/         \\/        \\/");
 
             Thread.Sleep(2000);
