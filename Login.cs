@@ -36,9 +36,8 @@
         internal bool SignIn()
         {
             
-            while (attempts <= 3)
+            while (attempts < 3)
             {
-                Console.WriteLine(attempts);
                 Console.Write("User-ID:");
                 if (int.TryParse(Console.ReadLine(), out int userID)) ;
                 Console.Write("Password:");
@@ -48,14 +47,16 @@
                 {
                     if (user.Id == userID && user.Password == userPassword)
                     {
-                        Console.WriteLine($"Välkommen {user.Id}");
+                        Console.WriteLine($"Welcome {user.Username}");
                         return true;
                     }
                 }
+                attempts++;
+                Console.WriteLine("Wrong user-ID or password.");
             }
             if (attempts == 3)
             {
-                Console.WriteLine("För många försök.");
+                Console.WriteLine("Too many attempts.");
             }
             return false;
         }
