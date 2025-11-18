@@ -21,10 +21,7 @@ namespace TDD_Bank
 
             Thread.Sleep(2000);
             Console.Clear();
-        }
 
-        public void ShowSignInMenu()
-        {
             Console.WriteLine("1. Login");
             Console.WriteLine("2. Exit");
 
@@ -37,6 +34,23 @@ namespace TDD_Bank
                     break;
                 case "2":
                     return;
+
+            }
+        }
+
+        public void SignInMenu()
+        {
+            Console.WriteLine("----Welcome To your Bank----");
+            Console.WriteLine("1. Show your accounts Balance");
+            Console.WriteLine("2. ");
+
+            var input = Console.ReadLine();
+
+            switch (input)
+            {
+                case "1":
+                    Console.WriteLine("");
+                    break;
             }
         }
 
