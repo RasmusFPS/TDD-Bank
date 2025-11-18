@@ -31,7 +31,7 @@ namespace TDD_Bank
 
             foreach (var i in UserCollection)
             {
-                Console.WriteLine($"New client\nClient: {i.Username}, Password: {i.Password}\n");
+                Console.WriteLine($"New Client:\n {i.Username}, Password: {i.Password}\n");
             }
         }
     }
