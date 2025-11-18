@@ -19,18 +19,22 @@
             //Blueprint Usercreation
             //-------------------------
 
-            //string name = Console.ReadLine(); 
-            //string password = Console.ReadLine();
-            //if (int.TryParse(Console.ReadLine(), out int id)) ;
-            //new Users(id, name, password, isAdmin)
+            Console.Write("Insert name:");
+            string name = Console.ReadLine();
+            Console.Write("Insert password:");
+            string password = Console.ReadLine();
+            int id = UserCollection.Count + 1;
+            bool isAdmin = false;
+            UserCollection.Add(new Users(id, name, password, isAdmin));
+            
+            
 
 
 
             foreach (var i in UserCollection)
             {
-                Console.WriteLine(i);
+                Console.WriteLine($"New client\nID: {i.Id}, Client: {i.Username}, Password: {i.Password}\n");
             }
-            //UserCollection.Add(id, Name, password);
         }
 
         internal bool SignIn()
