@@ -2,8 +2,8 @@
 {
     internal class User
     {
-        public int attempts = 0;
-        public List<User> UserCollection = new List<User>()
+        public static int attempts = 0;
+        public static List<User> UserCollection = new List<User>()
         {
             new User( "Admin-Johan", "1234", true),
             new User( "Carl", "Hawaa", false)
@@ -19,30 +19,39 @@
             IsAdmin = isAdmin;
         }
 
-        internal bool SignIn()
+
+
+        internal static bool SignIn()
         {
-            //Få in signininput
             while (attempts < 3)
             {
-                UI.SignInInput();
-                bool signedIn = false;
+                // 1. It calls the worker to get the data.
+                var Credentials = UI.SignInInput();
+
+                string username = Credentials.Item1;
+                string userPassword = Credentials.Item2;
+
+                // 2. It does the logic.
                 foreach (User user in UserCollection)
                 {
                     if (user.Username == username && user.Password == userPassword)
                     {
                         Console.WriteLine($"Welcome {user.Username}");
+                        // Here you would call the correct menu
                         return true;
                     }
                 }
+
+                // 3. It handles failure.
                 attempts++;
                 Console.WriteLine("Wrong user-ID or password.");
             }
+
             if (attempts == 3)
             {
                 Console.WriteLine("Too many attempts.");
             }
             return false;
         }
-
     }
 }

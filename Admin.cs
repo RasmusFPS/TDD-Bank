@@ -22,7 +22,6 @@ namespace TDD_Bank
             string name = Console.ReadLine();
             Console.Write("Insert password:");
             string password = Console.ReadLine();
-            int id = UserCollection.Count + 1;
             bool isAdmin = false;
             UserCollection.Add(new User(name, password, isAdmin));
 
