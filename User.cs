@@ -13,8 +13,8 @@
             Password = password;
             IsAdmin = isAdmin;
         }
-
-        internal static bool SignIn()
+        //changed to return to User insted of Bool we need to know what user is logged in
+        internal static User SignIn()
         {
             while (attempts < 3)
             {
@@ -31,7 +31,7 @@
                     {
                         Console.WriteLine($"Welcome {user.Username}");
                         // Here you would call the correct menu
-                        return true;
+                        return user;
                     }
                 }
 
@@ -44,7 +44,7 @@
             {
                 Console.WriteLine("Too many attempts.");
             }
-            return false;
+            return null;
         }
     }
 }

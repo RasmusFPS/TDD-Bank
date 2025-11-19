@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TDD_Bank
 {
+    //Made Data Static to work in user class
     internal static class Data
     {
         public static double _savingInterest;
@@ -14,11 +15,12 @@ namespace TDD_Bank
         public static List<User> UserCollection = new List<User>()
         {
             new User( "Admin-Johan", "1234", true),
-            new User( "Carl", "Hawaa", false)
+            new Client( "Carl", "Hawaa", false)
 
         };
 
         public static List<Exchange> Currency = new();
+
 
     }
 }

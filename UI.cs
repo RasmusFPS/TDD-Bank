@@ -6,18 +6,18 @@
         {
             Console.WriteLine("Welcome to TDD Bank\n");
             Console.WriteLine("___________________  ________    __________    _____    _______   ____  __.");
-            Thread.Sleep(400);
+            Thread.Sleep(200);
             Console.WriteLine("\\__    ___/\\______ \\ \\______ \\   \\______   \\  /  _  \\   \\      \\ |    |/ _|");
-            Thread.Sleep(400);
+            Thread.Sleep(200);
             Console.WriteLine("  |    |    |    |  \\ |    |  \\   |    |  _/ /  /_\\  \\  /   |   \\|      <  ");
-            Thread.Sleep(400);
+            Thread.Sleep(200);
             Console.WriteLine("  |    |    |    `   \\|    `   \\  |    |   \\/    |    \\/    |    \\    |  \\ ");
-            Thread.Sleep(400);
+            Thread.Sleep(200);
             Console.WriteLine("  |____|   /_______  /_______  /  |______  /\\____|__  /\\____|__  /____|__ \\");
-            Thread.Sleep(400);
+            Thread.Sleep(200);
             Console.WriteLine("                   \\/        \\/          \\/         \\/         \\/        \\/");
 
-            Thread.Sleep(2000);
+            Thread.Sleep(1000);
             Console.Clear();
 
             Console.WriteLine("1. Login");
@@ -30,6 +30,7 @@
                 case "1":
                     Console.WriteLine("Going to Login");
                     Thread.Sleep(100);
+                    Console.Clear();
                     break;
                 case "2":
                     return;
@@ -45,23 +46,19 @@
             Console.Write("Password:");
             string userPassword = Console.ReadLine();
 
+            Console.Clear();
             return (username,userPassword);
         }
 
-        internal static void SignInMenu()
+        public static string SignInMenu(Client client)
         {
-            Console.WriteLine("----Welcome To your Bank----");
-            Console.WriteLine("1. Show your accounts Balance");
-            Console.WriteLine("2. ");
+            Console.WriteLine($"\n---- Welcome, {client.Username}! ----");
+            Console.WriteLine("1. Show My Accounts");
+            Console.WriteLine("2. Create New Account");
+            Console.WriteLine("3. Logout");
+            Console.Write("Your choice: ");
 
-            var input = Console.ReadLine();
-
-            switch (input)
-            {
-                case "1":
-                    Console.WriteLine("");
-                    break;
-            }
+            return Console.ReadLine();
         }
 
         internal static void AdminMenu()
@@ -87,6 +84,30 @@
             Console.WriteLine();
             Console.WriteLine("1. Bank Account");
             Console.WriteLine("2. Savings Account");
+        }
+
+        internal static decimal UserInput()
+        {
+            Console.Write("Please Enter the Amount:");
+            var input = Convert.ToDecimal(Console.ReadLine());
+
+            return input;
+        }
+        
+        //prints the account balance (account number DOSENT WORK YET)
+        internal static void ShowAccounts(Client client)
+        {
+            Console.WriteLine("Accounts");
+
+            if (!client.Accounts.Any())
+            {
+                Console.WriteLine("You have no accounts");
+            }
+
+            foreach (Account account in client.Accounts)
+            {
+                Console.WriteLine(account.Balance.ToString(), account.AccountNumber);
+            }
         }
     }
 }
