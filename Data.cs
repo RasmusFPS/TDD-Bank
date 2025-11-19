@@ -8,6 +8,9 @@ namespace TDD_Bank
 {
     internal class Data
     {
+        public double _savingInterest;
+        public double _loanInterest;
+
         public static List<User> UserCollection = new List<User>()
         {
             new User( "Admin-Johan", "1234", true),
@@ -16,5 +19,6 @@ namespace TDD_Bank
         };
 
         public static List<Exchange> Currency = new();
+
     }
 }
