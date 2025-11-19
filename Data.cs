@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace TDD_Bank
 {
-    internal class Data
+    internal static class Data
     {
-        public double _savingInterest;
-        public double _loanInterest;
+        public static double _savingInterest;
+        public static double _loanInterest;
 
         public static List<User> UserCollection = new List<User>()
         {

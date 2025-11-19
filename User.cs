@@ -14,8 +14,6 @@
             IsAdmin = isAdmin;
         }
 
-
-
         internal static bool SignIn()
         {
             while (attempts < 3)
@@ -27,7 +25,7 @@
                 string userPassword = Credentials.Item2;
 
                 // 2. It does the logic.
-                foreach (User user in UserCollection)
+                foreach (User user in Data.UserCollection)
                 {
                     if (user.Username == username && user.Password == userPassword)
                     {
