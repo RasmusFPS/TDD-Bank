@@ -3,12 +3,7 @@
     internal class User
     {
         public static int attempts = 0;
-        public static List<User> UserCollection = new List<User>()
-        {
-            new User( "Admin-Johan", "1234", true),
-            new User( "Carl", "Hawaa", false)
-
-        };
+        
         public string Username { get; set; }
         public string Password { get; set; }
         public bool IsAdmin { get; set; }
