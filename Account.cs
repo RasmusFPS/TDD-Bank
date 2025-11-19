@@ -8,9 +8,40 @@ namespace TDD_Bank
 {
     internal class Account
     {
-        internal List<Account> Accounts = new();
-        internal List<Loan> Loans = new();
+        private static int NextAccountNumber = 1000;
 
+        public int AccountNumber { get; private set; }
+        public decimal Balance { get; private set; }
 
+        //AccountNumber and Account Balance
+        public Account(decimal initalbalance = 10000)
+        {
+            AccountNumber = NextAccountNumber++;
+            Balance = initalbalance;
+        }
+        //Prompts user to Deposite money with UI class
+        internal void Deposit(decimal amount)
+        {
+            amount = UI.UserInput();
+
+            if(amount > 0)
+            {
+                Balance += amount;
+            }
+        }
+        //Prompts user to withdraw certain amount with UI class
+        internal void Withdraw(decimal amount)
+        {
+            amount = UI.UserInput();
+
+            if (Balance > 0 && Balance >= amount)
+            {
+                Balance -= amount;
+            }
+            else
+            {
+                Console.WriteLine("Insufficent Funds");
+            }
+        }
     }
 }
