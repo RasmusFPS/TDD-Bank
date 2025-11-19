@@ -28,7 +28,8 @@
             switch (input)
             {
                 case "1":
-                    SignInInput();
+                    Console.WriteLine("Going to Login");
+                    Thread.Sleep(100);
                     break;
                 case "2":
                     return;
@@ -45,11 +46,6 @@
             string userPassword = Console.ReadLine();
 
             return (username,userPassword);
-        }
-
-        internal static void StartSignin()
-        {
-            User.SignIn();
         }
 
         internal static void SignInMenu()

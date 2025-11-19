@@ -11,8 +11,8 @@ namespace TDD_Bank
 
             //    runbank.WelcomeMSG();
 
-            UI.StartSignin();
-
+            UI.WelcomeMSG();
+            User.SignIn();
 
 
 
