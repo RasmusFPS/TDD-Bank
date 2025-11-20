@@ -55,7 +55,9 @@
             Console.WriteLine($"\n---- Welcome, {client.Username}! ----");
             Console.WriteLine("1. Show My Accounts");
             Console.WriteLine("2. Create New Account");
-            Console.WriteLine("3. Logout");
+            Console.WriteLine("3. Deposit Money");
+            Console.WriteLine("4. Withdraw Money");
+            Console.WriteLine("5. Logout");
             Console.Write("Your choice: ");
 
             return Console.ReadLine();
@@ -108,6 +110,11 @@
             {
                 Console.WriteLine(account.Balance.ToString(), account.AccountNumber);
             }
+        }
+
+        internal static void GetDeposit()
+        {
+
         }
     }
 }
