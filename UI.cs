@@ -96,7 +96,7 @@
             return input;
         }
         
-        //prints the account balance (account number DOSENT WORK YET)
+        //prints the account balance
         internal static void ShowAccounts(Client client)
         {
             Console.WriteLine("Accounts");
@@ -104,17 +104,35 @@
             if (!client.Accounts.Any())
             {
                 Console.WriteLine("You have no accounts");
+                return;
             }
 
-            foreach (Account account in client.Accounts)
+            Console.WriteLine("Balance      | Account Number ");
+            Console.WriteLine("-------------|----------------");
+
+            foreach(Account account in client.Accounts)
             {
-                Console.WriteLine(account.Balance.ToString(), account.AccountNumber);
+                Console.WriteLine($"{account.Balance}{account.Currency}         |{account.AccountNumber}");
             }
+
         }
 
-        internal static void GetDeposit()
+        internal static (int, decimal) GetDeposit()
         {
+            Console.WriteLine("Enter the Account Number");
+            int.TryParse(Console.ReadLine(), out int AccountNumber);
 
+            Console.WriteLine("Enter Amount:");
+            decimal.TryParse(Console.ReadLine(), out decimal amount);
+
+            return (AccountNumber, amount);
+        }
+
+        internal static void CurrencyList()
+        {
+            Console.WriteLine("SEK");
+            Console.WriteLine("EUR");
+            Console.WriteLine("USD");
         }
     }
 }

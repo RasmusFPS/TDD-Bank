@@ -20,10 +20,13 @@ namespace TDD_Bank
         {
             Console.WriteLine("Please input the Deposit amount");
             string userInput = Console.ReadLine();
+            Console.WriteLine("Choose Currency:");
+            UI.CurrencyList();
+            string input = Console.ReadLine().ToUpper();
             
             if (decimal.TryParse(userInput, out decimal DepositAmount))
             {
-                Account newAccount = new Account(DepositAmount);
+                Account newAccount = new Account(DepositAmount,input);
 
 
                 Accounts.Add(newAccount);
