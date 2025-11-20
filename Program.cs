@@ -42,6 +42,9 @@ namespace TDD_Bank
                     case "2":
                         client.CreateNewAccount();
                         break;
+                    case "3":
+                        UI.GetDeposit();
+                        break;
                 }
             }
         }

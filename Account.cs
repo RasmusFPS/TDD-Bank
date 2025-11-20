@@ -12,12 +12,14 @@ namespace TDD_Bank
 
         public int AccountNumber { get; private set; }
         public decimal Balance { get; private set; }
+        public string Currency { get; private set; }
 
         //AccountNumber and Account Balance
-        public Account(decimal initalbalance = 10000)
+        public Account(decimal initalbalance, string Currency)
         {
             AccountNumber = NextAccountNumber++;
             Balance = initalbalance;
+            this.Currency = Currency;
         }
         //Prompts user to Deposite money with UI class
         internal void Deposit(decimal amount)
