@@ -15,13 +15,12 @@ namespace TDD_Bank
         public static List<User> UserCollection = new List<User>()
         {
             new Admin( "Admin-Johan", "1234", true),
-            new Client( "Carl", "Hawaa", false)
+            new Client( "Carl", "Hawaa", false),
             new Client("Bob","123",false)
 
         };
 
         public static List<Exchange> Currency = new();
-
 
     }
 }
