@@ -7,12 +7,12 @@ namespace TDD_Bank
     {
         static void Main(string[] args)
         {
-            //THIS IS ONLY TEMP TO TEST (we can put this in our Bank.cs Later to make the thing work) : )
-            UI.WelcomeMSG();
+            //THIS IS ONLY TEMP TO TEST(we can put this in our Bank.cs Later to make the thing work) : )
+                UI.WelcomeMSG();
 
             User loggedInUser = User.SignIn();
 
-            if(loggedInUser is Client currentClient)
+            if (loggedInUser is Client currentClient)
             {
                 RunClientDashboard(currentClient);
             }
@@ -47,6 +47,8 @@ namespace TDD_Bank
                         break;
                 }
             }
+
+
         }
     }
 }
