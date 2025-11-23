@@ -19,11 +19,11 @@
             return false;
         }
 
-        internal void TransferToOthers(Account)
-        {
-            Console.WriteLine("Wich account do you want to transfer from?");
-            myAccounts = Account.ShowAccounts();
-        }
+        //internal void TransferToOthers(Account)
+        //{
+            //Console.WriteLine("Wich account do you want to transfer from?");
+            //myAccounts = Account.ShowAccounts();
+        //}
 
         internal void TransferLog()
         {

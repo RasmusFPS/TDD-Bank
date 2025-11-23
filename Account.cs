@@ -22,27 +22,27 @@ namespace TDD_Bank
             this.Currency = Currency;
         }
         //Prompts user to Deposite money with UI class
-        internal void Deposit(decimal amount)
+        internal bool Deposit(decimal amount)
         {
-            amount = UI.UserInput();
-
             if(amount > 0)
             {
                 Balance += amount;
+                return true;
             }
+            return false;
         }
         //Prompts user to withdraw certain amount with UI class
-        internal void Withdraw(decimal amount)
+        internal bool Withdraw(decimal amount)
         {
-            amount = UI.UserInput();
-
             if (Balance > 0 && Balance >= amount)
             {
                 Balance -= amount;
+                return true;
             }
             else
             {
                 Console.WriteLine("Insufficent Funds");
+                return false;
             }
         }
     }

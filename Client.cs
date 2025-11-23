@@ -14,6 +14,16 @@ namespace TDD_Bank
             //new makes sure the account is fresh and created for the object
             Accounts = new List<Account>();
         }
+
+        public Account GetAccount(int accountNumber)
+        {
+            foreach (var account in Accounts)
+            {
+                return account;
+            }
+
+            return null;
+        }
         
         //This takes user input on how much money should be in the account
         public void CreateNewAccount()
