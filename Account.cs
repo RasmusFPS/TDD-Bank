@@ -12,7 +12,7 @@ namespace TDD_Bank
 
         public int AccountNumber { get; private set; }
         public decimal Balance { get; set; }//Removed private to be able to use it in banktransfer class.
-        public string Currency { get; private set; }
+        public string Currency { get; set; }
 
         //AccountNumber and Account Balance
         public Account(decimal initalbalance, string Currency)
