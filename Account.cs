@@ -24,8 +24,6 @@ namespace TDD_Bank
         //Prompts user to Deposite money with UI class
         internal bool Deposit(decimal amount)
         {
-            //amount = UI.UserInput(); //Might be better to remove this so it can be re-used in
-            //banktransfer and call on it separately in Main
 
             if (amount > 0)
             {
@@ -44,7 +42,6 @@ namespace TDD_Bank
             }
             else
             {
-                Console.WriteLine("Insufficent Funds");
                 return false;
             }
         }

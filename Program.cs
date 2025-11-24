@@ -48,9 +48,6 @@ namespace TDD_Bank
                     case "4":
                         HandleWithdraw(client);
                         break;
-                    case "4":
-                        //WITHDRAWEL
-                        break;
                     case "5":
                         Console.WriteLine("FANNYS METOD");
                         BankTransfer.TransferToMe(client);
