@@ -2,8 +2,6 @@
 {
     internal class BankTransfer
     {
-        internal decimal Amount { get; set; }
-
         internal static bool TransferToMe(Client client)
         {
             if (client.Accounts.Count < 2)
