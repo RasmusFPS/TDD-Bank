@@ -39,7 +39,7 @@
             Account fromAccount = client.Accounts[fromIndex - 1];
             Account toAccount = client.Accounts[toIndex - 1];
 
-            if(fromAccount.Currency != toAccount.Currency)
+            if (fromAccount.Currency != toAccount.Currency)
             {
                 Console.WriteLine("The accounts have different currencies, transfer not possible.");
                 return false;
@@ -71,16 +71,97 @@
             toAccount.Deposit(amount);
         }
 
-        internal void TransferToOthers(Account account)
+        //returnerar bool för att se om transaktionen lyckades
+        internal static bool TransferToOthers(Client sender)
         {
-            Console.WriteLine("Wich account do you want to transfer from?");
-            //myAccounts = Account.ShowAccounts();
+            Console.WriteLine("Your accounts:");
+            //Loopar igenom och visar konton
+            foreach (var acc in sender.Accounts)
+            {
+                Console.WriteLine($"Account number: {acc.AccountNumber}");
+                Console.WriteLine($"Balance: {acc.Balance}  {acc.Currency}\n");
+            }
+            Console.WriteLine("Enter the account number of the account you want to transfer from");
+            string fromInput = Console.ReadLine();
+
+            Account fromAccount = null;
+
+            //Loopar igenom för att hitta matchande konton
+            foreach (var acc in sender.Accounts)
+            {
+                if (acc.AccountNumber.ToString() == fromInput)
+                {
+                    //när match hittas sparas det i denna variabeln
+                    fromAccount = acc;
+                    break;
+                }
+            }
+
+            //Kontrollerar att konto hittats
+            if (fromAccount == null)
+            {
+                Console.WriteLine("Invalid account");
+                return false;
+            }
+
+            Console.WriteLine("Enter the account you want to transfer to:");
+            string toInput = Console.ReadLine();
+
+            Account toAccount = null;
+
+            //yttre loop kollar alla användare i systemet, inre kollar individuella konton för klienter
+            foreach (var user in Data.UserCollection)
+            {
+                if (user is Client client)
+                {
+                    foreach (var acc in client.Accounts)
+                    {
+                        if (acc.AccountNumber.ToString() == toInput)
+                        {
+                            toAccount = acc;
+                            break;
+                        }
+                    }
+                }
+                if (toAccount != null)
+                    break;
+            }
+
+            if (toAccount == null)
+            {
+                Console.WriteLine("Account not found.");
+                return false;
+            }
+
+            Console.WriteLine("Enter the amount you want to transfer:");
+            string amountInput = Console.ReadLine();
+
+            //om det inte går att konvertera input till decimal -> felmeddelande
+            if (!decimal.TryParse(amountInput, out decimal amount))
+            {
+                Console.WriteLine("Invalid amount.");
+                return false;
+            }
+
+            if (amount <= 0)
+            {
+                Console.WriteLine("Amount must be grater than zero.");
+                return false;
+            }
+
+            if (fromAccount.Balance < amount)
+            {
+                Console.WriteLine("Insufficient balance.");
+                return false;
+            }
+
+            fromAccount.Withdraw(amount);
+
+            toAccount.Deposit(amount);
+
+            Console.WriteLine($"Transfer successful! {amount} {fromAccount.Currency} was sent from {fromAccount.AccountNumber} to {toAccount.AccountNumber}.");
+            return true;
         }
-        //internal void TransferToOthers(Account)
-        //{
-            //Console.WriteLine("Wich account do you want to transfer from?");
-            //myAccounts = Account.ShowAccounts();
-        //}
 
         internal void TransferLog()
         {
