@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 
 namespace TDD_Bank
 {
     internal class Client : User
     {
+        internal List<Loan> Loans { get; private set; }
         internal List<Account> Accounts { get; private set; }
         public Client(string username, string password, bool isAdmin) : base(username, password, false)
         {
             //new makes sure the account is fresh and created for the object
             Accounts = new List<Account>();
+            Loans = new List<Loan>();
         }
 
         public Account GetAccount(int accountNumber)
@@ -48,6 +51,28 @@ namespace TDD_Bank
                 Console.WriteLine("Invalid Amount, Couldnt Create Account");
             }
 
+        }
+
+        public void CreateSavingAccount()
+        {
+            Console.WriteLine("Please input deposit amount");
+            string userInput = Console.ReadLine();
+            Console.WriteLine("Choose currency");
+            UI.CurrencyList();
+            var input = Console.ReadLine().ToUpper();
+            Console.WriteLine("The intrest Rate is 2% per year");
+            if(decimal.TryParse(userInput,out decimal DepositAmount))
+            {
+                SavingAccount newAccount = new SavingAccount(DepositAmount,input,0.02m);
+
+                Accounts.Add(newAccount);
+
+                Console.WriteLine("Saving Account created");
+            }
+            else
+            {
+                Console.WriteLine("Invalid Amount, Couldnt create account");
+            }
         }
     }
 }

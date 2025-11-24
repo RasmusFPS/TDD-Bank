@@ -108,12 +108,19 @@
                 return;
             }
 
-            Console.WriteLine("Balance      | Account Number ");
-            Console.WriteLine("-------------|----------------");
-
-            foreach(Account account in client.Accounts)
+            Console.WriteLine("Balance      | Account Number | Type / Info");
+            Console.WriteLine("-------------|----------------|--------------------");
+            foreach (Account account in client.Accounts)
             {
-                Console.WriteLine($"{account.Balance}{account.Currency}         |{account.AccountNumber}");
+                string accounttype = "Standard Account";
+
+                if(account is SavingAccount)
+                {
+                    SavingAccount savingacc = (SavingAccount)account;
+
+                    accounttype = $"Saving account {savingacc.Intrestrate} Intrest per year";
+                }
+                Console.WriteLine($"{account.Balance}{account.Currency,-8}  | {account.AccountNumber,-14}  | {accounttype}");
             }
 
         }
@@ -135,5 +142,6 @@
             Console.WriteLine("EUR");
             Console.WriteLine("USD");
         }
+
     }
 }
