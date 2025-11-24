@@ -25,6 +25,21 @@ namespace TDD_Bank
             decimal dollar;
             dollar = sek * 0.68m;
         }
-        
+        /*internal void ValueExchangeSek()
+        {
+            if (Account.Currency == USD)
+            {
+                sek = Account.Balance / 0.105m;
+            }
+            else if (Account.Currency == EUR)
+            {
+                sek = Account.Balance / 0.091m;
+            }
+            else if (Account.Currency == DKK)
+            {
+                sek = Account.Balance / 0.68m;
+            }
+        }*/
+
     }
 }
