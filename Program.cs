@@ -43,7 +43,10 @@ namespace TDD_Bank
                         client.CreateNewAccount();
                         break;
                     case "3":
-                        UI.GetDeposit();
+                        HandleDeposit(client);
+                        break;
+                    case "4":
+                        HandleWithdraw(client);
                         break;
                     case "4":
                         //WITHDRAWEL
@@ -58,6 +61,56 @@ namespace TDD_Bank
             
             
 
+        }
+        private static void HandleDeposit(Client client)
+        {
+            UI.ShowAccounts(client);
+
+            var (accountNumber, amount) = UI.GetDeposit();
+
+            Account account = client.GetAccount(accountNumber);
+
+            if (account != null)
+            {
+                if (account.Deposit(amount))
+                {
+                    Console.WriteLine($"Deposit successful. New Balance{account.Balance}");
+                }
+                else
+                {
+                    Console.WriteLine("Deposit Failed");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Account Not Found");
+            }
+
+        }
+
+        private static void HandleWithdraw(Client client)
+        {
+            UI.ShowAccounts(client);
+
+            var (accountNumber, amount) = UI.GetDeposit();
+
+            Account account = client.GetAccount(accountNumber);
+
+            if(account != null)
+            {
+                if (account.Withdraw(amount))
+                {
+                    Console.WriteLine($"\nWithdrawal successful. New balance for account #{account.AccountNumber} is {account.Balance:C}.");
+                }
+                else
+                {
+                    Console.WriteLine("\nWithdrawal failed. Insufficient funds or invalid amount.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Account not found");
+            }
         }
     }
 }
