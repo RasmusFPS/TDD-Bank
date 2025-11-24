@@ -57,7 +57,8 @@
             Console.WriteLine("2. Create New Account");
             Console.WriteLine("3. Deposit Money");
             Console.WriteLine("4. Withdraw Money");
-            Console.WriteLine("5. Logout");
+            Console.WriteLine("5. Transfer Money");//Fanny Added
+            Console.WriteLine("6. Logout");
             Console.Write("Your choice: ");
 
             return Console.ReadLine();

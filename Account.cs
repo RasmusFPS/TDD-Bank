@@ -11,7 +11,7 @@ namespace TDD_Bank
         private static int NextAccountNumber = 1000;
 
         public int AccountNumber { get; private set; }
-        public decimal Balance { get; private set; }
+        public decimal Balance { get; set; }//Removed private to be able to use it in banktransfer class.
         public string Currency { get; private set; }
 
         //AccountNumber and Account Balance
@@ -24,7 +24,10 @@ namespace TDD_Bank
         //Prompts user to Deposite money with UI class
         internal bool Deposit(decimal amount)
         {
-            if(amount > 0)
+            //amount = UI.UserInput(); //Might be better to remove this so it can be re-used in
+            //banktransfer and call on it separately in Main
+
+            if (amount > 0)
             {
                 Balance += amount;
                 return true;

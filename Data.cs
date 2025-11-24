@@ -22,5 +22,7 @@ namespace TDD_Bank
 
         public static List<Exchange> Currency = new();
 
+        public static List<TransferLog> TransferHistory = new List<TransferLog>();
+
     }
 }
