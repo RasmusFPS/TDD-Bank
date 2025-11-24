@@ -9,9 +9,19 @@ namespace TDD_Bank
     internal class Exchange
     {
         public decimal sek;
+        internal void ExchangeStart(Account account)
+        {
+            if (account.Currency != "SEK")
+            {
+                Exchange.ValueExchangeSek(account, sek);
+            }
+            else if (account.Currency == "SEK")
+            {
+
+            }
+        }
         internal void ValueExchangeDollar()
         {
-
             decimal dollar;
             dollar = sek * 0.105m;
         }
@@ -25,6 +35,21 @@ namespace TDD_Bank
             decimal dollar;
             dollar = sek * 0.68m;
         }
-        
+        internal static void ValueExchangeSek(Account account, decimal sek)
+        {
+            if (account.Currency == "USD")
+            {
+                sek = account.Balance / 0.105m;
+            }
+            else if (account.Currency == "EUR")
+            {
+                sek = account.Balance / 0.091m;
+            }
+            else if (account.Currency == "DKK")
+            {
+                sek = account.Balance / 0.68m;
+            }
+        }
+
     }
 }

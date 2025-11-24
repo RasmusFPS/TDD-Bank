@@ -40,7 +40,7 @@ namespace TDD_Bank
                         UI.ShowAccounts(client);
                         break;
                     case "2":
-                        client.CreateNewAccount();
+                        TypeOfAccount(client);
                         break;
                     case "3":
                         HandleDeposit(client);
@@ -109,5 +109,25 @@ namespace TDD_Bank
                 Console.WriteLine("Account not found");
             }
         }
+        internal static void TypeOfAccount(Client client)
+        {
+            Console.WriteLine("What type of Account do you want to make");
+            Console.WriteLine("1.Bank Account\n2.Saving Account");
+            string input = Console.ReadLine();
+            switch (input)
+            {
+                case "1":
+                    client.CreateNewAccount();
+                    break;
+                case "2":
+                    client.CreateSavingAccount();
+                    break;
+                default:
+                    Console.WriteLine("Didnt choose Account correctly");
+                    break;
+
+            }
+        }
+
     }
 }

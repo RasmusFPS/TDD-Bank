@@ -12,32 +12,43 @@
             Console.WriteLine("Your accounts:\n");
             foreach (var acc in client.Accounts)
             {
-                Console.WriteLine($"Account {acc.AccountNumber}: {acc.Balance} kr {acc.Currency}");
+                Console.WriteLine($"Account {acc.AccountNumber}: {acc.Balance} {acc.Currency}");
             }
             ////return false;//Ev ta bort?
 
             Console.WriteLine("Enter wich account you want to transfer from:");
-            if (!int.TryParse(Console.ReadLine(), out int fromIndex) || fromIndex < 1 || fromIndex > client.Accounts.Count)
+            if (!int.TryParse(Console.ReadLine(), out int fromAccountNumber))
             {
-                Console.WriteLine("Invalid choice.");
+                Console.WriteLine("Invalid accountnumber.");
+                return false;
+            }
+
+            Account fromAccount = client.Accounts.Find(firstAccount => firstAccount.AccountNumber == fromAccountNumber);
+            if (fromAccount == null)
+            {
+                Console.WriteLine("Can't fint the account.");
                 return false;
             }
 
             Console.WriteLine("Enter wich account you want to transfer to:");
-            if (!int.TryParse(Console.ReadLine(), out int toIndex) || toIndex < 1 || toIndex > client.Accounts.Count)
+            if (!int.TryParse(Console.ReadLine(), out int toAccountNumber))
             {
-                Console.WriteLine("Invalid choice.");
+                Console.WriteLine("Invalid accountnumber.");
                 return false;
             }
 
-            if (fromIndex == toIndex)
+            Account toAccount = client.Accounts.Find(secondAccount => secondAccount.AccountNumber == toAccountNumber);
+            if (toAccount == null)
+            {
+                Console.WriteLine("Can't find the account.");
+                return false;
+            }
+
+            if (fromAccountNumber == toAccountNumber)
             {
                 Console.WriteLine("You can't transfer to the same account.");
                 return false;
             }
-
-            Account fromAccount = client.Accounts[fromIndex - 1];
-            Account toAccount = client.Accounts[toIndex - 1];
 
             if (fromAccount.Currency != toAccount.Currency)
             {
