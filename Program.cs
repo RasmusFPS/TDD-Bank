@@ -7,8 +7,8 @@ namespace TDD_Bank
     {
         static void Main(string[] args)
         {
-            //THIS IS ONLY TEMP TO TEST(we can put this in our Bank.cs Later to make the thing work) : )
-                UI.WelcomeMSG();
+            //    //THIS IS ONLY TEMP TO TEST(we can put this in our Bank.cs Later to make the thing work) : )
+            UI.WelcomeMSG();
 
             User loggedInUser = User.SignIn();
 
@@ -45,9 +45,18 @@ namespace TDD_Bank
                     case "3":
                         UI.GetDeposit();
                         break;
+                    case "4":
+                        //WITHDRAWEL
+                        break;
+                    case "5":
+                        Console.WriteLine("FANNYS METOD");
+                        BankTransfer.TransferToMe(client);
+                        break;
                 }
             }
 
+            
+            
 
         }
     }
