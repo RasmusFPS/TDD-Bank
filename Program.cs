@@ -9,8 +9,8 @@ namespace TDD_Bank
         {
             //    //THIS IS ONLY TEMP TO TEST(we can put this in our Bank.cs Later to make the thing work) : )
             UI.WelcomeMSG();
-
-            User loggedInUser = User.SignIn();
+            TDDBank bank = new TDDBank();
+            User loggedInUser = TDDBank.SignIn();
 
             if (loggedInUser is Client currentClient)
             {
@@ -50,6 +50,10 @@ namespace TDD_Bank
                         break;
                     case "5":
                         BankTransfer.TransferToMe(client);
+                        break;
+                    case "6":
+                        Console.Clear();
+                        TDDBank.SignIn();
                         break;
                 }
             }
