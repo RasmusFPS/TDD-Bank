@@ -106,7 +106,7 @@ namespace TDD_Bank
         private void HandleDeposit(Client client)
         {
             UI.ShowAccounts(client);
-            var accountNumber = UI.GetDeposit();
+            var accountNumber = UI.GetAccountNumber();
             var amount = UI.GetDecimal();
             Account account = client.GetAccount(accountNumber);
 
@@ -130,7 +130,7 @@ namespace TDD_Bank
         private void HandleWithdraw(Client client)
         {
             UI.ShowAccounts(client);
-            var accountNumber = UI.GetDeposit();
+            var accountNumber = UI.GetAccountNumber();
             var amount = UI.GetDecimal();
             Account account = client.GetAccount(accountNumber);
 
