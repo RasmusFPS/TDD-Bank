@@ -94,8 +94,7 @@ namespace TDD_Bank
                         HandleWithdraw(currentclient);
                         break;
                     case "5":
-                        // BankTransfer.TransferToMe(client);
-                        Console.WriteLine("Transfers are not implemented yet.");
+                        BankTransfer.TransferToMe(currentclient);
                         break;
                     case "6":
                         return;
