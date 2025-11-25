@@ -144,7 +144,7 @@
 
         }
 
-        internal static int GeAccountNumber()
+        internal static int GetAccountNumber()
         {
             Console.WriteLine("Enter the Account Number");
             int.TryParse(Console.ReadLine(), out int AccountNumber);
