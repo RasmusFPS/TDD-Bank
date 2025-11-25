@@ -144,7 +144,7 @@
 
         }
 
-        internal static int GetDeposit()
+        internal static int GeAccountNumber()
         {
             Console.WriteLine("Enter the Account Number");
             int.TryParse(Console.ReadLine(), out int AccountNumber);
@@ -164,6 +164,10 @@
         internal static void PrintMessage(string message)
         {
             Console.WriteLine();
+        }
+
+        internal static void PrintCurrency()
+        {
         }
         
     }
