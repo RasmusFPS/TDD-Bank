@@ -53,7 +53,7 @@ namespace TDD_Bank
                         break;
                     case "6":
                         Console.Clear();
-                        TDDBank.SignIn();
+                        UI.WelcomeMSG();
                         break;
                 }
             }
