@@ -34,6 +34,9 @@
                     break;
                 case "2":
                     return;
+                default:
+                    Console.WriteLine("INVALID");
+                    break;
 
             }
         }
