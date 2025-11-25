@@ -46,13 +46,19 @@
             //    return false;
             //}
 
-            if (fromAccount.Currency != toAccount.Currency)
+            if (fromAccount.Currency != "SEK")
+            {
+                Exchange exchange = new Exchange();
+                exchange.ExchangeStart(fromAccount);
+            }
+
+            if (toAccount.Currency != "SEK")
             {
                 Exchange exchange = new Exchange();
                 exchange.ExchangeStart(toAccount);
             }
 
-                Console.WriteLine($"How much do you want to transfer? Saldo: {fromAccount.Balance} {fromAccount.Currency}");
+            Console.WriteLine($"How much do you want to transfer? Saldo: {fromAccount.Balance} {fromAccount.Currency}");
             if (!decimal.TryParse(Console.ReadLine(), out decimal amount) || amount <= 0)
             {
                 Console.WriteLine("Invalid amount.");
