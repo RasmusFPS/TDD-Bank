@@ -4,17 +4,7 @@
     {
         internal static bool TransferToMe(Client client)
         {
-            //if (client.Accounts.Count < 2)
-            //{
-            //    Console.WriteLine("inte");
-            //    return false;
-            //}
-            Console.WriteLine("Your accounts:\n");
-            foreach (var acc in client.Accounts)
-            {
-                Console.WriteLine($"Account {acc.AccountNumber}: {acc.Balance} {acc.Currency}");
-            }
-            ////return false;//Ev ta bort?
+            UI.ShowAccounts(client);
 
             Console.WriteLine("Enter wich account you want to transfer from:");
             if (!int.TryParse(Console.ReadLine(), out int fromAccountNumber))
@@ -56,13 +46,19 @@
             //    return false;
             //}
 
-            if (fromAccount.Currency != toAccount.Currency)
+            if (fromAccount.Currency != "SEK")
+            {
+                Exchange exchange = new Exchange();
+                exchange.ExchangeStart(fromAccount);
+            }
+
+            if (toAccount.Currency != "SEK")
             {
                 Exchange exchange = new Exchange();
                 exchange.ExchangeStart(toAccount);
             }
 
-                Console.WriteLine($"How much do you want to transfer? Saldo: {fromAccount.Balance} {fromAccount.Currency}");
+            Console.WriteLine($"How much do you want to transfer? Saldo: {fromAccount.Balance} {fromAccount.Currency}");
             if (!decimal.TryParse(Console.ReadLine(), out decimal amount) || amount <= 0)
             {
                 Console.WriteLine("Invalid amount.");
