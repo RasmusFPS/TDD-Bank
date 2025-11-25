@@ -2,7 +2,7 @@
 {
     internal class TDDBank
     {
-        public static int attempts = 0;
+        private static int attempts = 0;
 
         internal static User SignIn()
         {

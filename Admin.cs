@@ -25,14 +25,27 @@ namespace TDD_Bank
             bool isAdmin = false;
             Data.UserCollection.Add(new User(name, password, isAdmin));
 
-
-
-
-
             foreach (var i in Data.UserCollection)
             {
                 Console.WriteLine($"New Client:\n {i.Username}, Password: {i.Password}\n");
             }
+            Console.WriteLine("Press Enter To Continue...");
+            Console.ReadKey();
+            Console.Clear();
+            UI.AdminMenu();
+        }
+
+        internal void UserLog()
+        {
+            Console.WriteLine("User Log:");
+            foreach (var i in Data.UserCollection)
+            {
+                Console.WriteLine($"New Client:\n {i.Username}, Password: {i.Password}\n");
+            }
+            Console.WriteLine("Press Enter To Continue...");
+            Console.ReadKey();
+            Console.Clear();
+            UI.AdminMenu();
         }
     }
 }
