@@ -41,16 +41,22 @@
             }
         }
 
-        internal static (string,string) SignInInput()
+        internal static string GetUsername()
         {
             //Dubbelkolla felhantering
             Console.Write("User-ID:");
             string username = Console.ReadLine();
+
+            Console.Clear();
+            return username;
+        }
+
+        internal static string GetPassword()
+        {
             Console.Write("Password:");
             string userPassword = Console.ReadLine();
 
-            Console.Clear();
-            return (username,userPassword);
+            return userPassword;
         }
 
         public static string SignInMenu(Client client)
@@ -138,23 +144,27 @@
 
         }
 
-        internal static (int, decimal) GetDeposit()
+        internal static int GetDeposit()
         {
             Console.WriteLine("Enter the Account Number");
             int.TryParse(Console.ReadLine(), out int AccountNumber);
 
+            return AccountNumber;
+        }
+
+        internal static decimal GetDecimal()
+        {
             Console.WriteLine("Enter Amount:");
             decimal.TryParse(Console.ReadLine(), out decimal amount);
 
-            return (AccountNumber, amount);
+            return amount;
         }
 
-        internal static void CurrencyList()
+
+        internal static void PrintMessage(string message)
         {
-            Console.WriteLine("SEK");
-            Console.WriteLine("EUR");
-            Console.WriteLine("USD");
+            Console.WriteLine();
         }
-
+        
     }
 }
