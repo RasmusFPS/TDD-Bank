@@ -95,7 +95,7 @@
                     admin.CreateNewUser();
                     return;
                 case "4":
-                    UI.WelcomeMSG();
+                    
                     break;
             }
 
