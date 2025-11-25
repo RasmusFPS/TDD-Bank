@@ -26,8 +26,7 @@ namespace TDD_Bank
                 }
                 else if (_loggedin is Admin)
                 {
-                    Console.WriteLine("Admin dashboard is not yet implemented. Logging out.");
-                    Thread.Sleep(2000);
+                    UI.AdminMenu();
                 }
 
                 _loggedin = null;
