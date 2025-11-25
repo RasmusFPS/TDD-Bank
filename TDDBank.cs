@@ -1,36 +1,63 @@
-﻿namespace TDD_Bank
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace TDD_Bank
 {
     internal class TDDBank
     {
-        public static int attempts = 0;
+        public int attempts = 0;
+        private User _loggedin;
 
-        internal static User SignIn()
+        public void Run()
         {
-            bool signedIn = false;
-            while (signedIn == false)
+            while (true)
+            {
+
+                UI.WelcomeMSG();
+
+                SignIn();
+
+                if (_loggedin == null) return;
+
+                if (_loggedin is Client)
+                {
+                    RunClientDashboard();
+                }
+                else if (_loggedin is Admin)
+                {
+                    Console.WriteLine("Admin dashboard is not yet implemented. Logging out.");
+                    Thread.Sleep(2000);
+                }
+
+                _loggedin = null;
+                Console.Clear();
+
+            }
+        }
+
+        internal void SignIn()
+        {
+            attempts = 0;
+
             {
                 while (attempts < 3)
                 {
-
-                    // 1. It calls the worker to get the data.
                     var Credentials = UI.SignInInput();
-
                     string username = Credentials.Item1.ToLower();
                     string userPassword = Credentials.Item2;
 
-                    // 2. It does the logic.
                     foreach (User user in Data.UserCollection)
                     {
                         if (user.Username.ToLower() == username && user.Password == userPassword)
                         {
                             Console.WriteLine($"Welcome {user.Username}");
-                            // Here you would call the correct menu
-                            signedIn = true;
-                            return user;
+                            _loggedin = user;
+                            return;
+
                         }
                     }
 
-                    // 3. It handles failure.
                     attempts++;
                     Console.WriteLine("Wrong user-ID or password.");
                 }
@@ -38,10 +65,110 @@
                 if (attempts == 3)
                 {
                     Console.WriteLine("Too many attempts.");
-                    return null;
+                    _loggedin = null;
                 }
             }
-            return null;
+        }
+
+        private void RunClientDashboard()
+        {
+            Client currentclient = _loggedin as Client;
+
+            if (currentclient == null) return;
+            bool temp = true;
+            while (temp)
+            {
+                string choice = UI.SignInMenu(currentclient);
+                switch (choice)
+                {
+                    case "1":
+                        Console.WriteLine("Show Accounts");
+                        UI.ShowAccounts(currentclient);
+                        break;
+                    case "2":
+                        TypeOfAccount(currentclient);
+                        break;
+                    case "3":
+                        HandleDeposit(currentclient);
+                        break;
+                    case "4":
+                        HandleWithdraw(currentclient);
+                        break;
+                    case "5":
+                        // BankTransfer.TransferToMe(client);
+                        Console.WriteLine("Transfers are not implemented yet.");
+                        break;
+                    case "6":
+                        return;
+                }
+            }
+        }
+
+        private void HandleDeposit(Client client)
+        {
+            UI.ShowAccounts(client);
+            var (accountNumber, amount) = UI.GetDeposit();
+            Account account = client.GetAccount(accountNumber);
+
+            if (account != null)
+            {
+                if (account.Deposit(amount))
+                {
+                    Console.WriteLine($"Deposit successful. New Balance{account.Balance}");
+                }
+                else
+                {
+                    Console.WriteLine("Deposit Failed");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Account Not Found");
+            }
+        }
+
+        private void HandleWithdraw(Client client)
+        {
+            UI.ShowAccounts(client);
+            var (accountNumber, amount) = UI.GetDeposit();
+            Account account = client.GetAccount(accountNumber);
+
+            if (account != null)
+            {
+                if (account.Withdraw(amount))
+                {
+                    Console.WriteLine($"\nWithdrawal successful. New balance for account #{account.AccountNumber} is {account.Balance:C}.");
+                }
+                else
+                {
+                    Console.WriteLine("\nWithdrawal failed. Insufficient funds or invalid amount.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Account not found");
+            }
+        }
+
+        internal void TypeOfAccount(Client client)
+        {
+            Console.WriteLine("What type of Account do you want to make");
+            Console.WriteLine("1.Bank Account\n2.Saving Account");
+            string input = Console.ReadLine();
+            switch (input)
+            {
+                case "1":
+                    client.CreateNewAccount();
+                    break;
+                case "2":
+                    client.CreateSavingAccount();
+                    break;
+                default:
+                    Console.WriteLine("Didnt choose Account correctly");
+                    break;
+            }
         }
     }
 }
+
+
