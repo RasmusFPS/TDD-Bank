@@ -4,8 +4,6 @@
     {
         internal static bool TransferToMe(Client client)
         {
-            decimal amountOne = 0;
-            decimal amountTwo = 0;
             UI.ShowAccounts(client);
 
             Console.WriteLine("Enter wich account you want to transfer from:");
@@ -42,25 +40,7 @@
                 return false;
             }
 
-            //if (fromAccount.Currency != toAccount.Currency)
-            //{
-            //    Console.WriteLine("The accounts have different currencies, transfer not possible.");
-            //    return false;
-            //}
-
-            //if (fromAccount.Currency != "SEK")
-            //{
-            //    Exchange exchange = new Exchange();
-            //    exchange.ExchangeStart(fromAccount);
-            //}
-
-            //if (toAccount.Currency != "SEK")
-            //{
-            //    Exchange exchange = new Exchange();
-            //    exchange.ExchangeStart(toAccount);
-            //}
-
-            Console.WriteLine($"How much do you want to transfer? Saldo: {fromAccount.Balance} {fromAccount.Currency}");
+            Console.WriteLine($"How much do you want to transfer? Balance: {fromAccount.Balance} {fromAccount.Currency}");
             if (!decimal.TryParse(Console.ReadLine(), out decimal amount) || amount <= 0)
             {
                 Console.WriteLine("Invalid amount.");
@@ -73,30 +53,17 @@
                 return false;
             }
 
-            if (fromAccount.Currency != "SEK")
-            {
-                bool addToAccount = false;
-                Exchange exchange = new Exchange();
-                amountOne = exchange.ValueExchangeOne(fromAccount, amount, addToAccount);
-            }
-
-            if (toAccount.Currency != "SEK" || toAccount.Currency == "SEK")
-            {
-                bool addToAccount = true;
-                Exchange exchange = new Exchange();
-                amountTwo = exchange.ValueExchangeTwo(toAccount, addToAccount);
-            }
             //Här ska överföringen genomföras.
-            ExecuteTransfer(fromAccount, toAccount, amountOne, amountTwo, client.Username, client.Username);
+            ExecuteTransfer(fromAccount, toAccount, amount);
             Console.WriteLine($"Transfer succeeded. {amount} {fromAccount.Currency} was transferred.");
             return true;
         }
 
         //GENOMFÖRA ÖVERFÖRING METOD BEHÖVS NOG HÄR.
-        private static void ExecuteTransfer(Account fromAccount, Account toAccount, decimal amountOne, decimal amountTwo, string fromUser, string toUser)
+        private static void ExecuteTransfer(Account fromAccount, Account toAccount, decimal amount)
         {
-            fromAccount.Withdraw(amountOne);
-            toAccount.Deposit(amountTwo);
+            fromAccount.Withdraw(amount);
+            toAccount.Deposit(amount);
         }
 
         //returnerar bool för att se om transaktionen lyckades
