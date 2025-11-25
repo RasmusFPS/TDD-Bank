@@ -137,7 +137,7 @@
                 {
                     SavingAccount savingacc = (SavingAccount)account;
 
-                    accounttype = $"Saving account {savingacc.Intrestrate} Intrest per year";
+                    accounttype = $"Saving account {savingacc.IntrestRate} Intrest per year";
                 }
                 Console.WriteLine($"{account.Balance}{account.Currency,-8}  | {account.AccountNumber,-14}  | {accounttype}");
             }
