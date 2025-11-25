@@ -70,9 +70,12 @@
         internal static void AdminMenu()
         {
             Console.WriteLine("1. Update Currency");
-            Console.WriteLine("2. Create New account");
+            Console.WriteLine("2. User Log");
+            Console.WriteLine("3. Create New User");
+            Console.WriteLine("4. Log Out");
 
             var input = Console.ReadLine();
+            Admin admin = new Admin("", "", true);
 
             switch (input)
             {
@@ -80,7 +83,14 @@
                     Console.WriteLine("Update Currency");
                     break;
                 case "2":
+                    admin.UserLog();
+                    break;
+                case "3":
+                    admin.CreateNewUser();
                     return;
+                case "4":
+                    UI.WelcomeMSG();
+                    break;
             }
 
         }
