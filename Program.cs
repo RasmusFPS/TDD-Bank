@@ -18,7 +18,8 @@ namespace TDD_Bank
             }
             else if (loggedInUser is Admin admin)
             {
-                Console.WriteLine("Admin dashboard is not yet DONE");
+                UI.AdminMenu();
+
             }
 
             Console.WriteLine("Thank you for using TDD Bank");
