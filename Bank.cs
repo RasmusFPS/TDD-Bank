@@ -94,8 +94,7 @@ namespace TDD_Bank
                         HandleWithdraw(currentclient);
                         break;
                     case "5":
-                        // BankTransfer.TransferToMe(client);
-                        Console.WriteLine("Transfers are not implemented yet.");
+                        BankTransfer.TransferToMe(currentclient);
                         break;
                     case "6":
                         return;
@@ -130,8 +129,7 @@ namespace TDD_Bank
         private void HandleWithdraw(Client client)
         {
             UI.ShowAccounts(client);
-            var accountNumber = UI.GetDeposit();
-            var amount = UI.GetDecimal();
+            var (AccountNumber) = UI.GetDeposit();
             Account account = client.GetAccount(accountNumber);
 
             if (account != null)
