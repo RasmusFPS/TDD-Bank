@@ -4,14 +4,15 @@ using System.Linq;
 
 namespace TDD_Bank
 {
-    internal class TDDBank
+    internal class Bank
     {
         public int attempts = 0;
         private User _loggedin;
 
         public void Run()
         {
-            while (true)
+            bool Exit = true;
+            while (Exit)
             {
 
                 UI.WelcomeMSG();
@@ -42,9 +43,8 @@ namespace TDD_Bank
             {
                 while (attempts < 3)
                 {
-                    var Credentials = UI.SignInInput();
-                    string username = Credentials.Item1.ToLower();
-                    string userPassword = Credentials.Item2;
+                    string username = UI.GetUsername();
+                    string userPassword = UI.GetPassword();
 
                     foreach (User user in Data.UserCollection)
                     {

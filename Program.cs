@@ -7,7 +7,7 @@ namespace TDD_Bank
     {
         static void Main(string[] args)
         {
-            TDDBank bank = new TDDBank();
+            Bank bank = new Bank();
 
             bank.Run();
         }

@@ -33,9 +33,9 @@ namespace TDD_Bank
             return false;
         }
         //Prompts user to withdraw certain amount with UI class
-        internal bool Withdraw(decimal amount)
+        internal bool Withdraw(decimal amount)//WORKS NOW
         {
-            if (Balance > 0 && Balance >= amount)
+            if (amount > 0 && Balance >=0)
             {
                 Balance -= amount;
                 return true;

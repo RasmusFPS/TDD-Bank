@@ -20,7 +20,11 @@ namespace TDD_Bank
 
         };
 
-        public static List<Exchange> Currency = new();
+        public static Dictionary<string, decimal> Currency = new()
+        {
+            {"EUR",0.09m }
+        };
+
 
         public static List<TransferLog> TransferHistory = new List<TransferLog>();
 
