@@ -2,8 +2,9 @@
 {
     internal static class UI
     {
-        internal static void WelcomeMSG()
+        internal static bool WelcomeMSG()
         {
+
             Console.WriteLine("Welcome to TDD Bank\n");
             Console.WriteLine("___________________  ________    __________    _____    _______   ____  __.");
             Thread.Sleep(200);
@@ -20,25 +21,41 @@
             Thread.Sleep(1000);
             Console.Clear();
 
-            Console.WriteLine("1. Login");
-            Console.WriteLine("2. Exit");
+            bool UserContinue = true;
+            bool WaitingForInput = true;
 
-            var input = Console.ReadLine();
-
-            switch (input)
+            while (WaitingForInput)
             {
-                case "1":
-                    Console.WriteLine("Going to Login");
-                    Thread.Sleep(100);
-                    Console.Clear();
-                    break;
-                case "2":
-                    return;
-                default:
-                    Console.WriteLine("INVALID");
-                    break;
+                Console.WriteLine("1. Login");
+                Console.WriteLine("2. Exit");
 
+                var input = Console.ReadLine();
+
+                switch (input)
+                {
+                    case "1":
+                        Console.WriteLine("Going to Login");
+                        Thread.Sleep(100);
+                        Console.Clear();
+                        UserContinue = true;
+                        WaitingForInput = false;
+                        break;
+                    case "2":
+                        Console.WriteLine("Exiting application...");
+                        Thread.Sleep(500);
+                        UserContinue = false;
+                        WaitingForInput = false;
+                        break;
+                    default:
+                        Console.WriteLine("INVALID");
+                        Console.WriteLine("Press 1 or 2");
+                        Thread.Sleep(500);
+                        Console.Clear();
+                        break;
+
+                }
             }
+            return UserContinue;
         }
 
         internal static string GetUsername()
@@ -48,7 +65,7 @@
             string username = Console.ReadLine();
 
             Console.Clear();
-            return username;
+            return username.ToLower();
         }
 
         internal static string GetPassword()
@@ -96,7 +113,7 @@
                     admin.CreateNewUser();
                     return;
                 case "4":
-                    
+
                     break;
             }
 
@@ -116,7 +133,7 @@
 
             return input;
         }
-        
+
         //prints the account balance
         internal static void ShowAccounts(Client client)
         {
@@ -134,7 +151,7 @@
             {
                 string accounttype = "Standard Account";
 
-                if(account is SavingAccount)
+                if (account is SavingAccount)
                 {
                     SavingAccount savingacc = (SavingAccount)account;
 
@@ -157,7 +174,7 @@
         {
             decimal amount;
             Console.WriteLine("Enter Amount:");
-            while(!decimal.TryParse(Console.ReadLine(), out amount));
+            while (!decimal.TryParse(Console.ReadLine(), out amount)) ;
             {
                 Console.WriteLine("Invaild Inupt. try again");
             }
@@ -174,6 +191,6 @@
         internal static void PrintCurrency()
         {
         }
-        
+
     }
 }
