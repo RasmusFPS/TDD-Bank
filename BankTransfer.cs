@@ -4,59 +4,71 @@
     {
         internal static bool TransferToMe(Client client)
         {
-            UI.ShowAccounts(client);
+            bool keepTrying = true;
 
-            Console.WriteLine("Enter wich account you want to transfer from:");
-            if (!int.TryParse(Console.ReadLine(), out int fromAccountNumber))
+            while (keepTrying)
             {
-                Console.WriteLine("Invalid accountnumber.");
-                return false;
-            }
+                UI.ShowAccounts(client);
 
-            Account fromAccount = client.Accounts.Find(firstAccount => firstAccount.AccountNumber == fromAccountNumber);
-            if (fromAccount == null)
-            {
-                Console.WriteLine("Can't fint the account.");
-                return false;
-            }
+                Console.WriteLine("Enter wich account you want to transfer from:");
+                if (!int.TryParse(Console.ReadLine(), out int fromAccountNumber))
+                {
+                    UI.PrintMessage("Invalid accountnumber.");
+                    continue;
+                }
 
-            Console.WriteLine("Enter wich account you want to transfer to:");
-            if (!int.TryParse(Console.ReadLine(), out int toAccountNumber))
-            {
-                Console.WriteLine("Invalid accountnumber.");
-                return false;
-            }
+                Account fromAccount = client.Accounts.Find(firstAccount => firstAccount.AccountNumber == fromAccountNumber);
+                if (fromAccount == null)
+                {
+                    UI.PrintMessage("Can't fint the account.");
+                    Console.Write("Do you want to try again? (j/n)");
+                    keepTrying = Console.ReadLine().ToLower() == "j";
+                    continue;
+                }
 
-            Account toAccount = client.Accounts.Find(secondAccount => secondAccount.AccountNumber == toAccountNumber);
-            if (toAccount == null)
-            {
-                Console.WriteLine("Can't find the account.");
-                return false;
-            }
+                Console.WriteLine("Enter wich account you want to transfer to:");
+                if (!int.TryParse(Console.ReadLine(), out int toAccountNumber))
+                {
+                    UI.PrintMessage("Invalid accountnumber.");
+                    continue;
+                }
 
-            if (fromAccountNumber == toAccountNumber)
-            {
-                Console.WriteLine("You can't transfer to the same account.");
-                return false;
-            }
+                Account toAccount = client.Accounts.Find(secondAccount => secondAccount.AccountNumber == toAccountNumber);
+                if (toAccount == null)
+                {
+                    UI.PrintMessage("Can't find the account.");
+                    Console.Write("Do you want to try again? (j/n)");
+                    keepTrying = Console.ReadLine().ToLower() == "j";
+                    continue;
+                }
 
-            Console.WriteLine($"How much do you want to transfer? Balance: {fromAccount.Balance} {fromAccount.Currency}");
-            if (!decimal.TryParse(Console.ReadLine(), out decimal amount) || amount <= 0)
-            {
-                Console.WriteLine("Invalid amount.");
-                return false;
-            }
+                if (fromAccountNumber == toAccountNumber)
+                {
+                    UI.PrintMessage("You can't transfer to the same account.");
+                    continue;
+                }
 
-            if (fromAccount.Balance < amount)
-            {
-                Console.WriteLine("Insufficient balance.");
-                return false;
-            }
+                Console.WriteLine($"How much do you want to transfer? Balance: {fromAccount.Balance} {fromAccount.Currency}");
+                if (!decimal.TryParse(Console.ReadLine(), out decimal amount) || amount <= 0)
+                {
+                    UI.PrintMessage("Invalid amount.");
+                    continue;
+                }
 
-            //Här ska överföringen genomföras.
-            ExecuteTransfer(fromAccount, toAccount, amount);
-            Console.WriteLine($"Transfer succeeded. {amount} {fromAccount.Currency} was transferred.");
-            return true;
+                if (fromAccount.Balance < amount)
+                {
+                    UI.PrintMessage("Insufficient balance.");
+                    Console.Write("Do you want to try again? (j/n)");
+                    keepTrying = Console.ReadLine().ToLower() == "j";
+                    continue;
+                }
+
+                //Här ska överföringen genomföras.
+                ExecuteTransfer(fromAccount, toAccount, amount);
+                Console.WriteLine($"Transfer succeeded. {amount} {fromAccount.Currency} was transferred to accountnumber {toAccount.AccountNumber}.");
+                return true;
+            }
+            return false;
         }
 
         //GENOMFÖRA ÖVERFÖRING METOD BEHÖVS NOG HÄR.

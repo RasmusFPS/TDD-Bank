@@ -53,6 +53,7 @@
 
         internal static string GetPassword()
         {
+            //dubbelkolla felhantering
             Console.Write("Password:");
             string userPassword = Console.ReadLine();
 
@@ -163,7 +164,7 @@
 
         internal static void PrintMessage(string message)
         {
-            Console.WriteLine();
+            Console.WriteLine(message);
         }
 
         internal static void PrintCurrency()
