@@ -155,8 +155,12 @@
 
         internal static decimal GetDecimal()
         {
+            decimal amount;
             Console.WriteLine("Enter Amount:");
-            decimal.TryParse(Console.ReadLine(), out decimal amount);
+            while(!decimal.TryParse(Console.ReadLine(), out amount));
+            {
+                Console.WriteLine("Invaild Inupt. try again");
+            }
 
             return amount;
         }
