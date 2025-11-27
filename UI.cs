@@ -65,7 +65,7 @@
             string username = Console.ReadLine();
 
             Console.Clear();
-            return username;
+            return username.ToLower();
         }
 
         internal static string GetPassword()
