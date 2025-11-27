@@ -22,7 +22,9 @@ namespace TDD_Bank
 
         public static Dictionary<string, decimal> Currency = new()
         {
-            {"EUR",0.09m }
+            {"EUR",0.09m },
+            {"USD",  0.10m},
+            {"DKK",  0.68m}
         };
 
 
