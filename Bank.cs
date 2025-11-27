@@ -95,6 +95,7 @@ namespace TDD_Bank
                         break;
                     case "5":
                         BankTransfer.TransferToMe(currentclient);
+                        //BankTransfer.TransferToOthers(currentclient);
                         break;
                     case "6":
                         return;
