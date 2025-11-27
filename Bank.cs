@@ -15,7 +15,12 @@ namespace TDD_Bank
             while (Exit)
             {
 
-                UI.WelcomeMSG();
+                Exit = UI.WelcomeMSG();
+
+                if(Exit == false)
+                {
+                    break;
+                }
 
                 SignIn();
 
