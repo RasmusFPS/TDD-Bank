@@ -34,6 +34,10 @@ namespace TDD_Bank
             Console.WriteLine("Please input the Deposit amount");
             string userInput = Console.ReadLine();
             Console.WriteLine("Choose Currency:");
+            foreach (var i in Data.Currency)
+            {
+                Console.WriteLine(i);
+            }
             string input = Console.ReadLine().ToUpper();
             
             if (decimal.TryParse(userInput, out decimal DepositAmount))
@@ -57,6 +61,10 @@ namespace TDD_Bank
             Console.WriteLine("Please input deposit amount");
             string userInput = Console.ReadLine();
             Console.WriteLine("Choose currency");
+            foreach (var i in Data.Currency)
+            {
+                Console.WriteLine(i);
+            }
             var input = Console.ReadLine().ToUpper();
             Console.WriteLine("The intrest Rate is 2% per year");
             if(decimal.TryParse(userInput,out decimal DepositAmount))
