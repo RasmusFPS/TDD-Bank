@@ -167,6 +167,12 @@
             Console.WriteLine(message);
         }
 
+        internal static void AskQuestion(string question)
+        {
+            Console.WriteLine(question);
+            question = Console.ReadLine();
+        }
+
         internal static void PrintCurrency()
         {
         }

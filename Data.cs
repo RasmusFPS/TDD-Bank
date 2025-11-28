@@ -9,8 +9,8 @@ namespace TDD_Bank
     //Made Data Static to work in user class
     internal static class Data
     {
-        public static double _savingInterest;
-        public static double _loanInterest;
+        public static double _savingInterest;//Ska denna bort?
+        public static decimal _loanInterest = 0.05m;
 
         public static List<User> UserCollection = new List<User>()
         {
@@ -26,7 +26,8 @@ namespace TDD_Bank
         };
 
 
-        public static List<TransferLog> TransferHistory = new List<TransferLog>();
+        internal static List<TransferLog> TransferHistory = new List<TransferLog>();
+        internal static List<Loan> ActiveLoans = new List<Loan>();
 
     }
 }
