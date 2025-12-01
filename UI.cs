@@ -79,13 +79,12 @@
 
         public static string PrintedSignInMenu(Client client)
         {
-            Console.WriteLine($"\n---- Welcome, {client.Username}! ----");
-            Console.WriteLine("1. Show My Accounts");
-            Console.WriteLine("2. Create New Account");
-            Console.WriteLine("3. Deposit Money");
-            Console.WriteLine("4. Withdraw Money");
-            Console.WriteLine("5. Transfer Money");
-            Console.WriteLine("6. Logout");
+            UI.PrintMessage("1. Show My Accounts");
+            UI.PrintMessage("2. Create New Account");
+            UI.PrintMessage("3. Deposit Money");
+            UI.PrintMessage("4. Withdraw Money");
+            UI.PrintMessage("5. Transfer Money");
+            UI.PrintMessage("6. Logout");
             Console.Write("Your choice: ");
 
             return Console.ReadLine();
@@ -93,10 +92,10 @@
 
         internal static void PrintedAdminMenu()
         {
-            Console.WriteLine("1. Update Currency");
-            Console.WriteLine("2. User Log");
-            Console.WriteLine("3. Create New User");
-            Console.WriteLine("4. Log Out");
+            UI.PrintMessage("1. Update Currency");
+            UI.PrintMessage("2. User Log");
+            UI.PrintMessage("3. Create New User");
+            UI.PrintMessage("4. Log Out");
 
             var input = Console.ReadLine();
             Admin admin = new Admin("", "", true);
@@ -104,7 +103,7 @@
             switch (input)
             {
                 case "1":
-                    Console.WriteLine("Update Currency");
+                    UI.PrintMessage("Update Currency");
                     break;
                 case "2":
                     admin.UserLog();
@@ -119,34 +118,20 @@
 
         }
 
-        internal static void NewAccount()
-        {
-            Console.WriteLine();
-            Console.WriteLine("1. Bank Account");
-            Console.WriteLine("2. Savings Account");
-        }
-
-        internal static decimal UserInput()
-        {//Felhantering?
-            Console.Write("Please Enter the Amount:");
-            var input = Convert.ToDecimal(Console.ReadLine());
-
-            return input;
-        }
 
         //prints the account balance
         internal static void ShowAccounts(Client client)
         {
-            Console.WriteLine("Accounts");
+            UI.PrintMessage("Accounts");
 
             if (!client.Accounts.Any())
             {
-                Console.WriteLine("You have no accounts");
+                UI.PrintMessage("You have no accounts");
                 return;
             }
 
-            Console.WriteLine("Balance      | Account Number | Type / Info");
-            Console.WriteLine("-------------|----------------|--------------------");
+            UI.PrintMessage("Balance      | Account Number | Type / Info");
+            UI.PrintMessage("-------------|----------------|--------------------");
             foreach (Account account in client.Accounts)
             {
                 string accounttype = "Standard Account";
@@ -157,14 +142,14 @@
 
                     accounttype = $"Saving account {savingacc.IntrestRate} Intrest per year";
                 }
-                Console.WriteLine($"{account.Balance}{account.Currency,-8}  | {account.AccountNumber,-14}  | {accounttype}");
+                UI.PrintMessage($"{account.Balance}{account.Currency,-8}  | {account.AccountNumber,-14}  | {accounttype}");
             }
 
         }
 
         internal static int GetAccountNumber()
         {
-            Console.WriteLine("Enter the Account Number");
+            UI.PrintMessage("Enter the Account Number");
             int.TryParse(Console.ReadLine(), out int AccountNumber);
 
             return AccountNumber;
@@ -173,10 +158,10 @@
         internal static decimal GetDecimal()
         {
             decimal amount;
-            Console.WriteLine("Enter Amount:");
+            UI.PrintMessage("Enter Amount:");
             while (!decimal.TryParse(Console.ReadLine(), out amount)) ;
             {
-                Console.WriteLine("Invaild Input. Try again");
+                UI.PrintMessage("Invaild Inupt. try again");
             }
 
             return amount;
@@ -190,7 +175,7 @@
 
         internal static void AskQuestion(string question)
         {
-            Console.WriteLine(question);
+            UI.PrintMessage(question);
             question = Console.ReadLine();
         }
 

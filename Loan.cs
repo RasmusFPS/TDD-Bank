@@ -10,6 +10,7 @@
         //Datetime här?
         public bool IsPaidOff { get; set; }
 
+        /*
         internal bool ApplyForLoan(Client client)
         {
             decimal total = 0;
@@ -80,6 +81,6 @@
                 }
 
             }
-        }
+        } */
     }
 }
