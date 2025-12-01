@@ -22,10 +22,12 @@ namespace TDD_Bank
 
         public static Dictionary<string, decimal> Currency = new()
         {
+            {"SEK", 1 },
             {"EUR",0.09m },
-            {"USD",  0.10m},
+            {"USD",  0.11m},
             {"DKK",  0.68m}
         };
+        public static decimal inSEK;
 
 
         public static List<TransferLog> TransferHistory = new List<TransferLog>();

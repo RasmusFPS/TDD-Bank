@@ -28,15 +28,42 @@ namespace TDD_Bank
             if (amount > 0)
             {
                 Balance += amount;
+
+                return true;
+            }
+            return false;
+        }
+        internal bool Deposit(decimal amount, Account account)
+        {
+            if (amount > 0)
+            {
+                Exchange exchange = new Exchange();
+                Balance += exchange.DepositExchange(account, amount);
                 return true;
             }
             return false;
         }
         //Prompts user to withdraw certain amount with UI class
+        internal bool Withdraw(decimal amount, Account account)
+        {
+            if (amount > 0 && Balance >= 0)
+            {
+                Exchange exchange = new Exchange();
+
+                exchange.WithdrawExchange(account, amount);
+                Balance -= amount;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         internal bool Withdraw(decimal amount)
         {
-            if (amount > 0 && Balance >=0)
+            if (amount > 0 && Balance >= 0)
             {
+
                 Balance -= amount;
                 return true;
             }
