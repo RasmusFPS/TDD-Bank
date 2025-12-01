@@ -32,7 +32,7 @@ namespace TDD_Bank
             Console.WriteLine("Press Enter To Continue...");
             Console.ReadKey();
             Console.Clear();
-            UI.AdminMenu();
+            UI.PrintedAdminMenu();
         }
 
         internal void UserLog()
@@ -45,7 +45,7 @@ namespace TDD_Bank
             Console.WriteLine("Press Enter To Continue...");
             Console.ReadKey();
             Console.Clear();
-            UI.AdminMenu();
+            UI.PrintedAdminMenu();
         }
     }
 }

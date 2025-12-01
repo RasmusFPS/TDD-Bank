@@ -9,7 +9,7 @@ namespace TDD_Bank
 {
     internal class Client : User
     {
-       // internal List<Loan> Loans { get; private set; }
+        internal List<Loan> Loans { get; private set; }
         internal List<Account> Accounts { get; private set; }
         public Client(string username, string password, bool isAdmin) : base(username, password, false)
         {
@@ -22,7 +22,10 @@ namespace TDD_Bank
         {
             foreach (var account in Accounts)
             {
-                return account;
+                if(account.AccountNumber == accountNumber)
+                {
+                    return account;
+                }
             }
 
             return null;
@@ -31,9 +34,9 @@ namespace TDD_Bank
         //This takes user input on how much money should be in the account
         public void CreateNewAccount()
         {
-            Console.WriteLine("Please input the Deposit amount");
+            UI.PrintMessage("Please input the Deposit amount");
             string userInput = Console.ReadLine();
-            Console.WriteLine("Choose Currency:");
+            UI.PrintMessage("Choose Currency:");
             foreach (var i in Data.Currency)
             {
                 Console.WriteLine(i);
@@ -47,11 +50,11 @@ namespace TDD_Bank
 
                 Accounts.Add(newAccount);
 
-                Console.WriteLine("Account Created");
+                UI.PrintMessage("Account Created");
             }
             else
             {
-                Console.WriteLine("Invalid Amount, Couldnt Create Account");
+                UI.PrintMessage("Invalid Amount, Couldnt Create Account");
             }
 
         }
@@ -60,24 +63,24 @@ namespace TDD_Bank
         {
             Console.WriteLine("Please input deposit amount");
             string userInput = Console.ReadLine();
-            Console.WriteLine("Choose currency");
+            UI.PrintMessage("Choose currency");
             foreach (var i in Data.Currency)
             {
                 Console.WriteLine(i);
             }
             var input = Console.ReadLine().ToUpper();
-            Console.WriteLine("The intrest Rate is 2% per year");
+            UI.PrintMessage("The intrest Rate is 2% per year");
             if(decimal.TryParse(userInput,out decimal DepositAmount))
             {
                 SavingAccount newAccount = new SavingAccount(DepositAmount,input,0.02m);
 
                 Accounts.Add(newAccount);
 
-                Console.WriteLine("Saving Account created");
+                UI.PrintMessage("Saving Account created");
             }
             else
             {
-                Console.WriteLine("Invalid Amount, Couldnt create account");
+                UI.PrintMessage("Invalid Amount, Couldnt create account");
             }
         }
     }
