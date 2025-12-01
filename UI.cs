@@ -176,7 +176,7 @@
             Console.WriteLine("Enter Amount:");
             while (!decimal.TryParse(Console.ReadLine(), out amount)) ;
             {
-                Console.WriteLine("Invaild Inupt. try again");
+                Console.WriteLine("Invaild Input. Try again");
             }
 
             return amount;
