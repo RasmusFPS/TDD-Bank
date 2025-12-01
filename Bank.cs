@@ -32,7 +32,7 @@ namespace TDD_Bank
                 }
                 else if (_loggedin is Admin)
                 {
-                    UI.AdminMenu();
+                    UI.PrintedAdminMenu();
                 }
 
                 _loggedin = null;
@@ -82,7 +82,7 @@ namespace TDD_Bank
             bool temp = true;
             while (temp)
             {
-                string choice = UI.SignInMenu(currentclient);
+                string choice = UI.PrintedSignInMenu(currentclient);
                 switch (choice)
                 {
                     case "1":

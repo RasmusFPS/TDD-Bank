@@ -60,7 +60,7 @@
 
         internal static string GetUsername()
         {
-            //Dubbelkolla felhantering
+            //Dubbelkolla felhantering, återanvändning av PrintMessage metoden?
             Console.Write("User-ID:");
             string username = Console.ReadLine();
 
@@ -70,14 +70,14 @@
 
         internal static string GetPassword()
         {
-            //dubbelkolla felhantering
+            //dubbelkolla felhantering, återanvändning av PrintMessage metoden?
             Console.Write("Password:");
             string userPassword = Console.ReadLine();
 
             return userPassword;
         }
 
-        public static string SignInMenu(Client client)
+        public static string PrintedSignInMenu(Client client)
         {
             Console.WriteLine($"\n---- Welcome, {client.Username}! ----");
             Console.WriteLine("1. Show My Accounts");
@@ -91,7 +91,7 @@
             return Console.ReadLine();
         }
 
-        internal static void AdminMenu()
+        internal static void PrintedAdminMenu()
         {
             Console.WriteLine("1. Update Currency");
             Console.WriteLine("2. User Log");
