@@ -19,7 +19,7 @@ namespace TDD_Bank
             new Client("Bob","123",false)
 
         };
-
+        //Dicitonary containing all currencies
         public static Dictionary<string, decimal> Currency = new()
         {
             {"SEK", 1 },
@@ -27,6 +27,7 @@ namespace TDD_Bank
             {"USD",  0.11m},
             {"DKK",  0.68m}
         };
+        //Amount translated to SEK (Needed for Exchange.cs)
         public static decimal inSEK;
 
 

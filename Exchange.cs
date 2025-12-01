@@ -9,10 +9,12 @@ namespace TDD_Bank
 {
     internal class Exchange
     {
+        //Exchanges amount  to SEK (inSEK), does not return values
         internal void WithdrawExchange(Account account, decimal amount)
         {
             Data.inSEK = amount / Data.Currency[account.Currency];
         }
+        //Exchanges inSEK to specified currency, return values
         internal decimal DepositExchange(Account account, decimal amount)
         {
             return Data.inSEK * Data.Currency[account.Currency];
