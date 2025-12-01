@@ -74,8 +74,8 @@
         //GENOMFÖRA ÖVERFÖRING METOD BEHÖVS NOG HÄR.
         private static void ExecuteTransfer(Account fromAccount, Account toAccount, decimal amount)
         {
-            fromAccount.Withdraw(amount);
-            toAccount.Deposit(amount);
+            fromAccount.Withdraw(amount, fromAccount);
+            toAccount.Deposit(amount, toAccount);
         }
 
         //returnerar bool för att se om transaktionen lyckades
