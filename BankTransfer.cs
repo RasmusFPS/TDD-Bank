@@ -10,7 +10,7 @@
             {
                 UI.ShowAccounts(client);
 
-                Console.WriteLine("Enter wich account you want to transfer from:");
+                UI.PrintMessage("Enter wich account you want to transfer from:");
                 if (!int.TryParse(Console.ReadLine(), out int fromAccountNumber))
                 {
                     UI.PrintMessage("Invalid accountnumber.");
