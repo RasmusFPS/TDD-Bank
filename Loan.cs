@@ -26,7 +26,7 @@
 
                 foreach (Account account in client.Accounts)
                 {
-                    total = +account.Balance;
+                    total += account.Balance;
                 }
 
                 decimal maxLoan = total * 5;
@@ -65,8 +65,13 @@
 
                 if (answer == "yes")
                 {
+                    //Är jag klar här?
                     UI.ShowAccounts(client);
-                    //Ta lånet
+                    UI.PrintMessage("Choose accountnumber: ");
+                    if (!int.TryParse(Console.ReadLine(), out int fromAccountNumber))
+                    {
+                        UI.PrintMessage("Invalid accountnumber.");
+                    }
                     return true;
                 }
                 else

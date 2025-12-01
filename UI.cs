@@ -127,7 +127,7 @@
         }
 
         internal static decimal UserInput()
-        {
+        {//Felhantering?
             Console.Write("Please Enter the Amount:");
             var input = Convert.ToDecimal(Console.ReadLine());
 
