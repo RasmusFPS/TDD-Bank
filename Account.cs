@@ -65,7 +65,6 @@ namespace TDD_Bank
         internal bool Deposit(decimal amount, Account account)
         {
             if (amount > 0 && Balance >= amount)
-            if (amount > 0)
             {
                 Exchange exchange = new Exchange(); 
                 Balance += exchange.DepositExchange(account, amount); //Exchanges the value from Withdraw to correct currency.
