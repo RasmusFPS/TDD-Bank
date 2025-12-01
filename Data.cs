@@ -9,7 +9,6 @@ namespace TDD_Bank
     //Made Data Static to work in user class
     internal static class Data
     {
-        public static double _savingInterest;//Ska denna bort?
         public static decimal _loanInterest = 0.05m;
 
         public static List<User> UserCollection = new List<User>()
@@ -19,7 +18,7 @@ namespace TDD_Bank
             new Client("Bob","123",false)
 
         };
-
+        //Dicitonary containing all currencies
         public static Dictionary<string, decimal> Currency = new()
         {
             {"SEK", 1 },
@@ -27,6 +26,7 @@ namespace TDD_Bank
             {"USD",  0.11m},
             {"DKK",  0.68m}
         };
+        //Amount translated to SEK (Needed for Exchange.cs)
         public static decimal inSEK;
 
 

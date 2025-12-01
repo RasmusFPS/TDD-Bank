@@ -26,7 +26,7 @@
                     continue;
                 }
 
-                Console.WriteLine("Enter wich account you want to transfer to:");
+                Console.WriteLine("Enter which account you want to transfer to:");
                 if (!int.TryParse(Console.ReadLine(), out int toAccountNumber))
                 {
                     UI.PrintMessage("Invalid accountnumber.");

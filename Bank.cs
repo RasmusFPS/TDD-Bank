@@ -32,7 +32,7 @@ namespace TDD_Bank
                 }
                 else if (_loggedin is Admin)
                 {
-                    UI.AdminMenu();
+                    UI.PrintedAdminMenu();
                 }
 
                 _loggedin = null;
@@ -55,7 +55,7 @@ namespace TDD_Bank
                     {
                         if (user.Username.ToLower() == username && user.Password == userPassword)
                         {
-                            Console.WriteLine($"Welcome {user.Username}");
+                            UI.PrintMessage($"Welcome {user.Username}");
                             _loggedin = user;
                             return;
 
@@ -63,12 +63,12 @@ namespace TDD_Bank
                     }
 
                     attempts++;
-                    Console.WriteLine("Wrong user-ID or password.");
+                    UI.PrintMessage("Wrong user-ID or password.");
                 }
 
                 if (attempts == 3)
                 {
-                    Console.WriteLine("Too many attempts.");
+                    UI.PrintMessage("Too many attempts.");
                     _loggedin = null;
                 }
             }
@@ -82,11 +82,11 @@ namespace TDD_Bank
             bool temp = true;
             while (temp)
             {
-                string choice = UI.SignInMenu(currentclient);
+                string choice = UI.PrintedSignInMenu(currentclient);
                 switch (choice)
                 {
                     case "1":
-                        Console.WriteLine("Show Accounts");
+                        UI.PrintMessage("Show Accounts");
                         UI.ShowAccounts(currentclient);
                         break;
                     case "2":
@@ -119,16 +119,16 @@ namespace TDD_Bank
             {
                 if (account.Deposit(amount))
                 {
-                    Console.WriteLine($"Deposit successful. New Balance{account.Balance}");
+                    UI.PrintMessage($"Deposit successful. New Balance{account.Balance}");
                 }
                 else
                 {
-                    Console.WriteLine("Deposit Failed");
+                    UI.PrintMessage("Deposit Failed");
                 }
             }
             else
             {
-                Console.WriteLine("Account Not Found");
+                UI.PrintMessage("Account Not Found");
             }
         }
 
@@ -143,23 +143,23 @@ namespace TDD_Bank
             {
                 if (account.Withdraw(amount))
                 {
-                    Console.WriteLine($"\nWithdrawal successful. New balance for account #{account.AccountNumber} is {account.Balance:C}.");
+                    UI.PrintMessage($"\nWithdrawal successful. New balance for account #{account.AccountNumber} is {account.Balance:C}.");
                 }
                 else
                 {
-                    Console.WriteLine("\nWithdrawal failed. Insufficient funds or invalid amount.");
+                    UI.PrintMessage("\nWithdrawal failed. Insufficient funds or invalid amount.");
                 }
             }
             else
             {
-                Console.WriteLine("Account not found");
+                UI.PrintMessage("Account not found");
             }
         }
 
         internal void TypeOfAccount(Client client)
         {
-            Console.WriteLine("What type of Account do you want to make");
-            Console.WriteLine("1.Bank Account\n2.Saving Account");
+            UI.PrintMessage("What type of Account do you want to make");
+            UI.PrintMessage("1.Bank Account\n2.Saving Account");
             string input = Console.ReadLine();
             switch (input)
             {
@@ -170,7 +170,7 @@ namespace TDD_Bank
                     client.CreateSavingAccount();
                     break;
                 default:
-                    Console.WriteLine("Didnt choose Account correctly");
+                    UI.PrintMessage("Didnt choose Account correctly");
                     break;
             }
         }
