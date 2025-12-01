@@ -17,7 +17,7 @@ namespace TDD_Bank
 
                 Exit = UI.WelcomeMSG();
 
-                if(Exit == false)
+                if (Exit == false)
                 {
                     break;
                 }
@@ -44,13 +44,12 @@ namespace TDD_Bank
         internal void SignIn()
         {
             attempts = 0;
-
+            while (!Data.locked)
             {
                 while (attempts < 3)
                 {
                     string username = UI.GetUsername();
                     string userPassword = UI.GetPassword();
-
                     foreach (User user in Data.UserCollection)
                     {
                         if (user.Username.ToLower() == username && user.Password == userPassword)
@@ -68,8 +67,37 @@ namespace TDD_Bank
 
                 if (attempts == 3)
                 {
-                    Console.WriteLine("Too many attempts.");
-                    _loggedin = null;
+                    Data.locked = true;
+                    Console.WriteLine("Too many attempts, ask admin for help.");
+                    //_loggedin = null;
+
+
+                }
+            }
+            if (Data.locked == true)
+            {
+                while (attempts != 6)
+                {
+                    string username = UI.GetUsername();
+                    string userPassword = UI.GetPassword();
+                    foreach (User user in Data.UserCollection)
+                    {
+                        
+                        if (user.Username.ToLower() == username && user.Password == userPassword && user.IsAdmin == false)
+                        {
+                            Console.WriteLine($"{user.Username} you are locked out, ask Admin to unlock program");
+                        }
+                        else if (user.Username.ToLower() == username && user.Password == userPassword && user.IsAdmin == true)
+                        {
+                            Console.WriteLine($"Welcome {user.Username}");
+                            _loggedin = user;
+                            return;
+
+                        }
+                    }
+
+                    attempts++;
+                    Console.WriteLine("Wrong user-ID or password.");
                 }
             }
         }

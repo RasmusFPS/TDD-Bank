@@ -96,7 +96,8 @@
             Console.WriteLine("1. Update Currency");
             Console.WriteLine("2. User Log");
             Console.WriteLine("3. Create New User");
-            Console.WriteLine("4. Log Out");
+            Console.WriteLine("4. Unlock Program");
+            Console.WriteLine("5. Log Out");
 
             var input = Console.ReadLine();
             Admin admin = new Admin("", "", true);
@@ -113,7 +114,11 @@
                     admin.CreateNewUser();
                     return;
                 case "4":
-
+                    Data.locked = false;
+                    Console.WriteLine("Success!");
+                    
+                    break;
+                case "5":
                     break;
             }
 
