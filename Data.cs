@@ -31,7 +31,7 @@ namespace TDD_Bank
 
 
         internal static List<TransferLog> TransferHistory = new List<TransferLog>();
-        internal static List<Loan> ActiveLoans = new List<Loan>();
+        //internal static List<Loan> ActiveLoans = new List<Loan>();
 
     }
 }
