@@ -17,7 +17,7 @@ namespace TDD_Bank
 
                 Exit = UI.WelcomeMSG();
 
-                if(Exit == false)
+                if (Exit == false)
                 {
                     break;
                 }
@@ -44,13 +44,12 @@ namespace TDD_Bank
         internal void SignIn()
         {
             attempts = 0;
-
+            while (!Data.locked)
             {
                 while (attempts < 3)
                 {
                     string username = UI.GetUsername();
                     string userPassword = UI.GetPassword();
-
                     foreach (User user in Data.UserCollection)
                     {
                         if (user.Username.ToLower() == username && user.Password == userPassword)
