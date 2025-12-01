@@ -163,7 +163,7 @@
         }
 
         internal static int GetAccountNumber()
-        {
+        {   //felhantering måste göras
             Console.WriteLine("Enter the Account Number");
             int.TryParse(Console.ReadLine(), out int AccountNumber);
 
