@@ -43,32 +43,30 @@ namespace TDD_Bank
 
         internal void SignIn()
         {
-            attempts = 0;
-            while (!Data.locked)
+            bool signedIn = false;
+            while (!signedIn)
             {
-                while (attempts < 3)
+                string username = UI.GetUsername();
+                string userPassword = UI.GetPassword();
+                foreach (User user in Data.UserCollection)
                 {
-                    string username = UI.GetUsername();
-                    string userPassword = UI.GetPassword();
-                    foreach (User user in Data.UserCollection)
+                    if (user.Tries == 0)
                     {
-                        if (user.Username.ToLower() == username && user.Password == userPassword)
-                        {
-                            UI.PrintMessage($"Welcome {user.Username}");
-                            _loggedin = user;
-                            return;
-
-                        }
+                        Console.WriteLine("Locked user, ask admin for help");
+                    }
+                    if (user.Username.ToLower() == username && user.Password == userPassword && user.Tries > 0)
+                    {
+                        UI.PrintMessage($"Welcome {user.Username}");
+                        _loggedin = user;
+                        signedIn = true;
+                        return;
+                    }
+                    else if (user.Username.ToLower() == username && user.Password != userPassword && user.Tries > 0)
+                    {
+                        UI.PrintMessage("Wrong user-ID or password.");
+                        user.Tries--;
                     }
 
-                    attempts++;
-                    UI.PrintMessage("Wrong user-ID or password.");
-                }
-
-                if (attempts == 3)
-                {
-                    UI.PrintMessage("Too many attempts.");
-                    _loggedin = null;
                 }
             }
         }

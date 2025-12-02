@@ -89,7 +89,7 @@ namespace TDD_Bank
             UI.PrintMessage("7. Logout");
             Console.Write("Your choice: ");
 
-            return Console.ReadLine();
+            return  Console.ReadLine();
         }
 
         internal static void PrintedAdminMenu()
@@ -97,10 +97,12 @@ namespace TDD_Bank
             PrintMessage("1. Update Currency");
             PrintMessage("2. User Log");
             PrintMessage("3. Create New User");
-            PrintMessage("4. Log Out");
+            PrintMessage("4. Unlock Users");
+            PrintMessage("5. Log Out");
 
             var input = Console.ReadLine();
-            Admin admin = new Admin("", "", true);
+            Admin admin = new Admin("", "", true, 3);
+
 
             switch (input)
             {
@@ -114,9 +116,7 @@ namespace TDD_Bank
                     admin.CreateNewUser();
                     return;
                 case "4":
-                    Data.locked = false;
-                    Console.WriteLine("Success!");
-                    
+                    admin.UserUnlock();
                     break;
                 case "5":
                     break;
