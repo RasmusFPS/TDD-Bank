@@ -9,6 +9,7 @@ namespace TDD_Bank
 {
     internal class Client : User
     {
+        //internal List<Loan> Loans { get; private set; }
         internal List<Account> Accounts { get; private set; }
         public bool IsLocked { get; set; }
         public Client(string username, string password, bool isAdmin, bool isLocked) : base(username, password, false)

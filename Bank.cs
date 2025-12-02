@@ -102,6 +102,10 @@ namespace TDD_Bank
                         //BankTransfer.TransferToOthers(currentclient);
                         break;
                     case "6":
+                        UI.ShowTransfers();
+                        break;
+                    case "7":
+
                         return;
                 }
             }
