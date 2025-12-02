@@ -16,11 +16,11 @@ namespace TDD_Bank
 
         static Data()
         {
-        carl.Accounts.Add(new Account(0, "SEK"));
-        carl.Accounts.Add(new SavingAccount(0, "SEK", 0.02m));
+            carl.Accounts.Add(new Account(0, "SEK"));
+            carl.Accounts.Add(new SavingAccount(0, "SEK", 0.02m));
 
-        bob.Accounts.Add(new Account(0, "SEK"));
-        bob.Accounts.Add(new SavingAccount(0, "SEK", 0.02m));
+            bob.Accounts.Add(new Account(0, "SEK"));
+            bob.Accounts.Add(new SavingAccount(0, "SEK", 0.02m));
         }
 
 
@@ -31,12 +31,12 @@ namespace TDD_Bank
             carl
 
         };
-       
+
         //Dicitonary containing all currencies
         public static Dictionary<string, decimal> Currency = new()
         {
             {"SEK", 1 },
-            {"EUR",0.09m },
+            {"EUR", 0.09m },
             {"USD",  0.11m},
             {"DKK",  0.68m}
         };

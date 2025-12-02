@@ -170,7 +170,7 @@ namespace TDD_Bank
                 // This is the only line we changed. It forces each piece of data into a
                 // column of a specific width, guaranteeing alignment.
                 PrintMessage(String.Format("{0,-15} | {1,-16} | {2,-35}",
-                    $"{account.Balance} {account.Currency}", // Combine balance and currency
+                    $"{Math.Round (account.Balance, 2)} {account.Currency}", // Combine balance and currency
                     account.AccountNumber,
                     accounttype));
             }
