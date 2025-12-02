@@ -103,12 +103,14 @@ namespace TDD_Bank
                         break;
                     case "5":
                         BankTransfer.TransferToMe(currentclient);
-                        //BankTransfer.TransferToOthers(currentclient);
                         break;
                     case "6":
-                        UI.ShowTransfers();
+                        BankTransfer.TransferToOthers(currentclient);
                         break;
                     case "7":
+                        UI.ShowTransfers();
+                        break;
+                    case "8":
                         return;
                 }
             }
