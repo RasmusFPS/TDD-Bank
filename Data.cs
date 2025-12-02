@@ -31,6 +31,7 @@ namespace TDD_Bank
             carl
 
         };
+        
 
         //Dicitonary containing all currencies
         public static Dictionary<string, decimal> Currency = new()
