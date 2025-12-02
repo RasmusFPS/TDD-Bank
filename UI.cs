@@ -167,20 +167,9 @@
             return amount;
         }
 
-
         internal static void PrintMessage(string message)
         {
             Console.WriteLine(message);
-        }
-
-        internal static void AskQuestion(string question)
-        {
-            PrintMessage(question);
-            question = Console.ReadLine();
-        }
-
-        internal static void PrintCurrency()
-        {
         }
 
     }

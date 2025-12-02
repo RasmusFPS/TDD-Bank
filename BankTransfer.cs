@@ -77,12 +77,6 @@
         {
             //GÖR EXCHANGE KONTROLLEN HÄR konverteringen sker här
             fromAccount.Withdraw(amount, fromAccount);
-
-            //if (fromAccount.Currency != toAccount.Currency)
-            //{
-            //    //GÖR konvertering
-            //}
-
             toAccount.Deposit(amount, toAccount);
         }
 
