@@ -6,15 +6,16 @@
         {
             bool keepTrying = true;
 
-            while (keepTrying)
-            {
+            //while (keepTrying)
+            //{
                 UI.ShowAccounts(client);
 
                 UI.PrintMessage("Enter wich account you want to transfer from:");
-                if (!int.TryParse(Console.ReadLine(), out int fromAccountNumber))
+                int fromAccountNumber;
+                while (!int.TryParse(Console.ReadLine(), out fromAccountNumber))
                 {
                     UI.PrintMessage("Invalid accountnumber.");
-                    continue;
+                    //continue;
                 }
                 //en metod som söker igenom listan och 
                 //returnerar det första elementet som matchar ett villkor, typ ihoptryckt foreachloop?
@@ -22,38 +23,31 @@
                 if (fromAccount == null)
                 {
                     UI.PrintMessage("Can't fint the account.");
-                    Console.Write("Do you want to try again? (j/n)");
-                    keepTrying = Console.ReadLine().ToLower() == "j";
-                    continue;
+                    TryAgain();
                 }
 
                 Console.WriteLine("Enter which account you want to transfer to:");
                 if (!int.TryParse(Console.ReadLine(), out int toAccountNumber))
                 {
                     UI.PrintMessage("Invalid accountnumber.");
-                    continue;
                 }
 
                 Account toAccount = client.Accounts.Find(secondAccount => secondAccount.AccountNumber == toAccountNumber);
                 if (toAccount == null)
                 {
                     UI.PrintMessage("Can't find the account.");
-                    Console.Write("Do you want to try again? (j/n)");
-                    keepTrying = Console.ReadLine().ToLower() == "j";
-                    continue;
+                    TryAgain();
                 }
 
                 if (fromAccountNumber == toAccountNumber)
                 {
                     UI.PrintMessage("You can't transfer to the same account.");
-                    continue;
                 }
 
                 Console.WriteLine($"How much do you want to transfer? Balance: {fromAccount.Balance} {fromAccount.Currency}");
                 if (!decimal.TryParse(Console.ReadLine(), out decimal amount) || amount <= 0)
                 {
                     UI.PrintMessage("Invalid amount.");
-                    continue;
                 }
 
                 if (fromAccount.Balance < amount)
@@ -61,7 +55,6 @@
                     UI.PrintMessage("Insufficient balance.");
                     Console.Write("Do you want to try again? (j/n)");
                     keepTrying = Console.ReadLine().ToLower() == "j";
-                    continue;
                 }
 
                 //Här ska överföringen genomföras.
@@ -69,8 +62,8 @@
                 Console.WriteLine($"Transfer succeeded. {amount} {fromAccount.Currency} was transferred to accountnumber {toAccount.AccountNumber}.");
                 return true;
             }
-            return false;
-        }
+            //return false;
+        //}
 
         //GENOMFÖRA ÖVERFÖRING METOD BEHÖVS NOG HÄR.
         private static void ExecuteTransfer(Account fromAccount, Account toAccount, decimal amount)
@@ -78,6 +71,12 @@
             //GÖR EXCHANGE KONTROLLEN HÄR konverteringen sker här
             fromAccount.Withdraw(amount, fromAccount);
             toAccount.Deposit(amount, toAccount);
+        }
+
+        private static bool TryAgain()
+        {
+            Console.Write("Do you want to try again? (j/n) ");
+            return Console.ReadLine().Trim().ToLower() == "j";
         }
 
         //returnerar bool för att se om transaktionen lyckades
