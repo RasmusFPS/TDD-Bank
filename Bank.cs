@@ -14,33 +14,39 @@ namespace TDD_Bank
             bool exit = false;
             while (!exit)
             {
+                bool userWantsToContinue = UI.WelcomeMSG();
 
-                exit = UI.WelcomeMSG();
-
-                if (exit)
+                if (userWantsToContinue)
                 {
-
-
                     SignIn();
 
-                    if (_loggedin == null) return;
-
-                    if (_loggedin is Client)
+                    if (_loggedin == null)
                     {
-                        RunClientDashboard();
+                        Console.WriteLine("Login failed. Returning to main menu.");
+                        Thread.Sleep(1000);
+                        Console.Clear();
                     }
-                    else if (_loggedin is Admin)
+                    else
                     {
-                        UI.PrintedAdminMenu();
-                    }
+                        if (_loggedin is Client)
+                        {
+                            RunClientDashboard();
+                        }
+                        else if (_loggedin is Admin)
+                        {
+                            UI.PrintedAdminMenu();
+                        }
 
+                        _loggedin = null;
+                        Console.Clear();
+                    }
                 }
-                _loggedin = null;
-                Console.Clear();
-
+                else
+                {
+                    exit = true;
+                }
             }
         }
-
         internal void SignIn()
         {
             bool signedIn = false;
@@ -103,7 +109,7 @@ namespace TDD_Bank
                         UI.ShowTransfers();
                         break;
                     case "7":
-                        break;
+                        return;
                 }
             }
         }
