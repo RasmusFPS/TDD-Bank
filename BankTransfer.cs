@@ -76,7 +76,7 @@
 
             if (fromAccount == null)
             {
-                UI.PrintMessage("Can't fint the account.");
+                UI.PrintMessage("Can't find the account.");
                 return null;
             }
 
@@ -85,7 +85,7 @@
 
         private static Account GetToAccount(Client client)
         {
-            UI.PrintMessage("Enter wich account you want to transfer from:");
+            UI.PrintMessage("Enter wich account you want to transfer to:");
             if (!int.TryParse(Console.ReadLine(), out int toAccountNumber))
             {
                 UI.PrintMessage("Invalid accountnumber.");
@@ -96,7 +96,7 @@
 
             if (toAccount == null)
             {
-                UI.PrintMessage("Can't fint the account.");
+                UI.PrintMessage("Can't find the account.");
                 return null;
             }
 
@@ -142,7 +142,6 @@
             return Console.ReadLine().ToLower() == "j";
         }
 
-        //GENOMFÖRA ÖVERFÖRING METOD BEHÖVS NOG HÄR.
         private static void ExecuteTransfer(Account fromAccount, Account toAccount, decimal amount)
         {
             fromAccount.Withdraw(amount);
@@ -154,7 +153,7 @@
             toAccount.Deposit(amount);
         }
 
-        //returnerar bool för att se om transaktionen lyckades
+        //returnerar bool för att se om transaktionen lyckades 
         internal static bool TransferToOthers(Client sender)
         {
             Console.WriteLine("Your accounts:");
