@@ -79,12 +79,12 @@
 
         public static string PrintedSignInMenu(Client client)
         {
-            UI.PrintMessage("1. Show My Accounts");
-            UI.PrintMessage("2. Create New Account");
-            UI.PrintMessage("3. Deposit Money");
-            UI.PrintMessage("4. Withdraw Money");
-            UI.PrintMessage("5. Transfer Money");
-            UI.PrintMessage("6. Logout");
+            PrintMessage("1. Show My Accounts");
+            PrintMessage("2. Create New Account");
+            PrintMessage("3. Deposit Money");
+            PrintMessage("4. Withdraw Money");
+            PrintMessage("5. Transfer Money");
+            PrintMessage("6. Logout");
             Console.Write("Your choice: ");
 
             return Console.ReadLine();
@@ -92,10 +92,10 @@
 
         internal static void PrintedAdminMenu()
         {
-            UI.PrintMessage("1. Update Currency");
-            UI.PrintMessage("2. User Log");
-            UI.PrintMessage("3. Create New User");
-            UI.PrintMessage("4. Log Out");
+            PrintMessage("1. Update Currency");
+            PrintMessage("2. User Log");
+            PrintMessage("3. Create New User");
+            PrintMessage("4. Log Out");
 
             var input = Console.ReadLine();
             Admin admin = new Admin("", "", true);
@@ -103,7 +103,7 @@
             switch (input)
             {
                 case "1":
-                    UI.PrintMessage("Update Currency");
+                    PrintMessage("Update Currency");
                     break;
                 case "2":
                     admin.UserLog();
@@ -126,16 +126,16 @@
         //prints the account balance
         internal static void ShowAccounts(Client client)
         {
-            UI.PrintMessage("Accounts");
+            PrintMessage("Accounts");
 
             if (!client.Accounts.Any())
             {
-                UI.PrintMessage("You have no accounts");
+                PrintMessage("You have no accounts");
                 return;
             }
 
-            UI.PrintMessage("Balance      | Account Number | Type / Info");
-            UI.PrintMessage("-------------|----------------|--------------------");
+            PrintMessage("Balance      | Account Number | Type / Info");
+            PrintMessage("-------------|----------------|--------------------");
             foreach (Account account in client.Accounts)
             {
                 string accounttype = "Standard Account";
@@ -146,7 +146,7 @@
 
                     accounttype = $"Saving account {savingacc.IntrestRate} Intrest per year";
                 }
-                UI.PrintMessage($"{account.Balance}{account.Currency,-8}  | {account.AccountNumber,-14}  | {accounttype}");
+                PrintMessage($"{account.Balance}{account.Currency,-8}  | {account.AccountNumber,-14}  | {accounttype}");
             }
 
         }
@@ -162,10 +162,10 @@
         internal static decimal GetDecimal()
         {
             decimal amount;
-            UI.PrintMessage("Enter Amount:");
+            PrintMessage("Enter Amount:");
             while (!decimal.TryParse(Console.ReadLine(), out amount)) ;
             {
-                UI.PrintMessage("Invaild Inupt. try again");
+                PrintMessage("Invaild Inupt. try again");
             }
 
             return amount;
@@ -179,7 +179,7 @@
 
         internal static void AskQuestion(string question)
         {
-            UI.PrintMessage(question);
+            PrintMessage(question);
             question = Console.ReadLine();
         }
 
