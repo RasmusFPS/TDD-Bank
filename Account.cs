@@ -21,25 +21,9 @@ namespace TDD_Bank
             Balance = initalbalance;
             Currency = currency;
         }
-        //Prompts user to withdraw certain amount with UI class
-        //internal bool Withdraw(decimal amount, Account account)
-        //{
-        //    if (amount > 0 && Balance >= 0)
-        //    {
-        //        Exchange exchange = new Exchange();
-
-        //        exchange.WithdrawExchange(account, amount); //Sends in amount into Withdraw to set inSEK to correct amount.
-        //        Balance -= amount;
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
         internal bool Withdraw(decimal amount) 
         {
-            if (amount > 0 && Balance >= 0)
+            if (amount > 0 && Balance >= amount)
             {
 
                 Balance -= amount;
@@ -54,7 +38,7 @@ namespace TDD_Bank
         internal bool Deposit(decimal amount)
         {
 
-            if (amount > 0)
+            if (amount > 0 && Balance >= amount)
             {
                 Balance += amount;
 
@@ -62,17 +46,5 @@ namespace TDD_Bank
             }
             return false;
         }
-        //internal bool Deposit(decimal amount, Account account)
-        //{
-        //    if (amount > 0 && Balance >= amount)
-        //    {
-        //        Exchange exchange = new Exchange(); 
-        //        Balance += exchange.DepositExchange(account, amount); //Exchanges the value from Withdraw to correct currency.
-        //                                                              //(Amount / Currency1 = inSEK
-        //                                                              // return inSEK * Currency2)
-        //        return true;
-        //    }
-        //    return false;
-        //}
     }
 }
