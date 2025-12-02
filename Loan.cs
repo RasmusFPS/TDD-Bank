@@ -10,77 +10,75 @@
         //Datetime här?
         public bool IsPaidOff { get; set; }
 
-        
+
         internal bool ApplyForLoan(Client client)
         {
             decimal total = 0;
             bool validAmount = false;
 
-            while (!validAmount)
+            if (client.Accounts.Count < 1)
             {
+                UI.PrintMessage("Loan cannot be processed.");
+                return false;
+            }
 
-                if (client.Accounts.Count < 1)
-                {
-                    UI.PrintMessage("Loan cannot be processed.");
-                    return false;
-                }
+            foreach (Account account in client.Accounts)
+            {
+                total += account.Balance;
+            }
 
-                foreach (Account account in client.Accounts)
-                {
-                    total += account.Balance;
-                }
+            decimal maxLoan = total * 5;
+            UI.PrintMessage($"Your total balance is {total} kr");//HUR KOMMER JAG ÅT CURRENCY?
+            UI.PrintMessage($"You can borrow a maximum of: {maxLoan} kr");
 
-                decimal maxLoan = total * 5;
-                UI.PrintMessage($"Your total balance is {total} kr");//HUR KOMMER JAG ÅT CURRENCY?
-                UI.PrintMessage($"You can borrow a maximum of: {maxLoan} kr");
-
-                UI.AskQuestion("How much do you want to borrow?");
-                if (!int.TryParse(Console.ReadLine(), out int loanAmount))
-                {
-                    UI.PrintMessage("Invalid amount. Try again.");
-                    continue;
-                }
-
+            int loanAmount = 0;
+            UI.AskQuestion("How much do you want to borrow?");
+            while (!int.TryParse(Console.ReadLine(), out loanAmount) || loanAmount <= 0 || loanAmount > maxLoan)//Flytta över till UI???
+            {
                 if (loanAmount <= 0)
                 {
                     UI.PrintMessage("The amount must be greater than 0. Try again");
-                    continue;
                 }
 
-                if (loanAmount > maxLoan)
+                else if (loanAmount > maxLoan)
                 {
                     UI.PrintMessage($"Your loan limit is {maxLoan} kr.");//VILL KOMMA ÅT CURRENCY
-                    continue;
-                }
-
-                validAmount = true;
-
-                decimal interest = loanAmount * Data._loanInterest;
-                decimal totalToPay = loanAmount + interest;
-
-                UI.PrintMessage($"Loan amount: {loanAmount} kr" +
-                    $"Interest rate: {interest} kr" +
-                    $"Total to pay: {totalToPay} kr" +
-                    $"Do you want to take the loan? Enter yes och no.");
-                string answer = Console.ReadLine().ToLower();
-
-                if (answer == "yes")
-                {
-                    //Är jag klar här?
-                    UI.ShowAccounts(client);
-                    UI.PrintMessage("Choose accountnumber: ");
-                    if (!int.TryParse(Console.ReadLine(), out int fromAccountNumber))
-                    {
-                        UI.PrintMessage("Invalid accountnumber.");
-                    }
-                    return true;
                 }
                 else
                 {
-                    return false;
+                    UI.PrintMessage("Invalid amount. Try again.");
                 }
             }
+
+
+
+            validAmount = true;
+
+            decimal interest = loanAmount * Data._loanInterest;
+            decimal totalToPay = loanAmount + interest;
+
+            UI.PrintMessage($"Loan amount: {loanAmount} kr" +
+                $"Interest rate: {interest} kr" +
+                $"Total to pay: {totalToPay} kr" +
+                $"Do you want to take the loan? Enter yes och no.");
+            string answer = Console.ReadLine().ToLower();
+
+            if (answer == "yes")
+            {
+                //Är jag klar här?
+                UI.ShowAccounts(client);
+                UI.PrintMessage("Choose accountnumber: ");
+                if (!int.TryParse(Console.ReadLine(), out int fromAccountNumber))
+                {
+                    UI.PrintMessage("Invalid accountnumber.");
+                }
+                return true;
+            }
+            else
+            {
                 return false;
-        } 
+            }
+
+        }
     }
 }

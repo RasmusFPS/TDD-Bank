@@ -14,10 +14,6 @@ namespace TDD_Bank
 
         internal void CreateNewUser()
         {
-            //-------------------------
-            //Blueprint Usercreation
-            //-------------------------
-
             Console.Write("Insert name:");
             string name = Console.ReadLine();
             Console.Write("Insert password:");
@@ -32,7 +28,6 @@ namespace TDD_Bank
             Console.WriteLine("Press Enter To Continue...");
             Console.ReadKey();
             Console.Clear();
-            UI.PrintedAdminMenu();
         }
 
         internal void UserLog()
@@ -45,7 +40,6 @@ namespace TDD_Bank
             Console.WriteLine("Press Enter To Continue...");
             Console.ReadKey();
             Console.Clear();
-            UI.PrintedAdminMenu();
         }
     }
 }
