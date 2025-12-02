@@ -39,7 +39,7 @@
                     TryAgain();
                 }
 
-                if (fromAccountNumber == toAccountNumber)
+                if (fromAccountNumber == toAccountNumber) 
                 {
                     UI.PrintMessage("You can't transfer to the same account.");
                 }
