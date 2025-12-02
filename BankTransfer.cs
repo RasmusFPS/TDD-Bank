@@ -6,8 +6,8 @@
         {
             bool keepTrying = true;
 
-            //while (keepTrying)
-            //{
+            while (keepTrying)
+            {
                 UI.ShowAccounts(client);
 
                 UI.PrintMessage("Enter wich account you want to transfer from:");
@@ -15,7 +15,6 @@
                 while (!int.TryParse(Console.ReadLine(), out fromAccountNumber))
                 {
                     UI.PrintMessage("Invalid accountnumber.");
-                    //continue;
                 }
                 //en metod som söker igenom listan och 
                 //returnerar det första elementet som matchar ett villkor, typ ihoptryckt foreachloop?
@@ -27,7 +26,8 @@
                 }
 
                 Console.WriteLine("Enter which account you want to transfer to:");
-                if (!int.TryParse(Console.ReadLine(), out int toAccountNumber))
+                int toAccountNumber;
+                while (!int.TryParse(Console.ReadLine(), out toAccountNumber))
                 {
                     UI.PrintMessage("Invalid accountnumber.");
                 }
@@ -53,8 +53,7 @@
                 if (fromAccount.Balance < amount)
                 {
                     UI.PrintMessage("Insufficient balance.");
-                    Console.Write("Do you want to try again? (j/n)");
-                    keepTrying = Console.ReadLine().ToLower() == "j";
+                    TryAgain();
                 }
 
                 //Här ska överföringen genomföras.
@@ -62,10 +61,9 @@
                 Console.WriteLine($"Transfer succeeded. {amount} {fromAccount.Currency} was transferred to accountnumber {toAccount.AccountNumber}.");
                 return true;
             }
-            //return false;
-        //}
+            return false;
+        }
 
-        //GENOMFÖRA ÖVERFÖRING METOD BEHÖVS NOG HÄR.
         private static void ExecuteTransfer(Account fromAccount, Account toAccount, decimal amount)
         {
             //GÖR EXCHANGE KONTROLLEN HÄR konverteringen sker här
