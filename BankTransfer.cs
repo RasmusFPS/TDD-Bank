@@ -65,6 +65,7 @@
 
                 //Här ska överföringen genomföras.
                 ExecuteTransfer(fromAccount, toAccount, amount);
+                AddTransferLog(fromAccount, toAccount, amount, client, client);
                 Console.WriteLine($"Transfer succeeded. {amount} {fromAccount.Currency} was transferred to accountnumber {toAccount.AccountNumber}.");
                 return true;
             }
@@ -165,6 +166,8 @@
             fromAccount.Withdraw(amount);
 
             toAccount.Deposit(amount);
+
+            AddTransferLog(fromAccount, toAccount, amount, sender, sender);
 
             Console.WriteLine($"Transfer successful! {amount} {fromAccount.Currency} was sent from {fromAccount.AccountNumber} to {toAccount.AccountNumber}.");
             return true;

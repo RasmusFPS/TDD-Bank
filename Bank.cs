@@ -103,6 +103,9 @@ namespace TDD_Bank
                         break;
                     case "6":
                         UI.ShowTransfers();
+                        break;
+                    case "7":
+
                         return;
                 }
             }

@@ -84,7 +84,8 @@
             UI.PrintMessage("3. Deposit Money");
             UI.PrintMessage("4. Withdraw Money");
             UI.PrintMessage("5. Transfer Money");
-            UI.PrintMessage("6. Logout");
+            UI.PrintMessage("6. Transferlog");
+            UI.PrintMessage("7. Logout");
             Console.Write("Your choice: ");
 
             return Console.ReadLine();
@@ -194,8 +195,7 @@
             foreach (var log in Data.TransferHistory)
             {
                 Console.WriteLine($"{log.LogTime}: \n" +
-                    $"From account: {log.FromAccount} ({log.FromUser}) --> To account {log.ToAccount} ({log.ToUser}) \n" +
-                    $"\t {log.Amount}, {log.Currency}");
+                    $"{log.Amount} {log.Currency}, from account: {log.FromAccount} ({log.FromUser}) --> To account {log.ToAccount} ({log.ToUser})");
             }
         }
 
