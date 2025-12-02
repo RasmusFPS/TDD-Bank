@@ -179,8 +179,9 @@
                 Amount = amount,
                 Currency = fromAccount.Currency,
                 FromUser = fromUser.Username,
-                ToUser = toUser.Username
-                
+                ToUser = toUser.Username,
+                LogTime = DateTime.Now
+
             };
 
             Data.TransferHistory.Add(log);

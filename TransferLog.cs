@@ -16,5 +16,6 @@ namespace TDD_Bank
         public string FromUser { get; set; }
         public string ToUser { get; set; }
 
+        public DateTime LogTime { get; set; }
     }
 }
