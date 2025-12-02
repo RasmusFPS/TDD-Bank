@@ -103,8 +103,7 @@ namespace TDD_Bank
                         UI.ShowTransfers();
                         break;
                     case "7":
-
-                        return;
+                        break;
                 }
             }
         }

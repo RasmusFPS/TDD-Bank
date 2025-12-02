@@ -188,7 +188,7 @@ namespace TDD_Bank
         {
             decimal amount;
             PrintMessage("Enter Amount:");
-            while (!decimal.TryParse(Console.ReadLine(), out amount)) ;
+            while (!decimal.TryParse(Console.ReadLine(), out amount))
             {
                 PrintMessage("Invaild Inupt. try again");
             }
