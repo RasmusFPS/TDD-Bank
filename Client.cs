@@ -38,12 +38,8 @@ namespace TDD_Bank
             UI.PrintMessage("Please input the Deposit amount");
             string userInput = Console.ReadLine();
             UI.PrintMessage("Choose Currency:");
-            foreach (var i in Data.Currency)
-            {
-                Console.WriteLine(i);
-            }
-            string input = Console.ReadLine().ToUpper();
-            
+            string input = UI.GetCurrency();
+
             if (decimal.TryParse(userInput, out decimal DepositAmount))
             {
                 Account newAccount = new Account(DepositAmount,input);

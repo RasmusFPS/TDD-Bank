@@ -1,4 +1,6 @@
-﻿namespace TDD_Bank
+﻿using System.Reflection.Metadata.Ecma335;
+
+namespace TDD_Bank
 {
     internal static class UI
     {
@@ -34,7 +36,6 @@
                 switch (input)
                 {
                     case "1":
-                        Console.WriteLine("Going to Login");
                         Thread.Sleep(100);
                         Console.Clear();
                         UserContinue = true;
@@ -134,8 +135,9 @@
                 return;
             }
 
-            PrintMessage("Balance      | Account Number | Type / Info");
-            PrintMessage("-------------|----------------|--------------------");
+            PrintMessage(String.Format("{0,-15} | {1,-16} | {2,-35}", "Balance", "Account Number", "Type / Info"));
+            PrintMessage("----------------|------------------|--------------------------------------");
+
             foreach (Account account in client.Accounts)
             {
                 string accounttype = "Standard Account";
@@ -143,17 +145,21 @@
                 if (account is SavingAccount)
                 {
                     SavingAccount savingacc = (SavingAccount)account;
-
-                    accounttype = $"Saving account {savingacc.IntrestRate} Intrest per year";
+                    accounttype = $"Saving account ({savingacc.IntrestRate:P} interest)";
                 }
-                PrintMessage($"{account.Balance}{account.Currency,-8}  | {account.AccountNumber,-14}  | {accounttype}");
-            }
 
+                // This is the only line we changed. It forces each piece of data into a
+                // column of a specific width, guaranteeing alignment.
+                PrintMessage(String.Format("{0,-15} | {1,-16} | {2,-35}",
+                    $"{account.Balance} {account.Currency}", // Combine balance and currency
+                    account.AccountNumber,
+                    accounttype));
+            }
         }
 
         internal static int GetAccountNumber()
-        {   //felhantering måste göras
-            Console.WriteLine("Enter the Account Number");
+        {
+            PrintMessage("Enter the Account Number");
             int.TryParse(Console.ReadLine(), out int AccountNumber);
 
             return AccountNumber;
@@ -187,5 +193,47 @@
         {
         }
 
+        internal static string GetCurrency()
+        {
+            int choice;
+            var listCurrency = Data.Currency.Keys.ToList();
+            string input = null;
+            bool validInput = false;
+            while (!validInput)
+            {
+                Console.Clear();
+
+                PrintMessage("Please choose a currency with index number:");
+
+                for (int i = 0; i < listCurrency.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {listCurrency[i]}");
+                }
+                PrintMessage("Your choice:");
+
+                
+
+                if (int.TryParse(Console.ReadLine(), out choice))
+                {
+                    if(choice > 0 &&  choice < listCurrency.Count)
+                    {
+                        input = listCurrency[choice-1];
+                        validInput = true;
+                    }
+                    else
+                    {
+                        PrintMessage("Invalid number. Try again");
+                        Thread.Sleep(400);
+                    }
+                }
+                else
+                {
+                    PrintMessage("Please enter a number");
+                    Thread.Sleep(1000);
+                }
+            }
+            return input;
+        }
+        
     }
 }

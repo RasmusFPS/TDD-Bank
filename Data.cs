@@ -30,6 +30,7 @@ namespace TDD_Bank
             carl,
             bob
         };
+       
         //Dicitonary containing all currencies
         public static Dictionary<string, decimal> Currency = new()
         {
@@ -38,6 +39,7 @@ namespace TDD_Bank
             {"USD",  0.11m},
             {"DKK",  0.68m}
         };
+
         //Amount translated to SEK (Needed for Exchange.cs)
         public static bool locked = false;
 
