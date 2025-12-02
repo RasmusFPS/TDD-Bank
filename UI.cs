@@ -98,13 +98,14 @@ namespace TDD_Bank
 
         public static string PrintedSignInMenu(Client client)
         {
-            UI.PrintMessage("1. Show My Accounts");
-            UI.PrintMessage("2. Create New Account");
-            UI.PrintMessage("3. Deposit Money");
-            UI.PrintMessage("4. Withdraw Money");
-            UI.PrintMessage("5. Transfer Money");
-            UI.PrintMessage("6. Transferlog");
-            UI.PrintMessage("7. Logout");
+            PrintMessage("1. Show My Accounts");
+            PrintMessage("2. Create New Account");
+            PrintMessage("3. Deposit Money");
+            PrintMessage("4. Withdraw Money");
+            PrintMessage("5. Transfer to Me");
+            PrintMessage("6. Transfer to Others");
+            PrintMessage("7. Transferlog");
+            PrintMessage("8. Logout");
             Console.Write("Your choice: ");
 
             return Console.ReadLine();
