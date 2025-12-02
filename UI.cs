@@ -61,12 +61,30 @@ namespace TDD_Bank
 
         internal static string GetUsername()
         {
-            //Dubbelkolla felhantering, återanvändning av PrintMessage metoden?
-            Console.Write("User-ID:");
-            string username = Console.ReadLine();
+            string username = null;
+            bool correctUsername = false;
+            while (!correctUsername)
+            {
+                Console.Write("User-ID:");
+                username = Console.ReadLine().ToLower();
 
-            Console.Clear();
-            return username.ToLower();
+                foreach (var user in Data.UserCollection)
+                {
+                    if (username == user.Username.ToLower())
+                    {
+                        correctUsername = true;
+                    }
+                }
+                if (!correctUsername)
+                {
+                    ErrorMesage("Username Dosent Exist\nTry again");
+                    Thread.Sleep(800);
+                    Console.Clear();
+                }
+                Console.Clear();
+
+            }
+            return username;
         }
 
         internal static string GetPassword()
@@ -188,6 +206,13 @@ namespace TDD_Bank
         {
             PrintMessage(question);
             question = Console.ReadLine();
+        }
+
+        internal static void ErrorMesage(string error)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(error);
+            Console.ResetColor();
         }
 
         internal static void PrintCurrency()
