@@ -170,8 +170,21 @@
             return true;
         }
 
-        internal void TransferLog()
+        internal static void AddTransferLog(Account fromAccount, Account toAccount, decimal amount, User fromUser, User toUser)
         {
+            TransferLog log = new TransferLog
+            {
+                FromAccount = fromAccount.AccountNumber,
+                ToAccount = toAccount.AccountNumber,
+                Amount = amount,
+                Currency = fromAccount.Currency,
+                FromUser = fromUser.Username,
+                ToUser = toUser.Username
+                
+            };
+
+            Data.TransferHistory.Add(log);
+
 
         }
     }

@@ -15,5 +15,6 @@ namespace TDD_Bank
         public string Currency { get; set; }
         public string FromUser { get; set; }
         public string ToUser { get; set; }
+
     }
 }
