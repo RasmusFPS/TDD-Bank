@@ -97,20 +97,7 @@
             Console.WriteLine("Enter the account number of the account you want to transfer from");
             string fromInput = Console.ReadLine();
 
-            Account fromAccount = null;
-
-            //Loopar igenom för att hitta matchande konton
-            foreach (var acc in sender.Accounts)
-            {
-                if (acc.AccountNumber.ToString() == fromInput)
-                {
-                    //när match hittas sparas det i denna variabeln
-                    fromAccount = acc;
-                    break;
-                }
-            }
-
-            //Kontrollerar att konto hittats
+            Account fromAccount = sender.Accounts.FirstOrDefault(acc => acc.AccountNumber.ToString() == fromInput);
             if (fromAccount == null)
             {
                 Console.WriteLine("Invalid account");
@@ -121,23 +108,21 @@
             string toInput = Console.ReadLine();
 
             Account toAccount = null;
+            Client reciver = null;
 
-            //yttre loop kollar alla användare i systemet, inre kollar individuella konton för klienter
             foreach (var user in Data.UserCollection)
             {
                 if (user is Client client)
                 {
-                    foreach (var acc in client.Accounts)
-                    {
-                        if (acc.AccountNumber.ToString() == toInput)
+                   
+                    toAccount = client.Accounts.FirstOrDefault(acc => acc.AccountNumber.ToString() == toInput);
+                    if (toAccount != null)
                         {
-                            toAccount = acc;
+                        reciver = client;
                             break;
                         }
-                    }
+                    
                 }
-                if (toAccount != null)
-                    break;
             }
 
             if (toAccount == null)
@@ -146,19 +131,16 @@
                 return false;
             }
 
-            Console.WriteLine("Enter the amount you want to transfer:");
-            string amountInput = Console.ReadLine();
-
-            //om det inte går att konvertera input till decimal -> felmeddelande
-            if (!decimal.TryParse(amountInput, out decimal amount))
+            if (fromAccount.AccountNumber == toAccount.AccountNumber)
             {
-                Console.WriteLine("Invalid amount.");
+                Console.WriteLine("Cannot transfer to the same account.");
                 return false;
             }
-
-            if (amount <= 0)
+           
+            Console.WriteLine("Enter the amount you want to transfer:");
+            if(!decimal.TryParse(Console.ReadLine(), out decimal amount) || amount <= 0)
             {
-                Console.WriteLine("Amount must be grater than zero.");
+                Console.WriteLine("Invalid amount.");
                 return false;
             }
 
@@ -169,12 +151,11 @@
             }
 
             fromAccount.Withdraw(amount);
-
             toAccount.Deposit(amount);
 
-            AddTransferLog(fromAccount, toAccount, amount, sender, sender);
+            AddTransferLog(fromAccount, toAccount, amount, sender, reciver);
 
-            Console.WriteLine($"Transfer successful! {amount} {fromAccount.Currency} was sent from {fromAccount.AccountNumber} to {toAccount.AccountNumber}.");
+            Console.WriteLine($"Transfer successful! {amount} {fromAccount.Currency} was sent from account{fromAccount.AccountNumber} to account {toAccount.AccountNumber}.");
             return true;
         }
 
