@@ -14,8 +14,8 @@ namespace TDD_Bank
         public static List<User> UserCollection = new List<User>()
         {
             new Admin( "Admin-Johan", "1234", true),
-            new Client( "Carl", "Hawaa", false),
-            new Client("Bob","123",false)
+            new Client( "Carl", "Hawaa", false, false),
+            new Client("Bob","123",false, false)
 
         };
         //Dicitonary containing all currencies
@@ -27,7 +27,6 @@ namespace TDD_Bank
             {"DKK",  0.68m}
         };
         //Amount translated to SEK (Needed for Exchange.cs)
-        public static decimal inSEK;
         public static bool locked = false;
 
 
