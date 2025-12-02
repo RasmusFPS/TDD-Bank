@@ -189,7 +189,7 @@ namespace TDD_Bank
             PrintMessage("Enter the Account Number");
             while(!int.TryParse(Console.ReadLine(), out AccountNumber))
             {
-                PrintMessage("Invalid input");
+                ErrorMesage("Invalid input");
             }
 
             return AccountNumber;
