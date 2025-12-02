@@ -107,39 +107,45 @@ namespace TDD_Bank
             UI.PrintMessage("7. Logout");
             Console.Write("Your choice: ");
 
-            return  Console.ReadLine();
+            return Console.ReadLine();
         }
 
         internal static void PrintedAdminMenu()
         {
-            PrintMessage("1. Update Currency");
-            PrintMessage("2. User Log");
-            PrintMessage("3. Create New User");
-            PrintMessage("4. Unlock Users");
-            PrintMessage("5. Log Out");
-
-            var input = Console.ReadLine();
-            Admin admin = new Admin("", "", true, 3);
-
-
-            switch (input)
+            bool signedIn = true;
+            while (signedIn)
             {
-                case "1":
-                    PrintMessage("Update Currency");
-                    break;
-                case "2":
-                    admin.UserLog();
-                    break;
-                case "3":
-                    admin.CreateNewUser();
-                    return;
-                case "4":
-                    admin.UserUnlock();
-                    break;
-                case "5":
-                    break;
-            }
 
+                PrintMessage("1. Update Currency");
+                PrintMessage("2. User Log");
+                PrintMessage("3. Create New User");
+                PrintMessage("4. Unlock Users");
+                PrintMessage("5. Log Out");
+
+                var input = Console.ReadLine();
+                Admin admin = new Admin("", "", true, 3);
+
+
+                switch (input)
+                {
+                    case "1":
+                        PrintMessage("Update Currency");
+                        break;
+                    case "2":
+                        admin.UserLog();
+                        break;
+                    case "3":
+                        admin.CreateNewUser();
+                        break;
+                    case "4":
+                        admin.UserUnlock();
+                        break;
+                    case "5":
+                        signedIn = false;
+                        break;
+                }
+
+            }
         }
 
 
@@ -170,7 +176,7 @@ namespace TDD_Bank
                 // This is the only line we changed. It forces each piece of data into a
                 // column of a specific width, guaranteeing alignment.
                 PrintMessage(String.Format("{0,-15} | {1,-16} | {2,-35}",
-                    $"{Math.Round (account.Balance, 2)} {account.Currency}", // Combine balance and currency
+                    $"{Math.Round(account.Balance, 2)} {account.Currency}", // Combine balance and currency
                     account.AccountNumber,
                     accounttype));
             }
@@ -248,13 +254,13 @@ namespace TDD_Bank
                 }
                 PrintMessage("Your choice:");
 
-                
+
 
                 if (int.TryParse(Console.ReadLine(), out choice))
                 {
-                    if(choice > 0 &&  choice < listCurrency.Count)
+                    if (choice > 0 && choice < listCurrency.Count)
                     {
-                        input = listCurrency[choice-1];
+                        input = listCurrency[choice - 1];
                         validInput = true;
                     }
                     else
@@ -271,6 +277,6 @@ namespace TDD_Bank
             }
             return input;
         }
-        
+
     }
 }
