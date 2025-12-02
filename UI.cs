@@ -185,8 +185,12 @@ namespace TDD_Bank
 
         internal static int GetAccountNumber()
         {
+            int AccountNumber;
             PrintMessage("Enter the Account Number");
-            int.TryParse(Console.ReadLine(), out int AccountNumber);
+            while(!int.TryParse(Console.ReadLine(), out AccountNumber))
+            {
+                PrintMessage("Invalid input");
+            }
 
             return AccountNumber;
         }
@@ -197,7 +201,7 @@ namespace TDD_Bank
             PrintMessage("Enter Amount:");
             while (!decimal.TryParse(Console.ReadLine(), out amount))
             {
-                PrintMessage("Invaild Inupt. try again");
+                ErrorMesage("Invaild Inupt. try again");
             }
 
             return amount;
