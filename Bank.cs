@@ -11,30 +11,30 @@ namespace TDD_Bank
 
         public void Run()
         {
-            bool Exit = true;
-            while (Exit)
+            bool exit = false;
+            while (!exit)
             {
 
-                Exit = UI.WelcomeMSG();
+                exit = UI.WelcomeMSG();
 
-                if (Exit == false)
+                if (exit)
                 {
-                    break;
+
+
+                    SignIn();
+
+                    if (_loggedin == null) return;
+
+                    if (_loggedin is Client)
+                    {
+                        RunClientDashboard();
+                    }
+                    else if (_loggedin is Admin)
+                    {
+                        UI.PrintedAdminMenu();
+                    }
+
                 }
-
-                SignIn();
-
-                if (_loggedin == null) return;
-
-                if (_loggedin is Client)
-                {
-                    RunClientDashboard();
-                }
-                else if (_loggedin is Admin)
-                {
-                    UI.PrintedAdminMenu();
-                }
-
                 _loggedin = null;
                 Console.Clear();
 
@@ -100,6 +100,10 @@ namespace TDD_Bank
                         //BankTransfer.TransferToOthers(currentclient);
                         break;
                     case "6":
+                        UI.ShowTransfers();
+                        break;
+                    case "7":
+
                         return;
                 }
             }

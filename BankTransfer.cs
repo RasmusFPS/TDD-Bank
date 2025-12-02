@@ -65,6 +65,7 @@
 
                 //Här ska överföringen genomföras.
                 ExecuteTransfer(fromAccount, toAccount, amount);
+                AddTransferLog(fromAccount, toAccount, amount, client, client);
                 Console.WriteLine($"Transfer succeeded. {amount} {fromAccount.Currency} was transferred to accountnumber {toAccount.AccountNumber}.");
                 return true;
             }
@@ -171,12 +172,28 @@
 
             toAccount.Deposit(amount);
 
+            AddTransferLog(fromAccount, toAccount, amount, sender, sender);
+
             Console.WriteLine($"Transfer successful! {amount} {fromAccount.Currency} was sent from {fromAccount.AccountNumber} to {toAccount.AccountNumber}.");
             return true;
         }
 
-        internal void TransferLog()
+        internal static void AddTransferLog(Account fromAccount, Account toAccount, decimal amount, User fromUser, User toUser)
         {
+            TransferLog log = new TransferLog
+            {
+                FromAccount = fromAccount.AccountNumber,
+                ToAccount = toAccount.AccountNumber,
+                Amount = amount,
+                Currency = fromAccount.Currency,
+                FromUser = fromUser.Username,
+                ToUser = toUser.Username,
+                LogTime = DateTime.Now
+
+            };
+
+            Data.TransferHistory.Add(log);
+
 
         }
     }
