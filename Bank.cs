@@ -102,8 +102,8 @@ namespace TDD_Bank
                         HandleWithdraw(currentclient);
                         break;
                     case "5":
-                        BankTransfer.TransferToMe(currentclient);
-                        //BankTransfer.TransferToOthers(currentclient);
+                        //BankTransfer.TransferToMe(currentclient);
+                        BankTransfer.TransferToOthers(currentclient);
                         break;
                     case "6":
                         UI.ShowTransfers();
