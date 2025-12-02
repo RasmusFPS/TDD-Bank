@@ -187,5 +187,17 @@
         {
         }
 
+        internal static void ShowTransfers()
+        {
+            Console.WriteLine("Transfers: ");
+
+            foreach (var log in Data.TransferHistory)
+            {
+                Console.WriteLine($"{log.LogTime}: \n" +
+                    $"From account: {log.FromAccount} ({log.FromUser}) --> To account {log.ToAccount} ({log.ToUser}) \n" +
+                    $"\t {log.Amount}, {log.Currency}");
+            }
+        }
+
     }
 }
