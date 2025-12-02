@@ -141,8 +141,8 @@ namespace TDD_Bank
                         admin.UserUnlock();
                         break;
                     case "5":
-                        
-                        return;
+                        signedIn = false;
+                        break;
                 }
 
             }

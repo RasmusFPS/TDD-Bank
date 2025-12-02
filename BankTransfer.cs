@@ -98,15 +98,22 @@
             string fromInput = Console.ReadLine();
 
             Account fromAccount = null;
+            User reciver = null;
 
             //Loopar igenom för att hitta matchande konton
-            foreach (var acc in sender.Accounts)
+            foreach (var user in Data.UserCollection)
             {
-                if (acc.AccountNumber.ToString() == fromInput)
+                if (user is Client client)
                 {
-                    //när match hittas sparas det i denna variabeln
-                    fromAccount = acc;
-                    break;
+                    foreach(var acc in client.Accounts)
+
+                    if (acc.AccountNumber.ToString() == fromInput)
+                    {
+                        //när match hittas sparas det i denna variabeln
+                        fromAccount = acc;
+                        reciver = client;
+                        break;
+                    }
                 }
             }
 
