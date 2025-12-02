@@ -16,11 +16,11 @@ namespace TDD_Bank
 
         static Data()
         {
-            carl.Accounts.Add(new Account(0, "SEK"));
-            carl.Accounts.Add(new SavingAccount(0, "SEK", 0.02m));
+            carl.Accounts.Add(new Account(500, "SEK"));
+            carl.Accounts.Add(new SavingAccount(500, "SEK", 0.02m));
 
-            bob.Accounts.Add(new Account(0, "SEK"));
-            bob.Accounts.Add(new SavingAccount(0, "SEK", 0.02m));
+            bob.Accounts.Add(new Account(500, "SEK"));
+            bob.Accounts.Add(new SavingAccount(500, "SEK", 0.02m));
         }
 
 
