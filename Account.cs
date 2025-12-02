@@ -15,11 +15,11 @@ namespace TDD_Bank
         public string Currency { get; set; }
 
         //AccountNumber and Account Balance
-        public Account(decimal initalbalance, string Currency)
+        public Account(decimal initalbalance, string currency)
         {
             AccountNumber = NextAccountNumber++;
             Balance = initalbalance;
-            this.Currency = Currency;
+            Currency = currency;
         }
         //Prompts user to withdraw certain amount with UI class
         internal bool Withdraw(decimal amount, Account account)

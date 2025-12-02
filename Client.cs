@@ -9,7 +9,7 @@ namespace TDD_Bank
 {
     internal class Client : User
     {
-       // internal List<Loan> Loans { get; private set; }
+        internal List<Loan> Loans { get; private set; }
         internal List<Account> Accounts { get; private set; }
         public Client(string username, string password, bool isAdmin) : base(username, password, false)
         {
@@ -37,12 +37,8 @@ namespace TDD_Bank
             UI.PrintMessage("Please input the Deposit amount");
             string userInput = Console.ReadLine();
             UI.PrintMessage("Choose Currency:");
-            foreach (var i in Data.Currency)
-            {
-                Console.WriteLine(i);
-            }
-            string input = Console.ReadLine().ToUpper();
-            
+            string input = UI.GetCurrency();
+
             if (decimal.TryParse(userInput, out decimal DepositAmount))
             {
                 Account newAccount = new Account(DepositAmount,input);
