@@ -39,11 +39,11 @@ namespace TDD_Bank
             {"DKK",  0.68m}
         };
         //Amount translated to SEK (Needed for Exchange.cs)
-        public static decimal inSEK;
+        public static bool locked = false;
 
 
         internal static List<TransferLog> TransferHistory = new List<TransferLog>();
-        internal static List<Loan> ActiveLoans = new List<Loan>();
+        //internal static List<Loan> ActiveLoans = new List<Loan>();
 
     }
 }
