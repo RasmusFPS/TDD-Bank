@@ -11,10 +11,12 @@ namespace TDD_Bank
     {
         //internal List<Loan> Loans { get; private set; }
         internal List<Account> Accounts { get; private set; }
-        public Client(string username, string password, bool isAdmin) : base(username, password, false)
+        public bool IsLocked { get; set; }
+        public Client(string username, string password, bool isAdmin, bool isLocked) : base(username, password, false)
         {
             //new makes sure the account is fresh and created for the object
             Accounts = new List<Account>();
+            IsLocked = isLocked;
             //Loans = new List<Loan>();
         }
 
@@ -37,12 +39,8 @@ namespace TDD_Bank
             UI.PrintMessage("Please input the Deposit amount");
             string userInput = Console.ReadLine();
             UI.PrintMessage("Choose Currency:");
-            foreach (var i in Data.Currency)
-            {
-                Console.WriteLine(i);
-            }
-            string input = Console.ReadLine().ToUpper();
-            
+            string input = UI.GetCurrency();
+
             if (decimal.TryParse(userInput, out decimal DepositAmount))
             {
                 Account newAccount = new Account(DepositAmount,input);

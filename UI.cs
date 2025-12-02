@@ -1,4 +1,6 @@
-﻿namespace TDD_Bank
+﻿using System.Reflection.Metadata.Ecma335;
+
+namespace TDD_Bank
 {
     internal static class UI
     {
@@ -34,7 +36,6 @@
                 switch (input)
                 {
                     case "1":
-                        Console.WriteLine("Going to Login");
                         Thread.Sleep(100);
                         Console.Clear();
                         UserContinue = true;
@@ -93,10 +94,10 @@
 
         internal static void PrintedAdminMenu()
         {
-            UI.PrintMessage("1. Update Currency");
-            UI.PrintMessage("2. User Log");
-            UI.PrintMessage("3. Create New User");
-            UI.PrintMessage("4. Log Out");
+            PrintMessage("1. Update Currency");
+            PrintMessage("2. User Log");
+            PrintMessage("3. Create New User");
+            PrintMessage("4. Log Out");
 
             var input = Console.ReadLine();
             Admin admin = new Admin("", "", true);
@@ -104,7 +105,7 @@
             switch (input)
             {
                 case "1":
-                    UI.PrintMessage("Update Currency");
+                    PrintMessage("Update Currency");
                     break;
                 case "2":
                     admin.UserLog();
@@ -127,16 +128,17 @@
         //prints the account balance
         internal static void ShowAccounts(Client client)
         {
-            UI.PrintMessage("Accounts");
+            PrintMessage("Accounts");
 
             if (!client.Accounts.Any())
             {
-                UI.PrintMessage("You have no accounts");
+                PrintMessage("You have no accounts");
                 return;
             }
 
-            UI.PrintMessage("Balance      | Account Number | Type / Info");
-            UI.PrintMessage("-------------|----------------|--------------------");
+            PrintMessage(String.Format("{0,-15} | {1,-16} | {2,-35}", "Balance", "Account Number", "Type / Info"));
+            PrintMessage("----------------|------------------|--------------------------------------");
+
             foreach (Account account in client.Accounts)
             {
                 string accounttype = "Standard Account";
@@ -144,17 +146,21 @@
                 if (account is SavingAccount)
                 {
                     SavingAccount savingacc = (SavingAccount)account;
-
-                    accounttype = $"Saving account {savingacc.IntrestRate} Intrest per year";
+                    accounttype = $"Saving account ({savingacc.IntrestRate:P} interest)";
                 }
-                UI.PrintMessage($"{account.Balance}{account.Currency,-8}  | {account.AccountNumber,-14}  | {accounttype}");
-            }
 
+                // This is the only line we changed. It forces each piece of data into a
+                // column of a specific width, guaranteeing alignment.
+                PrintMessage(String.Format("{0,-15} | {1,-16} | {2,-35}",
+                    $"{account.Balance} {account.Currency}", // Combine balance and currency
+                    account.AccountNumber,
+                    accounttype));
+            }
         }
 
         internal static int GetAccountNumber()
-        {   //felhantering måste göras
-            Console.WriteLine("Enter the Account Number");
+        {
+            PrintMessage("Enter the Account Number");
             int.TryParse(Console.ReadLine(), out int AccountNumber);
 
             return AccountNumber;
@@ -163,10 +169,10 @@
         internal static decimal GetDecimal()
         {
             decimal amount;
-            UI.PrintMessage("Enter Amount:");
+            PrintMessage("Enter Amount:");
             while (!decimal.TryParse(Console.ReadLine(), out amount)) ;
             {
-                UI.PrintMessage("Invaild Inupt. try again");
+                PrintMessage("Invaild Inupt. try again");
             }
 
             return amount;
@@ -180,7 +186,7 @@
 
         internal static void AskQuestion(string question)
         {
-            UI.PrintMessage(question);
+            PrintMessage(question);
             question = Console.ReadLine();
         }
 
@@ -199,5 +205,47 @@
             }
         }
 
+        internal static string GetCurrency()
+        {
+            int choice;
+            var listCurrency = Data.Currency.Keys.ToList();
+            string input = null;
+            bool validInput = false;
+            while (!validInput)
+            {
+                Console.Clear();
+
+                PrintMessage("Please choose a currency with index number:");
+
+                for (int i = 0; i < listCurrency.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {listCurrency[i]}");
+                }
+                PrintMessage("Your choice:");
+
+                
+
+                if (int.TryParse(Console.ReadLine(), out choice))
+                {
+                    if(choice > 0 &&  choice < listCurrency.Count)
+                    {
+                        input = listCurrency[choice-1];
+                        validInput = true;
+                    }
+                    else
+                    {
+                        PrintMessage("Invalid number. Try again");
+                        Thread.Sleep(400);
+                    }
+                }
+                else
+                {
+                    PrintMessage("Please enter a number");
+                    Thread.Sleep(1000);
+                }
+            }
+            return input;
+        }
+        
     }
 }
