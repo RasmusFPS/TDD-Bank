@@ -113,7 +113,11 @@ namespace TDD_Bank
                     admin.CreateNewUser();
                     return;
                 case "4":
-
+                    Data.locked = false;
+                    Console.WriteLine("Success!");
+                    
+                    break;
+                case "5":
                     break;
             }
 
