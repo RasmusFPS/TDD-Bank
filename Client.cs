@@ -11,7 +11,7 @@ namespace TDD_Bank
     {
         internal List<Account> Accounts { get; private set; }
         public bool IsLocked { get; set; }
-        public Client(string username, string password, bool isAdmin, bool isLocked) : base(username, password, false)
+        public Client(string username, string password, bool isAdmin, int tries, bool isLocked) : base(username, password, false, tries)
         {
             //new makes sure the account is fresh and created for the object
             Accounts = new List<Account>();

@@ -8,7 +8,7 @@ namespace TDD_Bank
 {
     internal class Admin : User
     {
-        public Admin(string username, string password, bool isAdmin) : base(username, password, isAdmin)
+        public Admin(string username, string password, bool isAdmin, int tries) : base(username, password, isAdmin, tries)
         {
         }
 
@@ -23,7 +23,8 @@ namespace TDD_Bank
             Console.Write("Insert password:");
             string password = Console.ReadLine();
             bool isAdmin = false;
-            Data.UserCollection.Add(new User(name, password, isAdmin));
+            int tries = 3;
+            Data.UserCollection.Add(new User(name, password, isAdmin, tries));
 
             foreach (var i in Data.UserCollection)
             {
@@ -46,6 +47,51 @@ namespace TDD_Bank
             Console.ReadKey();
             Console.Clear();
             UI.PrintedAdminMenu();
+        }
+        internal void UserUnlock()
+        {
+            List<string> LockedUsers = new List<string>();
+            foreach (var user in Data.UserCollection)
+            {
+
+                if (user.Tries == 0)
+                {
+                    //Console.WriteLine($"{i}. {user.Username}");
+                    LockedUsers.Add(user.Username);
+                }
+            }
+            if (LockedUsers.Count() != 0)
+            {
+                foreach (var i in LockedUsers)
+                {
+                    int nr = 1;
+                    Console.WriteLine($" {nr}. {i}");
+                }
+                Console.Write("Lås upp:");
+                int.TryParse(Console.ReadLine(), out int choice);
+                if (choice < LockedUsers.Count + 1 && choice > 0)
+                {
+
+                    foreach (var i in Data.UserCollection)
+                    {
+                        if (i.Username == LockedUsers[choice - 1])
+                        {
+                            i.Tries =+ 3;
+                        }
+                    }
+                    LockedUsers.RemoveAt(choice - 1);
+                }
+                else
+                {
+                    Console.WriteLine("Error, outside of list");
+                    Console.ReadKey();
+                }
+            }
+            else
+            {
+                Console.WriteLine("No Locked users");
+                Console.ReadKey();
+            }
         }
     }
 }

@@ -13,9 +13,9 @@ namespace TDD_Bank
 
         public static List<User> UserCollection = new List<User>()
         {
-            new Admin( "Admin-Johan", "1234", true),
-            new Client( "Carl", "Hawaa", false, false),
-            new Client("Bob","123",false, false)
+            new Admin( "Admin-Johan", "1234", true, 3),
+            new Client( "Carl", "Hawaa", false, 3, false),
+            new Client("Bob","123",false, 0, false)
 
         };
         //Dicitonary containing all currencies
