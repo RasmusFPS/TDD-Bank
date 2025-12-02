@@ -15,7 +15,7 @@ namespace TDD_Bank
         {
             //new makes sure the account is fresh and created for the object
             Accounts = new List<Account>();
-            Loans = new List<Loan>();
+            //Loans = new List<Loan>();
         }
 
         public Account GetAccount(int accountNumber)
