@@ -125,7 +125,7 @@ namespace TDD_Bank
             {
                 if (account.Deposit(amount))
                 {
-                    UI.PrintMessage($"Deposit successful. New Balance{account.Balance}");
+                    UI.PrintMessage($"Deposit successful. New Balance {account.Balance} {account.Currency}");
                 }
                 else
                 {
@@ -149,7 +149,7 @@ namespace TDD_Bank
             {
                 if (account.Withdraw(amount))
                 {
-                    UI.PrintMessage($"\nWithdrawal successful. New balance for account #{account.AccountNumber} is {account.Balance:C}.");
+                    UI.PrintMessage($"\nWithdrawal successful. New balance for account #{account.AccountNumber} is {account.Balance} {account.Currency}.");
                 }
                 else
                 {
