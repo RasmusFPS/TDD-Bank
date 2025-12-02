@@ -116,5 +116,21 @@ namespace TDD_Bank
                 Console.ReadKey();
             }
         }
+        internal void CurrencyValue()
+        {
+            Console.WriteLine("What currency do you want to edit?");
+            foreach (var i in Data.Currency)
+            {
+                Console.WriteLine($"{i.Key} | {i.Value}");
+            }
+            string choice = Console.ReadLine().ToUpper();
+            if (Data.Currency.ContainsKey(choice))
+            {
+            Console.WriteLine("How many percent?");
+            decimal.TryParse(Console.ReadLine(), out decimal percent);
+                Data.Currency[choice] *= (1 + percent / 100);
+            Console.ReadKey();
+            }
+        }
     }
 }

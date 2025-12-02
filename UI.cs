@@ -130,6 +130,7 @@ namespace TDD_Bank
                 {
                     case "1":
                         PrintMessage("Update Currency");
+                        admin.CurrencyValue();
                         break;
                     case "2":
                         admin.UserLog();
