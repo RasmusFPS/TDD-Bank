@@ -11,8 +11,8 @@ namespace TDD_Bank
     {
         public static decimal _loanInterest = 0.05m;
 
-        public static Client carl = new Client("Carl", "Hawaa", false);
-        public static Client bob = new Client("Bob", "123", false);
+        public static Client carl = new Client("Carl", "Hawaa", false, false);
+        public static Client bob = new Client("Bob", "123", false, false);
 
         static Data()
         {
