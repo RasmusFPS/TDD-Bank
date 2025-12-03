@@ -1,4 +1,6 @@
-﻿namespace TDD_Bank
+﻿using System.Net.Http.Headers;
+
+namespace TDD_Bank
 {
     internal class BankTransfer
     {
@@ -36,13 +38,13 @@
                 if (success)
                 {
                     amount = GetAmount(fromAccount);
-                    if(amount == -1)
+                    if (amount == -1)
                     {
                         success = false;
                     }
                 }
 
-                if(success && !ValidateBalance (fromAccount, amount))
+                if (success && !ValidateBalance(fromAccount, amount))
                 {
                     success = false;
                 }
@@ -56,9 +58,9 @@
                     return true;
                 }
 
-                keepTrying = TryAgain();               
+                keepTrying = TryAgain();
 
-                
+
             }
             return false;
         }
@@ -150,7 +152,29 @@
                 amount /= Data.Currency[fromAccount.Currency];
                 amount *= Data.Currency[toAccount.Currency];
             }
-            toAccount.Deposit(amount);
+
+            PendingTrans newTransfer = new PendingTrans
+            {
+                ToAccount = toAccount,
+                Amount = amount
+            };
+
+            Data.TransferQueue.Add(newTransfer);
+        }
+
+        internal static void CheckQueue()
+        {
+            if(DateTime.Now >= Data.Runtime)
+            {
+                foreach(var transfer in Data.TransferQueue)
+                {
+                    transfer.ToAccount.Deposit(transfer.Amount);
+                }
+
+                Data.TransferQueue.Clear();
+
+                Data.Runtime = DateTime.Now.AddMinutes(15);
+            }
         }
 
         //returnerar bool för att se om transaktionen lyckades 
@@ -183,14 +207,14 @@
             {
                 if (user is Client client)
                 {
-                   
+
                     toAccount = client.Accounts.FirstOrDefault(acc => acc.AccountNumber.ToString() == toInput);
                     if (toAccount != null)
-                        {
+                    {
                         reciver = client;
-                            break;
-                        }
-                    
+                        break;
+                    }
+
                 }
             }
 
@@ -205,9 +229,9 @@
                 Console.WriteLine("Cannot transfer to the same account.");
                 return false;
             }
-           
+
             Console.WriteLine("Enter the amount you want to transfer:");
-            if(!decimal.TryParse(Console.ReadLine(), out decimal amount) || amount <= 0)
+            if (!decimal.TryParse(Console.ReadLine(), out decimal amount) || amount <= 0)
             {
                 Console.WriteLine("Invalid amount.");
                 return false;
