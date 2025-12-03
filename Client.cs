@@ -41,7 +41,7 @@ namespace TDD_Bank
             UI.PrintMessage("Choose Currency:");
             string input = UI.GetCurrency();
 
-            if (decimal.TryParse(userInput, out decimal DepositAmount))
+            if (decimal.TryParse(userInput, out decimal DepositAmount)&& DepositAmount > 0)
             {
                 Account newAccount = new Account(DepositAmount,input);
 
@@ -52,7 +52,7 @@ namespace TDD_Bank
             }
             else
             {
-                UI.PrintMessage("Invalid Amount, Couldnt Create Account");
+                UI.ErrorMesage("Invalid Amount, Couldnt Create Account");
             }
 
         }
@@ -63,20 +63,19 @@ namespace TDD_Bank
             string userInput = Console.ReadLine();
             UI.PrintMessage("Choose Currency:");
             string input = UI.GetCurrency();
-            UI.PrintMessage("The intrest Rate is 2% per year");
-            if(decimal.TryParse(userInput,out decimal DepositAmount))
+            if(decimal.TryParse(userInput,out decimal DepositAmount) && DepositAmount > 0)
             {
                 SavingAccount newAccount = new SavingAccount(DepositAmount,input,1.02m);
 
                 Accounts.Add(newAccount);
 
-                UI.PrintMessage($"The one year compund will be {DepositAmount*1.02m}");
+                UI.PrintMessage($"Intrest per year: 2%\nOne year compund will be {DepositAmount*1.02m}");
 
                 UI.PrintMessage("Saving Account created");
             }
             else
             {
-                UI.PrintMessage("Invalid Amount, Couldnt create account");
+                UI.ErrorMesage("Invalid Amount, Couldnt create account");
             }
         }
     }
