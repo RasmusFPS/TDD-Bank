@@ -85,6 +85,8 @@ namespace TDD_Bank
             bool temp = true;
             while (temp)
             {
+                BankTransfer.CheckQueue();
+
                 string choice = UI.PrintedSignInMenu(currentclient);
                 switch (choice)
                 {
