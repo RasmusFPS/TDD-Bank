@@ -38,7 +38,7 @@ namespace TDD_Bank
         internal bool Deposit(decimal amount)
         {
 
-            if (amount > 0 && Balance >= amount)
+            if (amount > 0)
             {
                 Balance += amount;
 
