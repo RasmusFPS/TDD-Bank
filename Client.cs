@@ -59,20 +59,18 @@ namespace TDD_Bank
 
         public void CreateSavingAccount()
         {
-            Console.WriteLine("Please input deposit amount");
+            UI.PrintMessage("Please input the Deposit amount");
             string userInput = Console.ReadLine();
-            UI.PrintMessage("Choose currency");
-            foreach (var i in Data.Currency)
-            {
-                Console.WriteLine(i);
-            }
-            var input = Console.ReadLine().ToUpper();
+            UI.PrintMessage("Choose Currency:");
+            string input = UI.GetCurrency();
             UI.PrintMessage("The intrest Rate is 2% per year");
             if(decimal.TryParse(userInput,out decimal DepositAmount))
             {
-                SavingAccount newAccount = new SavingAccount(DepositAmount,input,0.02m);
+                SavingAccount newAccount = new SavingAccount(DepositAmount,input,1.02m);
 
                 Accounts.Add(newAccount);
+
+                UI.PrintMessage($"The one year compund will be {DepositAmount*1.02m}");
 
                 UI.PrintMessage("Saving Account created");
             }
