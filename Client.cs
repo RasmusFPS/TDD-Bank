@@ -69,7 +69,7 @@ namespace TDD_Bank
 
                 Accounts.Add(newAccount);
 
-                UI.PrintMessage($"Intrest per year: 2%\nOne year compund will be {DepositAmount*1.02m}");
+                UI.PrintMessage($"Intrest per year: 2%\nOne year compund will be {DepositAmount*1.02m} {input}");
 
                 UI.PrintMessage("Saving Account created");
             }
