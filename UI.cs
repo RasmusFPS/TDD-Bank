@@ -89,9 +89,23 @@ namespace TDD_Bank
 
         internal static string GetPassword()
         {
-            //dubbelkolla felhantering, återanvändning av PrintMessage metoden?
-            Console.Write("Password:");
-            string userPassword = Console.ReadLine();
+            bool emptyPassword = true;
+            string userPassword = null;
+            while (emptyPassword)
+            {
+                Console.Write("Password:");
+                userPassword = Console.ReadLine();
+                if (userPassword.Trim() == "")
+                {
+                    ErrorMesage("Write something before clicking enter");
+                    Thread.Sleep(500);
+                    Console.Clear();
+                }
+                else
+                {
+                    emptyPassword = false;
+                }
+            }
 
             return userPassword;
         }
@@ -136,7 +150,7 @@ namespace TDD_Bank
                         break;
                     case "2":
                         admin.AddCurrency();
-                            break;
+                        break;
                     case "3":
                         admin.UserLog();
                         break;
