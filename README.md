@@ -1,36 +1,36 @@
 <h1 align="center"><u>TDD Bank</u></h1>
 
-1. **Start**: När programmet startas laddas testdatan (kunder/konton)
-2. **Välkomstmeddelande**: Användaren får en ASCII art Logo och sedan en meny för att logga in eller avsluta programmet
-3. **Inloggning**
-   - Användaren anger Användarnamn och lösenord
-   - Systemet kollar om användaren finns och om lösenordet passar
-   - Om användaren skriver fel lösenord 3 gånger så blir dom utlåsta och måste fråga en Admin om hjälp
-4. **Inloggad**
-   - När Kunden loggat in, hamnar de i en loop där de kan se sina konton, sätta in/ta ut pengar, göra överföringar, skapa nytt Bankkonto/Sparkonto och ta lån
-   - Om en admin loggar in hamnar de i en alternativ meny för enbart Admins, där man kan låsa upp kunder, skapad kunder till banken och uppdaterat värdet av bankens valutor
-5. **Utloggning**: När Användaren väljer loggout så kommer deras user bli satt till null och dem kommer tas till Inloggning
+1. **Start**: When the program starts, test data (clients/accounts) is loaded.
+2. **Welcome Message**: The user receives an ASCII art Logo and then a menu to log in or exit the program.
+3. **Login**
+   - The user enters Username and password.
+   - The system checks if the user exists and if the password matches.
+   - If the user enters the wrong password 3 times, they become locked out and must ask an Admin for help.
+4. **Logged In**
+   - When the Client logs in, they enter a loop where they can view their accounts, deposit/withdraw money, make transfers, create new Bank Accounts/Savings Accounts, and take loans.
+   - If an admin logs in, they enter an alternative menu strictly for Admins, where one can unlock clients, create clients for the bank, and update the value of the bank's currencies.
+5. **Logout**: When the User selects logout, their user object is set to null and they are returned to Login.
 
-<h2 align="center"><u>Objekt och Klasser</u></h2>
+<h2 align="center"><u>Objects and Classes</u></h2>
 
-1. **Program.cs**: Skapar Bank-objektet för att köra programmet
-2. **Bank.cs**: Här körs själva programmet och är hjärnan bakom allt
-3. **UI.cs**: Denna klassen är bara för menyer/det som syns på skärmen
-4. **BankTransfer.cs**: En hjälpklass som sköter logiken för att flytta pengar. Den hanterar valutaväxling, input-validering och lägger överföringar i kö.
-5. **TransferLog.cs**: Ett objekt som fungerar som kvitto. Sparar information om genomförda transaktioner (avsändare, mottagare, belopp, tid).
-6. **PendingTransfer.cs**: Ett objekt som håller information om en överföring som ligger i kö (väntar på 15-minuters fördröjningen). Innehåller mottagarkonto och belopp.
+1. **Program.cs**: Creates the Bank object to run the program.
+2. **Bank.cs**: This is where the program itself runs and is the brain behind everything.
+3. **UI.cs**: This class is only for menus/what is visible on the screen.
+4. **BankTransfer.cs**: A helper class that handles the logic for moving money. It handles currency exchange, input validation, and queues transfers.
+5. **TransferLog.cs**: An object that functions as a receipt. Saves information about completed transactions (sender, receiver, amount, time).
+6. **PendingTransfer.cs**: An object that holds information about a transfer currently in the queue (waiting for the 15-minute delay). Contains recipient account and amount.
 
 <h2 align="center"><u>Data</u></h2>
 
-- **Data.cs**: Detta är en statisk klass som innehåller Listor på användare, växelkurs och transaktionshistorik
+- **Data.cs**: This is a static class containing Lists of users, exchange rates, and transaction history.
 
-<h2 align="center"><u>Arv</u></h2>
+<h2 align="center"><u>Inheritance</u></h2>
 
-- **User**: Grundmallen för att skapa en användare
-- **Client**: En vanlig bankkund. Ärver från user så att användare får ett bankkonto
-- **Admin**: Ärver från user men har tillgång till administrativa verktyg istället för bankkonton.
+- **User**: The basic template for creating a user.
+- **Client**: A standard bank customer. Inherits from user so that the user gets a bank account.
+- **Admin**: Inherits from user but has access to administrative tools instead of bank accounts.
 
-<h2 align="center"><u>BankKonto</u></h2>
+<h2 align="center"><u>BankAccount</u></h2>
 
-- **Account**: Ett vanligt bankkonto. Håller koll på saldo, valuta kontonummer
-- **SavingAccount**: Sparkonto med en 2% ränta
+- **Account**: A standard bank account. Keeps track of balance, currency, and account number.
+- **SavingAccount**: Savings account with 2% interest.
