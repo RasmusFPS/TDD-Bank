@@ -21,17 +21,19 @@
 6. **PendingTransfer.cs**: Ett objekt som håller information om en överföring som ligger i kö (väntar på 15-minuters fördröjningen). Innehåller mottagarkonto och belopp.
 
 <h3 align="center"><u>Data</u></h3>
+<hr>
 
 - **Data.cs**: Detta är en statisk klass som innehåller Listor på användare, växelkurs och transaktionshistorik
 
-<h4 align="center"><u>Arv</u></h4>
+<h3 align="center"><u>Arv</u></h3>
+<hr>
 
 - **User**: Grundmallen för att skapa en användare
 - **Client**: En vanlig bankkund. Ärver från user så att användare får ett bankkonto
 - **Admin**: Ärver från user men har tillgång till administrativa verktyg istället för bankkonton.
 
-<h5 align="center"><u>BankKonto</u></h5>
+<h3 align="center"><u>BankKonto</u></h3>
+<hr>
 
 - **Account**: Ett vanligt bankkonto. Håller koll på saldo, valuta kontonummer
-- **SavingAccount**: Sparkonto med en 2% ränt per år
-
+- **SavingAccount**: Sparkonto med en 2% ränta
