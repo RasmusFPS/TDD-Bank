@@ -51,16 +51,14 @@ namespace TDD_Bank
 
                 if (success)
                 {
-                    //Här ska överföringen genomföras.
                     ExecuteTransfer(fromAccount, toAccount, amount);
                     AddTransferLog(fromAccount, toAccount, amount, client, client);
                     Console.WriteLine($"Transfer succeeded. {amount} {fromAccount.Currency} was transferred to accountnumber {toAccount.AccountNumber}.");
                     return true;
                 }
 
-                keepTrying = TryAgain();
-
-
+                keepTrying = TryAgain();               
+                                
             }
             return false;
         }
@@ -70,7 +68,7 @@ namespace TDD_Bank
             UI.PrintMessage("Enter wich account you want to transfer from:");
             if (!int.TryParse(Console.ReadLine(), out int fromAccountNumber))
             {
-                UI.PrintMessage("Invalid accountnumber.");
+                UI.ErrorMesage("Invalid accountnumber.");
                 return null;
             }
 
@@ -78,7 +76,7 @@ namespace TDD_Bank
 
             if (fromAccount == null)
             {
-                UI.PrintMessage("Can't find the account.");
+                UI.ErrorMesage("Can't find the account.");
                 return null;
             }
 
@@ -90,7 +88,7 @@ namespace TDD_Bank
             UI.PrintMessage("Enter wich account you want to transfer to:");
             if (!int.TryParse(Console.ReadLine(), out int toAccountNumber))
             {
-                UI.PrintMessage("Invalid accountnumber.");
+                UI.ErrorMesage("Invalid accountnumber.");
                 return null;
             }
 
@@ -98,12 +96,11 @@ namespace TDD_Bank
 
             if (toAccount == null)
             {
-                UI.PrintMessage("Can't find the account.");
+                UI.ErrorMesage("Can't find the account.");
                 return null;
             }
 
             return toAccount;
-
         }
 
         private static bool ValidateAccounts(Account fromAccount, Account toAccount)
@@ -111,7 +108,7 @@ namespace TDD_Bank
             if (fromAccount.AccountNumber == toAccount.AccountNumber)
 
             {
-                UI.PrintMessage("You can't transfer to the same account.");
+                UI.ErrorMesage("You can't transfer to the same account.");
                 return false;
             }
 
@@ -123,7 +120,7 @@ namespace TDD_Bank
             Console.WriteLine($"How much do you want to transfer? Balance: {fromAccount.Balance} {fromAccount.Currency}");
             if (!decimal.TryParse(Console.ReadLine(), out decimal amount) || amount <= 0)
             {
-                UI.PrintMessage("Invalid amount.");//Lägg till fel meddelande bokstäver skrivs in.
+                UI.ErrorMesage("Invalid amount.");//Lägg till fel meddelande bokstäver skrivs in.
                 return -1;
             }
             return amount;
@@ -133,7 +130,7 @@ namespace TDD_Bank
         {
             if (fromAccount.Balance < amount)
             {
-                UI.PrintMessage("Insufficient balance.");
+                UI.ErrorMesage("Insufficient balance.");
                 return false;
             }
             return true;
@@ -260,7 +257,6 @@ namespace TDD_Bank
             };
 
             Data.TransferHistory.Add(log);
-
 
         }
     }
