@@ -20,20 +20,17 @@
 5. **TransferLog.cs**: Ett objekt som fungerar som kvitto. Sparar information om genomförda transaktioner (avsändare, mottagare, belopp, tid).
 6. **PendingTransfer.cs**: Ett objekt som håller information om en överföring som ligger i kö (väntar på 15-minuters fördröjningen). Innehåller mottagarkonto och belopp.
 
-<h3 align="center"><u>Data</u></h3>
-<hr>
+<h2 align="center"><u>Data</u></h2>
 
 - **Data.cs**: Detta är en statisk klass som innehåller Listor på användare, växelkurs och transaktionshistorik
 
-<h3 align="center"><u>Arv</u></h3>
-<hr>
+<h2 align="center"><u>Arv</u></h2>
 
 - **User**: Grundmallen för att skapa en användare
 - **Client**: En vanlig bankkund. Ärver från user så att användare får ett bankkonto
 - **Admin**: Ärver från user men har tillgång till administrativa verktyg istället för bankkonton.
 
-<h3 align="center"><u>BankKonto</u></h3>
-<hr>
+<h2 align="center"><u>BankKonto</u></h2>
 
 - **Account**: Ett vanligt bankkonto. Håller koll på saldo, valuta kontonummer
 - **SavingAccount**: Sparkonto med en 2% ränta
