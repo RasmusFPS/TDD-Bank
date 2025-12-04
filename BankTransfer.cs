@@ -117,12 +117,17 @@ namespace TDD_Bank
         private static decimal GetAmount(Account fromAccount)
         {
             UI.PrintMessage($"How much do you want to transfer? Balance: {fromAccount.Balance} {fromAccount.Currency}");
-            if (!decimal.TryParse(Console.ReadLine(), out decimal amount) || amount <= 0)
+            if (!decimal.TryParse(Console.ReadLine(), out decimal amount))
             {
-                UI.ErrorMesage("Invalid amount.");//Lägg till fel meddelande bokstäver skrivs in.
+                UI.ErrorMesage("Invalid input - please enter a number.");
                 return -1;
             }
-            return amount;
+            else if(amount <= 0)
+            {
+                UI.ErrorMesage("Amount must be greater than 0.");
+                return -1;
+            }
+                return amount;
         }
 
         private static bool ValidateBalance(Account fromAccount, decimal amount)

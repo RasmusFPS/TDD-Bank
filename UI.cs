@@ -242,15 +242,13 @@ namespace TDD_Bank
             {
                 Console.Clear();
 
-                PrintMessage("Please choose a currency with index number:");
+                PrintMessage("Please choose a currency with index number: ");
 
                 for (int i = 0; i < listCurrency.Count; i++)
                 {
                     Console.WriteLine($"{i + 1}. {listCurrency[i]}");
                 }
-                PrintMessage("Your choice:");
-
-
+                PrintMessage("Your choice: ");
 
                 if (int.TryParse(Console.ReadLine(), out choice))
                 {
@@ -261,13 +259,13 @@ namespace TDD_Bank
                     }
                     else
                     {
-                        PrintMessage("Invalid number. Try again");
+                        PrintMessage("Invalid number. Try again.");
                         Thread.Sleep(400);
                     }
                 }
                 else
                 {
-                    PrintMessage("Please enter a number");
+                    PrintMessage("Please enter a number: ");
                     Thread.Sleep(1000);
                 }
             }
