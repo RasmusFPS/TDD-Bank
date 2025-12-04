@@ -8,6 +8,7 @@ namespace TDD_Bank
         {
 
             Console.WriteLine("Welcome to TDD Bank\n");
+            Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("___________________  ________    __________    _____    _______   ____  __.");
             Thread.Sleep(200);
             Console.WriteLine("\\__    ___/\\______ \\ \\______ \\   \\______   \\  /  _  \\   \\      \\ |    |/ _|");
@@ -19,6 +20,7 @@ namespace TDD_Bank
             Console.WriteLine("  |____|   /_______  /_______  /  |______  /\\____|__  /\\____|__  /____|__ \\");
             Thread.Sleep(200);
             Console.WriteLine("                   \\/        \\/          \\/         \\/         \\/        \\/");
+            Console.ResetColor();
 
             Thread.Sleep(1000);
             Console.Clear();
@@ -28,8 +30,10 @@ namespace TDD_Bank
 
             while (WaitingForInput)
             {
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("1. Login");
                 Console.WriteLine("2. Exit");
+                Console.ResetColor();
 
                 var input = Console.ReadLine();
 
@@ -42,14 +46,13 @@ namespace TDD_Bank
                         WaitingForInput = false;
                         break;
                     case "2":
-                        Console.WriteLine("Exiting application...");
+                        UI.PrintMessage("Exiting application...");
                         Thread.Sleep(500);
                         UserContinue = false;
                         WaitingForInput = false;
                         break;
                     default:
-                        Console.WriteLine("INVALID");
-                        Console.WriteLine("Press 1 or 2");
+                        ErrorMesage("INVALID");
                         Thread.Sleep(500);
                         Console.Clear();
                         break;
@@ -106,12 +109,14 @@ namespace TDD_Bank
                     emptyPassword = false;
                 }
             }
+            Console.Clear();
 
             return userPassword;
         }
 
         public static string PrintedSignInMenu(Client client)
         {
+            Console.ForegroundColor = ConsoleColor.White;
             PrintMessage("1. Show My Accounts");
             PrintMessage("2. Create New Account");
             PrintMessage("3. Deposit Money");
@@ -121,6 +126,7 @@ namespace TDD_Bank
             PrintMessage("7. Transferlog");
             PrintMessage("8. Logout");
             Console.Write("Your choice: ");
+            Console.ResetColor();
 
             return Console.ReadLine();
         }
