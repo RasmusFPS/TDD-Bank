@@ -16,10 +16,9 @@
 1. **Program.cs**: Skapar Bank-objektet för att köra programmet
 2. **Bank.cs**: Här körs själva programmet och är hjärnan bakom allt
 3. **UI.cs**: Denna klassen är bara för menyer/det som syns på skärmen
-4. - **BankTransfer**: En hjälpklass som sköter logiken för att flytta pengar. Den hanterar valutaväxling, input-validering och lägger överföringar i kö.
-5. - **TransferLog**: Ett objekt som fungerar som kvitto. Sparar information om genomförda transaktioner (avsändare, mottagare, belopp, tid).
-6. - **PendingTransfer**: Ett objekt som håller information om en överföring som ligger i kö (väntar på 15-minuters fördröjningen). Innehåller mottagarkonto och belopp.
-
+4. **BankTransfer.cs**: En hjälpklass som sköter logiken för att flytta pengar. Den hanterar valutaväxling, input-validering och lägger överföringar i kö.
+5. **TransferLog.cs**: Ett objekt som fungerar som kvitto. Sparar information om genomförda transaktioner (avsändare, mottagare, belopp, tid).
+6. **PendingTransfer.cs**: Ett objekt som håller information om en överföring som ligger i kö (väntar på 15-minuters fördröjningen). Innehåller mottagarkonto och belopp.
 
 <h3 align="center"><u>Data</u></h3>
 
