@@ -132,7 +132,7 @@ namespace TDD_Bank
                 {
                     case "1":
                         PrintMessage("Update Currency");
-                        admin.CurrencyValue();
+                        CurrencyUpdate();
                         break;
                     case "2":
                         admin.AddCurrency();
@@ -192,7 +192,7 @@ namespace TDD_Bank
         {
             int AccountNumber;
             PrintMessage("Enter the Account Number");
-            while(!int.TryParse(Console.ReadLine(), out AccountNumber))
+            while (!int.TryParse(Console.ReadLine(), out AccountNumber))
             {
                 ErrorMesage("Invalid input");
                 PrintMessage("Enter Account Number:");
@@ -269,7 +269,7 @@ namespace TDD_Bank
 
                 if (int.TryParse(Console.ReadLine(), out choice))
                 {
-                    if (choice > 0 && choice < listCurrency.Count+1)
+                    if (choice > 0 && choice < listCurrency.Count + 1)
                     {
                         input = listCurrency[choice - 1];
                         validInput = true;
@@ -287,6 +287,27 @@ namespace TDD_Bank
                 }
             }
             return input;
+        }
+        internal static void CurrencyUpdate()
+        {
+            Admin admin = new Admin("", "", true, 3);
+            Console.WriteLine("Choose your action\n" +
+                "1. Update Currency.\n" +
+                "2. Add Currency.\n" +
+                "3. Remove Currency.\n");
+            int.TryParse(Console.ReadLine(), out int choice);
+            switch (choice)
+            {
+                case 1:
+                    admin.CurrencyUpdate();
+                    break;
+                case 2:
+                    admin.AddCurrency();
+                    break;
+                case 3:
+                    admin.CurrencyRemove();
+                    break;
+            }
         }
 
     }
