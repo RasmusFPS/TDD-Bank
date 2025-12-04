@@ -111,6 +111,10 @@ namespace TDD_Bank
                         UI.ShowTransfers();
                         break;
                     case "8":
+                        Loan loan = new Loan();
+                        loan.ApplyForLoan(currentclient);
+                        break;
+                    case "9":
                         return;
                 }
             }

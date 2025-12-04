@@ -9,7 +9,7 @@ namespace TDD_Bank
 {
     internal class Client : User
     {
-        //internal List<Loan> Loans { get; private set; }
+        internal List<Loan> Loans { get; private set; }
         internal List<Account> Accounts { get; private set; }
         public bool IsLocked { get; set; }
         public Client(string username, string password, bool isAdmin, int tries, bool isLocked) : base(username, password, false, tries)
@@ -17,7 +17,7 @@ namespace TDD_Bank
             //new makes sure the account is fresh and created for the object
             Accounts = new List<Account>();
             IsLocked = isLocked;
-            //Loans = new List<Loan>();
+            Loans = new List<Loan>();
         }
 
         public Account GetAccount(int accountNumber)

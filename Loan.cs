@@ -10,71 +10,116 @@
         //Datetime här?
         public bool IsPaidOff { get; set; }
 
-        internal bool ApplyForLoan(Client client)
+        private static int nextLoanId = 1;
+
+
+        internal void ApplyForLoan(Client client)
         {
-            decimal total = 0;
-            bool validAmount = false;
-
-            if (client.Accounts.Count < 1)
+            Account chosenAccount = SelectAccount(client);
+            if (chosenAccount == null)
             {
-                UI.PrintMessage("Loan cannot be processed.");
-                return false;
+                return;
             }
 
-            foreach (Account account in client.Accounts)
+            decimal maxLoan = CalculateMaxLoan(chosenAccount);
+            decimal? requestedAmount = AskLoanAmount(maxLoan);
+
+            if (requestedAmount == null)
             {
-                total += account.Balance;
+                return;
             }
 
-            decimal maxLoan = total * 5;
-            UI.PrintMessage($"Your total balance is {total} kr");//HUR KOMMER JAG ÅT CURRENCY?
-            UI.PrintMessage($"You can borrow a maximum of: {maxLoan} kr");
+            decimal interest = CalculateInterest(requestedAmount.Value);
+            decimal totalPay = CalculateTotalPay(requestedAmount.Value);
 
-            int loanAmount;
-            UI.PrintMessage("How much do you want to borrow?");
-            while (!int.TryParse(Console.ReadLine(), out loanAmount) || loanAmount <= 0 || loanAmount > maxLoan)//Flytta över till UI???
+            UI.PrintMessage($"Loan amount: {requestedAmount.Value} {chosenAccount.Currency}");
+            UI.PrintMessage($"interest: {interest} {chosenAccount.Currency}");
+            UI.PrintMessage($"Total to pay: {totalPay} {chosenAccount.Currency}");
+
+            DepositLoan(chosenAccount, requestedAmount.Value);
+            Loan newLoan = CreateLoan(client, requestedAmount.Value, totalPay);
+
+            UI.PrintMessage($"loan deposited to account {chosenAccount.AccountNumber}.");
+        }
+        private Account SelectAccount(Client client)
+        {
+            UI.PrintMessage("Choose an account to deposit the loan to (cannot be a savings account)");
+            UI.ShowAccounts(client);
+
+            int accountNumber = UI.GetAccountNumber();
+            Account chosenAccount = client.GetAccount(accountNumber);
+
+            if (chosenAccount == null)
             {
+                UI.PrintMessage("Account not found. Loan declined");
+                return null;
+            }
 
-                if (loanAmount <= 0)
+            if (chosenAccount is SavingAccount)
+            {
+                UI.ErrorMesage("Cannot take loan on a savings account");
+                return null;
+            }
+
+            return chosenAccount;
+        }
+
+        private decimal CalculateMaxLoan(Account account)
+        {
+            //konverterar först till SEK
+            decimal balanceInSEK = account.Balance / Data.Currency[account.Currency];
+            decimal maxLoanInSEK = balanceInSEK * 5;
+
+            //konverterar tillbaka till kontots valuta och returnerar det värdet
+            return maxLoanInSEK * Data.Currency[account.Currency];
+        }
+
+        private decimal? AskLoanAmount(decimal maxLoan)
+        {
+            UI.PrintMessage($"Enter loan amount (max: {maxLoan}):");
+            string? Input = Console.ReadLine();
+
+            if (decimal.TryParse(Input, out decimal requestedLoan))
+            {
+                if (requestedLoan > 0 && requestedLoan <= maxLoan)
                 {
-                    UI.PrintMessage("The amount must be greater than 0 and in numbers. Try again");
-                }
-
-                else if (loanAmount > maxLoan)
-                {
-                    UI.PrintMessage($"Your loan limit is {maxLoan} kr.");//VILL KOMMA ÅT CURRENCY
-                }
-                else
-                {
-                    UI.PrintMessage("Invalid amount. Try again.");
+                    return requestedLoan;
                 }
             }
+            UI.ErrorMesage("Invalid amount. Loan declined");
+            return null;
+        }
 
-            decimal interest = loanAmount * Data._loanInterest;
-            decimal totalToPay = loanAmount + interest;
+        private decimal CalculateInterest(decimal amount)
+        {
+            return amount * Data._loanInterest;
+        }
 
-            UI.PrintMessage($"Loan amount: {loanAmount} kr" +
-                $"Interest rate: {interest} kr" +
-                $"Total to pay: {totalToPay} kr" +
-                $"Do you want to take the loan? Enter yes och no.");
-            string answer = Console.ReadLine().ToLower();
+        private decimal CalculateTotalPay(decimal amount)
+        {
+            return amount + CalculateInterest(amount);
+        }
 
-            if (answer == "yes")
+        private void DepositLoan(Account account, decimal amount)
+        {
+            account.Deposit(amount);
+        }
+
+        private Loan CreateLoan(Client client, decimal amount, decimal totalToPay)
+        {
+            Loan newLoan = new Loan
             {
-                //Är jag klar här?
-                UI.ShowAccounts(client);
-                UI.PrintMessage("Choose accountnumber: ");
-                if (!int.TryParse(Console.ReadLine(), out int fromAccountNumber))
-                {
-                    UI.PrintMessage("Invalid accountnumber.");
-                }
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+                LoanId = nextLoanId++,
+                ClientUsername = client.Username,
+                Amount = amount,
+                InterestRate = Data._loanInterest,
+                TotalToPay = totalToPay,
+                IsPaidOff = false
+            };
+            client.Loans.Add(newLoan);
+            Data.ActiveLoans.Add(newLoan);
 
+            return newLoan;
         }
     }
 }
