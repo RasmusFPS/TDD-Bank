@@ -29,16 +29,9 @@ namespace TDD_Bank
             return Amount + (Amount * InterestRate);
         }
 
-
-        internal static bool ApplyForLoan(Client client)
+        internal static decimal CalculateBalanceInSek(Client client)
         {
-            
-            decimal loanRequest = 0;
             decimal totalBalance = 0;
-            //Räkna om alla kontons pengar till SEK
-            //var newLoan = new Loan(client.Username, loanRequest, Data._loanInterest);
-
-
             foreach (var account in client.Accounts)
             {
                 decimal rate = Data.Currency[account.Currency];
@@ -46,6 +39,37 @@ namespace TDD_Bank
                 totalBalance += balanceInSek;
             }
             decimal maxLoan = totalBalance * 5;
+
+            return totalBalance;
+        }
+
+        internal static decimal Borrow(decimal maxLoan)
+        {
+            decimal loanRequest = 0;
+            UI.PrintMessage($"You can take a loan of {maxLoan} SEK (five times your balance) ");
+            //Felmeddelande kring lån som är i fel valuta
+
+
+            UI.PrintMessage("How much do you want to borrow?");
+
+            while (!decimal.TryParse(Console.ReadLine(), out loanRequest) || loanRequest <= 0 || loanRequest > maxLoan)
+            {
+                UI.ErrorMesage("Invalid amount");
+                UI.ErrorMesage($"Enter valid numbers and choose a loan under {maxLoan} SEK");
+
+            }
+            return loanRequest;
+        }
+
+
+        internal static bool ApplyForLoan(Client client)
+        {
+            decimal totalBalance = CalculateBalanceInSek(client);
+            UI.PrintMessage($"Your total balance is {CalculateBalanceInSek(client)} SEK");
+
+            
+            
+            
 
 
             UI.PrintMessage($"Your total balance is {totalBalance} SEK");
@@ -59,18 +83,7 @@ namespace TDD_Bank
             }
 
 
-            UI.PrintMessage($"You can take a loan of {maxLoan} SEK (five times your balance) ");
-            //Felmeddelande kring lån som är i fel valuta
-
-
-            UI.PrintMessage("How much do you want to borrow?");
-
-            while (!decimal.TryParse(Console.ReadLine(), out loanRequest) || loanRequest <= 0 || loanRequest > maxLoan)
-            {
-                UI.ErrorMesage("Invalid amount");
-                UI.ErrorMesage($"Enter valid numbers and choose a loan under {maxLoan} SEK");
-
-            }
+           
 
 
 
