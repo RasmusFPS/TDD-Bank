@@ -209,16 +209,9 @@ namespace TDD_Bank
             return amount;
         }
 
-
         internal static void PrintMessage(string message)
         {
             Console.WriteLine(message);
-        }
-
-        internal static void AskQuestion(string question)
-        {
-            PrintMessage(question);
-            question = Console.ReadLine();
         }
 
         internal static void ErrorMesage(string error)
@@ -226,10 +219,6 @@ namespace TDD_Bank
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(error);
             Console.ResetColor();
-        }
-
-        internal static void PrintCurrency()
-        {
         }
 
         internal static void ShowTransfers()
