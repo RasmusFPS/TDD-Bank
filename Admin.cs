@@ -116,13 +116,52 @@ namespace TDD_Bank
                 Console.ReadKey();
             }
         }
-        internal void CurrencyValue()
+        internal void AddCurrency()
         {
+            bool isNumber = false;
+            Console.WriteLine("What currency would you like to add?");
+            string currency = Console.ReadLine().ToUpper();
+            foreach (char i in currency)
+            {
+                if (char.IsNumber(i))
+                {
+                    isNumber = true;
+                    UI.ErrorMesage("Can't contain numbers.");
+                }
+            }
+            if (!Data.Currency.ContainsKey(currency) && currency.Length == 3 && !isNumber)
+            {
+
+                Console.WriteLine("What is the current exchangerate to SEK from this currency");
+                if (decimal.TryParse(Console.ReadLine(), out decimal exchange) && exchange > 0)
+                {
+                    Data.Currency.Add(currency, exchange);
+                }
+                else
+                {
+                    UI.ErrorMesage("Wrong input");
+                }
+
+            }
+            else if (Data.Currency.ContainsKey(currency))
+            {
+                UI.ErrorMesage("This currency already exists.");
+            }
+            else
+            {
+                UI.ErrorMesage("Wrong input");
+            }
+        }
+        internal void CurrencyUpdate()
+        {
+
             Console.WriteLine("What currency do you want to edit?");
             foreach (var i in Data.Currency)
             {
                 Console.WriteLine($"{i.Key} | {i.Value}");
             }
+
+
             string choice = Console.ReadLine().ToUpper();
             if (Data.Currency.ContainsKey(choice))
             {
@@ -131,6 +170,33 @@ namespace TDD_Bank
                 Data.Currency[choice] *= (1 + percent / 100);
             Console.ReadKey();
             }
+            else if (!Data.Currency.ContainsKey(choice))
+            {
+                UI.ErrorMesage("Wrong Input");
+            }
+        }
+        internal void CurrencyRemove()
+        {
+            Console.WriteLine("Choose the Currency you want to remove:");
+            foreach(var i in Data.Currency)
+            {
+                Console.WriteLine(i.Key);
+            }
+            string choice = Console.ReadLine().ToUpper();
+            if (Data.Currency.ContainsKey(choice))
+            {
+                Console.WriteLine($"Are you sure you wanna remove {choice}? y/n");
+                if (Console.ReadLine().ToUpper() == "Y")
+                {
+                    Data.Currency.Remove(choice);
+                }
+                else
+                {
+                    Console.WriteLine("Exiting, press enter to continue");
+                    Thread.Sleep(500);
+                }
+            }
         }
     }
 }
+
