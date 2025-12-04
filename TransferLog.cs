@@ -8,7 +8,6 @@ namespace TDD_Bank
 {
     internal class TransferLog
     {
-        //Ev en dataTime här.
         public int FromAccount { get; set; }
         public int ToAccount { get; set; }
         public decimal Amount { get; set; }

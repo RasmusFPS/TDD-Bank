@@ -45,7 +45,6 @@ namespace TDD_Bank
             {
                 Account newAccount = new Account(DepositAmount,input);
 
-
                 Accounts.Add(newAccount);
 
                 UI.PrintMessage("Account Created");
@@ -54,7 +53,6 @@ namespace TDD_Bank
             {
                 UI.PrintMessage("Invalid Amount, Couldnt Create Account");
             }
-
         }
 
         public void CreateSavingAccount()

@@ -23,16 +23,13 @@ namespace TDD_Bank
             bob.Accounts.Add(new SavingAccount(500, "SEK", 0.02m));
         }
 
-
         public static List<User> UserCollection = new List<User>()
         {
             new Admin( "Admin-Johan", "1234", true, 3),
             bob,
             carl
-
         };
         
-
         //Dicitonary containing all currencies
         public static Dictionary<string, decimal> Currency = new()
         {
@@ -43,7 +40,5 @@ namespace TDD_Bank
         };
 
         internal static List<TransferLog> TransferHistory = new List<TransferLog>();
-        //internal static List<Loan> ActiveLoans = new List<Loan>();
-
     }
 }

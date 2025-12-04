@@ -49,7 +49,6 @@
 
                 if (success)
                 {
-                    //Här ska överföringen genomföras.
                     ExecuteTransfer(fromAccount, toAccount, amount);
                     AddTransferLog(fromAccount, toAccount, amount, client, client);
                     Console.WriteLine($"Transfer succeeded. {amount} {fromAccount.Currency} was transferred to accountnumber {toAccount.AccountNumber}.");
@@ -57,8 +56,7 @@
                 }
 
                 keepTrying = TryAgain();               
-
-                
+                                
             }
             return false;
         }
@@ -68,7 +66,7 @@
             UI.PrintMessage("Enter wich account you want to transfer from:");
             if (!int.TryParse(Console.ReadLine(), out int fromAccountNumber))
             {
-                UI.PrintMessage("Invalid accountnumber.");
+                UI.ErrorMesage("Invalid accountnumber.");
                 return null;
             }
 
@@ -76,7 +74,7 @@
 
             if (fromAccount == null)
             {
-                UI.PrintMessage("Can't find the account.");
+                UI.ErrorMesage("Can't find the account.");
                 return null;
             }
 
@@ -88,7 +86,7 @@
             UI.PrintMessage("Enter wich account you want to transfer to:");
             if (!int.TryParse(Console.ReadLine(), out int toAccountNumber))
             {
-                UI.PrintMessage("Invalid accountnumber.");
+                UI.ErrorMesage("Invalid accountnumber.");
                 return null;
             }
 
@@ -96,12 +94,11 @@
 
             if (toAccount == null)
             {
-                UI.PrintMessage("Can't find the account.");
+                UI.ErrorMesage("Can't find the account.");
                 return null;
             }
 
             return toAccount;
-
         }
 
         private static bool ValidateAccounts(Account fromAccount, Account toAccount)
@@ -109,7 +106,7 @@
             if (fromAccount.AccountNumber == toAccount.AccountNumber)
 
             {
-                UI.PrintMessage("You can't transfer to the same account.");
+                UI.ErrorMesage("You can't transfer to the same account.");
                 return false;
             }
 
@@ -121,7 +118,7 @@
             Console.WriteLine($"How much do you want to transfer? Balance: {fromAccount.Balance} {fromAccount.Currency}");
             if (!decimal.TryParse(Console.ReadLine(), out decimal amount) || amount <= 0)
             {
-                UI.PrintMessage("Invalid amount.");//Lägg till fel meddelande bokstäver skrivs in.
+                UI.ErrorMesage("Invalid amount.");//Lägg till fel meddelande bokstäver skrivs in.
                 return -1;
             }
             return amount;
@@ -131,7 +128,7 @@
         {
             if (fromAccount.Balance < amount)
             {
-                UI.PrintMessage("Insufficient balance.");
+                UI.ErrorMesage("Insufficient balance.");
                 return false;
             }
             return true;
@@ -160,20 +157,20 @@
             //Loopar igenom och visar konton
             foreach (var acc in sender.Accounts)
             {
-                Console.WriteLine($"Account number: {acc.AccountNumber}");
+                Console.WriteLine($"Accountnumber: {acc.AccountNumber}");
                 Console.WriteLine($"Balance: {acc.Balance}  {acc.Currency}\n");
             }
-            Console.WriteLine("Enter the account number of the account you want to transfer from");
+            Console.WriteLine("Enter the accountnumber of the account you want to transfer from: ");
             string fromInput = Console.ReadLine();
 
             Account fromAccount = sender.Accounts.FirstOrDefault(acc => acc.AccountNumber.ToString() == fromInput);
             if (fromAccount == null)
             {
-                Console.WriteLine("Invalid account");
+                Console.WriteLine("Invalid account.");
                 return false;
             }
 
-            Console.WriteLine("Enter the account you want to transfer to:");
+            Console.WriteLine("Enter the account you want to transfer to: ");
             string toInput = Console.ReadLine();
 
             Account toAccount = null;
@@ -186,10 +183,10 @@
                    
                     toAccount = client.Accounts.FirstOrDefault(acc => acc.AccountNumber.ToString() == toInput);
                     if (toAccount != null)
-                        {
+                    {
                         reciver = client;
                             break;
-                        }
+                    }
                     
                 }
             }
@@ -243,7 +240,6 @@
             };
 
             Data.TransferHistory.Add(log);
-
 
         }
     }
