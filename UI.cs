@@ -213,16 +213,9 @@ namespace TDD_Bank
             return amount;
         }
 
-
         internal static void PrintMessage(string message)
         {
             Console.WriteLine(message);
-        }
-
-        internal static void AskQuestion(string question)
-        {
-            PrintMessage(question);
-            question = Console.ReadLine();
         }
 
         internal static void ErrorMesage(string error)
@@ -230,10 +223,6 @@ namespace TDD_Bank
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(error);
             Console.ResetColor();
-        }
-
-        internal static void PrintCurrency()
-        {
         }
 
         internal static void ShowTransfers()
@@ -257,15 +246,13 @@ namespace TDD_Bank
             {
                 Console.Clear();
 
-                PrintMessage("Please choose a currency with index number:");
+                PrintMessage("Please choose a currency with index number: ");
 
                 for (int i = 0; i < Data.Currency.Count; i++)
                 {
                     Console.WriteLine($"{i + 1}. {listCurrency[i]}");
                 }
-                PrintMessage("Your choice:");
-
-
+                PrintMessage("Your choice: ");
 
                 if (int.TryParse(Console.ReadLine(), out choice))
                 {
@@ -276,13 +263,13 @@ namespace TDD_Bank
                     }
                     else
                     {
-                        PrintMessage("Invalid number. Try again");
+                        PrintMessage("Invalid number. Try again.");
                         Thread.Sleep(400);
                     }
                 }
                 else
                 {
-                    PrintMessage("Please enter a number");
+                    PrintMessage("Please enter a number: ");
                     Thread.Sleep(1000);
                 }
             }

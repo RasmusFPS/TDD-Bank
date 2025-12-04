@@ -24,7 +24,7 @@ namespace TDD_Bank
             bob.Accounts.Add(new Account(500, "SEK"));
             bob.Accounts.Add(new SavingAccount(500, "SEK", 0.02m));
         }
-
+        
         public static List<User> UserCollection = new List<User>()
         {
             new Admin( "Admin-Johan", "1234", true, 3),

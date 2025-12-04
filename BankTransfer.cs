@@ -53,7 +53,7 @@ namespace TDD_Bank
                 {
                     ExecuteTransfer(fromAccount, toAccount, amount);
                     AddTransferLog(fromAccount, toAccount, amount, client, client);
-                    Console.WriteLine($"Transfer succeeded. {amount} {fromAccount.Currency} was transferred to accountnumber {toAccount.AccountNumber}.");
+                    UI.PrintMessage($"Transfer successful! {amount} {fromAccount.Currency} was transferred from account {fromAccount.AccountNumber} to account {toAccount.AccountNumber}.");
                     return true;
                 }
 
@@ -106,7 +106,6 @@ namespace TDD_Bank
         private static bool ValidateAccounts(Account fromAccount, Account toAccount)
         {
             if (fromAccount.AccountNumber == toAccount.AccountNumber)
-
             {
                 UI.ErrorMesage("You can't transfer to the same account.");
                 return false;
@@ -117,13 +116,18 @@ namespace TDD_Bank
 
         private static decimal GetAmount(Account fromAccount)
         {
-            Console.WriteLine($"How much do you want to transfer? Balance: {fromAccount.Balance} {fromAccount.Currency}");
-            if (!decimal.TryParse(Console.ReadLine(), out decimal amount) || amount <= 0)
+            UI.PrintMessage($"How much do you want to transfer? Balance: {fromAccount.Balance} {fromAccount.Currency}");
+            if (!decimal.TryParse(Console.ReadLine(), out decimal amount))
             {
-                UI.ErrorMesage("Invalid amount.");//Lägg till fel meddelande bokstäver skrivs in.
+                UI.ErrorMesage("Invalid input - please enter a number.");
                 return -1;
             }
-            return amount;
+            else if(amount <= 0)
+            {
+                UI.ErrorMesage("Amount must be greater than 0.");
+                return -1;
+            }
+                return amount;
         }
 
         private static bool ValidateBalance(Account fromAccount, decimal amount)
@@ -137,7 +141,7 @@ namespace TDD_Bank
         }
         private static bool TryAgain()
         {
-            Console.Write("Do you want to try again? (j/n)");
+            UI.PrintMessage("Do you want to try again? (j/n)");
             return Console.ReadLine().ToLower() == "j";
         }
 
@@ -221,7 +225,7 @@ namespace TDD_Bank
                 return false;
             }
            
-            UI.PrintMessage("Enter the amount you want to transfer:");
+            UI.PrintMessage("Enter the amount you want to transfer: ");
             if(!decimal.TryParse(Console.ReadLine(), out decimal amount) || amount <= 0)
             {
                 UI.ErrorMesage("Invalid amount.");
