@@ -35,8 +35,9 @@ namespace TDD_Bank
 
                 bool isAdmin = false;
                 int tries = 3;
+                bool isLocked = false;
 
-                Data.UserCollection.Add(new User(name, password, isAdmin, tries));
+                Data.UserCollection.Add(new Client(name, password, isAdmin, tries, false));
 
                 foreach (var i in Data.UserCollection)
                 {
