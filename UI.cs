@@ -118,10 +118,11 @@ namespace TDD_Bank
             {
 
                 PrintMessage("1. Update Currency");
-                PrintMessage("2. User Log");
-                PrintMessage("3. Create New User");
-                PrintMessage("4. Unlock Users");
-                PrintMessage("5. Log Out");
+                PrintMessage("2. Add Currency");
+                PrintMessage("3. User Log");
+                PrintMessage("4. Create New User");
+                PrintMessage("5. Unlock Users");
+                PrintMessage("6. Log Out");
 
                 var input = Console.ReadLine();
                 Admin admin = new Admin("", "", true, 3);
@@ -134,15 +135,18 @@ namespace TDD_Bank
                         admin.CurrencyValue();
                         break;
                     case "2":
+                        admin.AddCurrency();
+                            break;
+                    case "3":
                         admin.UserLog();
                         break;
-                    case "3":
+                    case "4":
                         admin.CreateNewUser();
                         break;
-                    case "4":
+                    case "5":
                         admin.UserUnlock();
                         break;
-                    case "5":
+                    case "6":
                         signedIn = false;
                         break;
                 }
@@ -255,7 +259,7 @@ namespace TDD_Bank
 
                 PrintMessage("Please choose a currency with index number:");
 
-                for (int i = 0; i < listCurrency.Count; i++)
+                for (int i = 0; i < Data.Currency.Count; i++)
                 {
                     Console.WriteLine($"{i + 1}. {listCurrency[i]}");
                 }
@@ -265,7 +269,7 @@ namespace TDD_Bank
 
                 if (int.TryParse(Console.ReadLine(), out choice))
                 {
-                    if (choice > 0 && choice < listCurrency.Count)
+                    if (choice > 0 && choice < listCurrency.Count+1)
                     {
                         input = listCurrency[choice - 1];
                         validInput = true;
