@@ -51,7 +51,7 @@ namespace TDD_Bank
 
             else
             {
-                Console.WriteLine("Name already taken.");
+                UI.ErrorMesage("Name already taken.");
             }
 
 
@@ -106,7 +106,7 @@ namespace TDD_Bank
                 }
                 else
                 {
-                    Console.WriteLine("Error, outside of list");
+                    UI.ErrorMesage("Error, outside of list");
                     Console.ReadKey();
                 }
             }
@@ -161,14 +161,19 @@ namespace TDD_Bank
                 Console.WriteLine($"{i.Key} | {i.Value}");
             }
 
+            
 
             string choice = Console.ReadLine().ToUpper();
             if (Data.Currency.ContainsKey(choice))
             {
-            Console.WriteLine("How many percent?");
-            decimal.TryParse(Console.ReadLine(), out decimal percent);
+                Console.WriteLine("How many percent?");
+                decimal.TryParse(Console.ReadLine(), out decimal percent);
                 Data.Currency[choice] *= (1 + percent / 100);
-            Console.ReadKey();
+                Console.ReadKey();
+            }
+            else if (!Data.Currency.ContainsKey(choice))
+            {
+                UI.ErrorMesage("Fel Input");
             }
             else if (!Data.Currency.ContainsKey(choice))
             {
