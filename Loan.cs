@@ -38,16 +38,21 @@ namespace TDD_Bank
                 decimal balanceInSek = account.Balance * rate;
                 totalBalance += balanceInSek;
             }
-            decimal maxLoan = totalBalance * 5;
+            
 
             return totalBalance;
         }
 
-        internal static decimal Borrow(decimal maxLoan)
+        internal static decimal Borrow(Client client, decimal maxLoan)
         {
             decimal loanRequest = 0;
+            decimal totalBalance = CalculateBalanceInSek(client);
+            UI.PrintMessage($"Your total balance is {CalculateBalanceInSek(client)} SEK");
             UI.PrintMessage($"You can take a loan of {maxLoan} SEK (five times your balance) ");
             //Felmeddelande kring lån som är i fel valuta
+            
+
+
 
 
             UI.PrintMessage("How much do you want to borrow?");
@@ -58,38 +63,12 @@ namespace TDD_Bank
                 UI.ErrorMesage($"Enter valid numbers and choose a loan under {maxLoan} SEK");
 
             }
+           
             return loanRequest;
         }
 
-
-        internal static bool ApplyForLoan(Client client)
+        internal static void ShowSummary(Loan newLoan)
         {
-            decimal totalBalance = CalculateBalanceInSek(client);
-            UI.PrintMessage($"Your total balance is {CalculateBalanceInSek(client)} SEK");
-
-            
-            
-            
-
-
-            UI.PrintMessage($"Your total balance is {totalBalance} SEK");
-
-
-
-            if (totalBalance <= 0)
-            {
-                UI.ErrorMesage("Insufficient balance. Loan declined");
-                return false;
-            }
-
-
-           
-
-
-
-            var newLoan = new Loan(client.Username, loanRequest, Data._loanInterest);
-
-
             decimal interest = newLoan.TotalToPay - newLoan.Amount;
             decimal totalToPay = newLoan.TotalToPay;
 
@@ -98,48 +77,109 @@ namespace TDD_Bank
                         $"\nTotal to pay: {totalToPay} {newLoan.Currency}" +
                         $"\nDo you want to take the loan? Enter yes or no.");
 
+        }
+
+        internal static Account FindAccount(Client client)
+        {
+            UI.ShowAccounts(client);
+            UI.PrintMessage("Enter the account number to deposit the loan into: ");
+            if (!int.TryParse(Console.ReadLine(), out int accountNumberChoice))
+            {
+                UI.ErrorMesage("Invalid account number");
+                return null;
+            }
+            else
+            {
+                //Hitta rätt konto
+                Account accChoice = null;
+                foreach (var account in client.Accounts)
+                {
+                    if (account.AccountNumber == accountNumberChoice)
+                    {
+                        //accChoice = account;
+                        //break;
+                        return account;
+                    }
+                }
+                //if (accChoice == null)
+                //{
+                //    UI.ErrorMesage("Account not found");
+                    
+                //}
+                return null;
+            }
+            
+        }
+
+        internal static bool ApplyForLoan(Client client)
+        {
+            decimal totalBalance = CalculateBalanceInSek(client);
+            //UI.PrintMessage($"Your total balance is {totalBalance} SEK");
+
+
+            if (totalBalance <= 0)
+            {
+                UI.ErrorMesage("Insufficient balance. Loan declined");
+                return false;
+            }
+
+            decimal maxLoan = totalBalance * 5;
+
+            decimal loanRequest = Borrow(client, maxLoan);
+
+            var newLoan = new Loan(client.Username, loanRequest, Data._loanInterest);
+            
+            ShowSummary(newLoan);
+            
             string loanAnswer = Console.ReadLine().ToLower();
 
-            if (loanAnswer == "yes")
-            {
-                UI.ShowAccounts(client);
-                UI.PrintMessage("Enter the account number to deposit the loan into: ");
-                if (!int.TryParse(Console.ReadLine(), out int accountNumberChoice))
-                {
-                    UI.ErrorMesage("Invalid account number");
-                    return false;
-                }
-                else
-                {
-                    //Hitta rätt konto
-                    Account accChoice = null;
-                    foreach (var account in client.Accounts)
-                    {
-                        if (account.AccountNumber == accountNumberChoice)
-                        {
-                            accChoice = account;
-                            break;
-                        }
-                    }
-                    if (accChoice == null)
-                    {
-                        UI.ErrorMesage("Account not found");
-                        return false;
-                    }
+            if (loanAnswer != "yes")
+                return true;
 
-                    accChoice.Deposit(loanRequest);
+            //if (loanAnswer == "yes")
+            //{
+            //    UI.ShowAccounts(client);
+            //    UI.PrintMessage("Enter the account number to deposit the loan into: ");
+            //    if (!int.TryParse(Console.ReadLine(), out int accountNumberChoice))
+            //    {
+            //        UI.ErrorMesage("Invalid account number");
+            //        return false;
+            //    }
+            //    else
+            //    {
+            //        //Hitta rätt konto
+            //        Account accChoice = null;
+            //        foreach (var account in client.Accounts)
+            //        {
+            //            if (account.AccountNumber == accountNumberChoice)
+            //            {
+            //                accChoice = account;
+            //                break;
+            //            }
+            //        }
+            //        Account selectAccount = FindAccount(client);
+            //        if (accChoice == null)
+            //        {
+            //            UI.ErrorMesage("Account not found");
+            //            return false;
+            //        }
+
+            Account selectAccount = FindAccount(client);
+            if (selectAccount == null)
+            {
+                UI.ErrorMesage("Account not found");
+                return false;
+            }
+            selectAccount.Deposit(loanRequest);
+            
+                    
                     UI.PrintMessage($"The loan({loanRequest} {newLoan.Currency}) has been deposited {newLoan.LoanDate}");
 
                     //var depositedLoan = new Loan(client.Username, loanRequest, Data._loanInterest);
                     Data.ActiveLoans.Add(newLoan);
-                }
+                
 
-            }
-            else
-            {
-                return true;
-            }
-
+        
             return true;
         }
 
