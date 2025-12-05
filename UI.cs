@@ -183,7 +183,7 @@ namespace TDD_Bank
 
             if (!client.Accounts.Any())
             {
-                PrintMessage("You have no accounts");
+                ErrorMesage("You have no accounts");
                 return;
             }
 
@@ -229,6 +229,7 @@ namespace TDD_Bank
             while (!decimal.TryParse(Console.ReadLine(), out amount))
             {
                 ErrorMesage("Invaild Inupt. try again");
+                PrintMessage("Enter Amount:");
             }
 
             return amount;
@@ -284,14 +285,14 @@ namespace TDD_Bank
                     }
                     else
                     {
-                        PrintMessage("Invalid number. Try again.");
-                        Thread.Sleep(400);
+                        ErrorMesage("Invalid number. Try again.");
+                        Thread.Sleep(600);
                     }
                 }
                 else
                 {
-                    PrintMessage("Please enter a number: ");
-                    Thread.Sleep(1000);
+                    ErrorMesage("Please enter a number");
+                    Thread.Sleep(600);
                 }
             }
             return input;
@@ -316,6 +317,13 @@ namespace TDD_Bank
                     admin.CurrencyRemove();
                     break;
             }
+        }
+
+        internal static bool AskTryagain()
+        {
+            PrintMessage("Do you want to try again y/n");
+            string input = Console.ReadLine().ToLower();
+            return input == "y" || input == "yes";
         }
 
     }
