@@ -124,7 +124,8 @@ namespace TDD_Bank
             PrintMessage("5. Transfer to Me");
             PrintMessage("6. Transfer to Others");
             PrintMessage("7. Transferlog");
-            PrintMessage("8. Logout");
+            PrintMessage("8. Loan");
+            PrintMessage("9. Logout");
             Console.Write("Your choice: ");
             Console.ResetColor();
 
