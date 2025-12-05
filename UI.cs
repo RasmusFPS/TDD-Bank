@@ -8,6 +8,7 @@ namespace TDD_Bank
         {
 
             Console.WriteLine("Welcome to TDD Bank\n");
+            Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("___________________  ________    __________    _____    _______   ____  __.");
             Thread.Sleep(200);
             Console.WriteLine("\\__    ___/\\______ \\ \\______ \\   \\______   \\  /  _  \\   \\      \\ |    |/ _|");
@@ -19,6 +20,7 @@ namespace TDD_Bank
             Console.WriteLine("  |____|   /_______  /_______  /  |______  /\\____|__  /\\____|__  /____|__ \\");
             Thread.Sleep(200);
             Console.WriteLine("                   \\/        \\/          \\/         \\/         \\/        \\/");
+            Console.ResetColor();
 
             Thread.Sleep(1000);
             Console.Clear();
@@ -28,8 +30,10 @@ namespace TDD_Bank
 
             while (WaitingForInput)
             {
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("1. Login");
                 Console.WriteLine("2. Exit");
+                Console.ResetColor();
 
                 var input = Console.ReadLine();
 
@@ -42,14 +46,13 @@ namespace TDD_Bank
                         WaitingForInput = false;
                         break;
                     case "2":
-                        Console.WriteLine("Exiting application...");
+                        UI.PrintMessage("Exiting application...");
                         Thread.Sleep(500);
                         UserContinue = false;
                         WaitingForInput = false;
                         break;
                     default:
-                        Console.WriteLine("INVALID");
-                        Console.WriteLine("Press 1 or 2");
+                        ErrorMesage("INVALID");
                         Thread.Sleep(500);
                         Console.Clear();
                         break;
@@ -89,15 +92,31 @@ namespace TDD_Bank
 
         internal static string GetPassword()
         {
-            //dubbelkolla felhantering, återanvändning av PrintMessage metoden?
-            Console.Write("Password:");
-            string userPassword = Console.ReadLine();
+            bool emptyPassword = true;
+            string userPassword = null;
+            while (emptyPassword)
+            {
+                Console.Write("Password:");
+                userPassword = Console.ReadLine();
+                if (userPassword.Trim() == "")
+                {
+                    ErrorMesage("Write something before clicking enter");
+                    Thread.Sleep(500);
+                    Console.Clear();
+                }
+                else
+                {
+                    emptyPassword = false;
+                }
+            }
+            Console.Clear();
 
             return userPassword;
         }
 
         public static string PrintedSignInMenu(Client client)
         {
+            Console.ForegroundColor = ConsoleColor.White;
             PrintMessage("1. Show My Accounts");
             PrintMessage("2. Create New Account");
             PrintMessage("3. Deposit Money");
@@ -108,6 +127,7 @@ namespace TDD_Bank
             PrintMessage("8. Loan");
             PrintMessage("9. Logout");
             Console.Write("Your choice: ");
+            Console.ResetColor();
 
             return Console.ReadLine();
         }
@@ -119,10 +139,11 @@ namespace TDD_Bank
             {
 
                 PrintMessage("1. Update Currency");
-                PrintMessage("2. User Log");
-                PrintMessage("3. Create New User");
-                PrintMessage("4. Unlock Users");
-                PrintMessage("5. Log Out");
+                PrintMessage("2. Add Currency");
+                PrintMessage("3. User Log");
+                PrintMessage("4. Create New User");
+                PrintMessage("5. Unlock Users");
+                PrintMessage("6. Log Out");
 
                 var input = Console.ReadLine();
                 Admin admin = new Admin("", "", true, 3);
@@ -132,18 +153,21 @@ namespace TDD_Bank
                 {
                     case "1":
                         PrintMessage("Update Currency");
-                        admin.CurrencyValue();
+                        CurrencyUpdate();
                         break;
                     case "2":
-                        admin.UserLog();
+                        admin.AddCurrency();
                         break;
                     case "3":
-                        admin.CreateNewUser();
+                        admin.UserLog();
                         break;
                     case "4":
-                        admin.UserUnlock();
+                        admin.CreateNewUser();
                         break;
                     case "5":
+                        admin.UserUnlock();
+                        break;
+                    case "6":
                         signedIn = false;
                         break;
                 }
@@ -189,7 +213,7 @@ namespace TDD_Bank
         {
             int AccountNumber;
             PrintMessage("Enter the Account Number");
-            while(!int.TryParse(Console.ReadLine(), out AccountNumber))
+            while (!int.TryParse(Console.ReadLine(), out AccountNumber))
             {
                 ErrorMesage("Invalid input");
                 PrintMessage("Enter Account Number:");
@@ -210,16 +234,9 @@ namespace TDD_Bank
             return amount;
         }
 
-
         internal static void PrintMessage(string message)
         {
             Console.WriteLine(message);
-        }
-
-        internal static void AskQuestion(string question)
-        {
-            PrintMessage(question);
-            question = Console.ReadLine();
         }
 
         internal static void ErrorMesage(string error)
@@ -227,10 +244,6 @@ namespace TDD_Bank
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(error);
             Console.ResetColor();
-        }
-
-        internal static void PrintCurrency()
-        {
         }
 
         internal static void ShowTransfers()
@@ -254,36 +267,55 @@ namespace TDD_Bank
             {
                 Console.Clear();
 
-                PrintMessage("Please choose a currency with index number:");
+                PrintMessage("Please choose a currency with index number: ");
 
-                for (int i = 0; i < listCurrency.Count; i++)
+                for (int i = 0; i < Data.Currency.Count; i++)
                 {
                     Console.WriteLine($"{i + 1}. {listCurrency[i]}");
                 }
-                PrintMessage("Your choice:");
-
-
+                PrintMessage("Your choice: ");
 
                 if (int.TryParse(Console.ReadLine(), out choice))
                 {
-                    if (choice > 0 && choice < listCurrency.Count)
+                    if (choice > 0 && choice < listCurrency.Count + 1)
                     {
                         input = listCurrency[choice - 1];
                         validInput = true;
                     }
                     else
                     {
-                        PrintMessage("Invalid number. Try again");
+                        PrintMessage("Invalid number. Try again.");
                         Thread.Sleep(400);
                     }
                 }
                 else
                 {
-                    PrintMessage("Please enter a number");
+                    PrintMessage("Please enter a number: ");
                     Thread.Sleep(1000);
                 }
             }
             return input;
+        }
+        internal static void CurrencyUpdate()
+        {
+            Admin admin = new Admin("", "", true, 3);
+            Console.WriteLine("Choose your action\n" +
+                "1. Update Currency.\n" +
+                "2. Add Currency.\n" +
+                "3. Remove Currency.\n");
+            int.TryParse(Console.ReadLine(), out int choice);
+            switch (choice)
+            {
+                case 1:
+                    admin.CurrencyUpdate();
+                    break;
+                case 2:
+                    admin.AddCurrency();
+                    break;
+                case 3:
+                    admin.CurrencyRemove();
+                    break;
+            }
         }
 
     }

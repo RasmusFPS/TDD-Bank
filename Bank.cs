@@ -22,7 +22,7 @@ namespace TDD_Bank
 
                     if (_loggedin == null)
                     {
-                        Console.WriteLine("Login failed. Returning to main menu.");
+                        UI.ErrorMesage("Login failed. Returning to main menu.");
                         Thread.Sleep(1000);
                         Console.Clear();
                     }
@@ -62,14 +62,16 @@ namespace TDD_Bank
                     }
                     if (user.Username.ToLower() == username && user.Password == userPassword && user.Tries > 0)
                     {
+                        Console.ForegroundColor = ConsoleColor.White;
                         UI.PrintMessage($"Welcome {user.Username}");
+                        Console.ResetColor();
                         _loggedin = user;
                         signedIn = true;
                         return;
                     }
                     else if (user.Username.ToLower() == username && user.Password != userPassword && user.Tries > 0)
                     {
-                        UI.PrintMessage("Wrong user-ID or password.");
+                        UI.ErrorMesage("Wrong user-ID or password.");
                         user.Tries--;
                     }
 
@@ -85,6 +87,8 @@ namespace TDD_Bank
             bool temp = true;
             while (temp)
             {
+                BankTransfer.CheckQueue();
+
                 string choice = UI.PrintedSignInMenu(currentclient);
                 switch (choice)
                 {
@@ -134,12 +138,12 @@ namespace TDD_Bank
                 }
                 else
                 {
-                    UI.PrintMessage("Deposit Failed");
+                    UI.ErrorMesage("Deposit Failed");
                 }
             }
             else
             {
-                UI.PrintMessage("Account Not Found");
+                UI.ErrorMesage("Account Not Found");
             }
         }
 
@@ -158,12 +162,12 @@ namespace TDD_Bank
                 }
                 else
                 {
-                    UI.PrintMessage("\nWithdrawal failed. Insufficient funds or invalid amount.");
+                    UI.ErrorMesage("\nWithdrawal failed. Insufficient funds or invalid amount.");
                 }
             }
             else
             {
-                UI.PrintMessage("Account not found");
+                UI.ErrorMesage("Account not found");
             }
         }
 
@@ -181,7 +185,7 @@ namespace TDD_Bank
                     client.CreateSavingAccount();
                     break;
                 default:
-                    UI.PrintMessage("Didnt choose Account correctly");
+                    UI.ErrorMesage("Didnt choose Account correctly");
                     break;
             }
         }
