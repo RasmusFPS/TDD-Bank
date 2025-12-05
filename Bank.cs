@@ -95,6 +95,8 @@ namespace TDD_Bank
                     case "1":
                         UI.PrintMessage("Show Accounts");
                         UI.ShowAccounts(currentclient);
+                        UI.PrintMessage("Press Enter to continue");
+                        Console.ReadLine();
                         break;
                     case "2":
                         TypeOfAccount(currentclient);
@@ -125,49 +127,69 @@ namespace TDD_Bank
 
         private void HandleDeposit(Client client)
         {
-            UI.ShowAccounts(client);
-            var accountNumber = UI.GetAccountNumber();
-            var amount = UI.GetDecimal();
-            Account account = client.GetAccount(accountNumber);
-
-            if (account != null)
+            bool keepTrying = true;
+            while (keepTrying)
             {
-                if (account.Deposit(amount))
+
+                UI.ShowAccounts(client);
+                var accountNumber = UI.GetAccountNumber();
+                var amount = UI.GetDecimal();
+                Account account = client.GetAccount(accountNumber);
+
+                if (account != null)
                 {
-                    UI.PrintMessage($"Deposit successful. New Balance {account.Balance} {account.Currency}");
+                    if (account.Deposit(amount))
+                    {
+                        UI.PrintMessage($"Deposit successful. New Balance {account.Balance} {account.Currency}");
+                        keepTrying = false;
+                    }
+                    else
+                    {
+                        UI.ErrorMesage("Deposit Failed");
+                        keepTrying = UI.AskTryagain();
+                        Console.Clear();
+                    }
                 }
                 else
                 {
-                    UI.ErrorMesage("Deposit Failed");
+                    UI.ErrorMesage("Account Not Found");
+                    keepTrying = UI.AskTryagain();
+                    Console.Clear();
                 }
-            }
-            else
-            {
-                UI.ErrorMesage("Account Not Found");
             }
         }
 
         private void HandleWithdraw(Client client)
         {
-            UI.ShowAccounts(client);
-            var accountNumber = UI.GetAccountNumber();
-            var amount = UI.GetDecimal();
-            Account account = client.GetAccount(accountNumber);
-
-            if (account != null)
+            bool keepTrying = true;
+            while (keepTrying)
             {
-                if (account.Withdraw(amount))
+
+                UI.ShowAccounts(client);
+                var accountNumber = UI.GetAccountNumber();
+                var amount = UI.GetDecimal();
+                Account account = client.GetAccount(accountNumber);
+
+                if (account != null)
                 {
-                    UI.PrintMessage($"\nWithdrawal successful. New balance for account #{account.AccountNumber} is {account.Balance} {account.Currency}.");
+                    if (account.Withdraw(amount))
+                    {
+                        UI.PrintMessage($"\nWithdrawal successful. New balance for account #{account.AccountNumber} is {account.Balance} {account.Currency}.");
+                        keepTrying = false;
+                    }
+                    else
+                    {
+                        UI.ErrorMesage("\nWithdrawal failed. Insufficient funds or invalid amount.");
+                        keepTrying = UI.AskTryagain();
+                        Console.Clear();
+                    }
                 }
                 else
                 {
-                    UI.ErrorMesage("\nWithdrawal failed. Insufficient funds or invalid amount.");
+                    UI.ErrorMesage("Account not found");
+                    keepTrying = UI.AskTryagain();
+                    Console.Clear();
                 }
-            }
-            else
-            {
-                UI.ErrorMesage("Account not found");
             }
         }
 
