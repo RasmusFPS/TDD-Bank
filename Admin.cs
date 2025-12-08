@@ -41,13 +41,12 @@ namespace TDD_Bank
 
                 foreach (var i in Data.UserCollection)
                 {
-                    Console.WriteLine($"New Client:\n {i.Username}, Password: {i.Password}\n");
+                    UI.PrintMessage($"New Client:\n {i.Username}, Password: {i.Password}\n");
                 }
 
-                Console.WriteLine("Press Enter To Continue...");
+                UI.PrintMessage("Press Enter To Continue...");
                 Console.ReadKey();
                 Console.Clear();
-                UI.PrintedAdminMenu();
             }
 
             else
@@ -67,10 +66,9 @@ namespace TDD_Bank
             {
                 Console.WriteLine($"New Client:\n {i.Username}, Password: {i.Password}\n");
             }
-            Console.WriteLine("Press Enter To Continue...");
+            UI.PrintMessage("Press Enter To Continue...");
             Console.ReadKey();
             Console.Clear();
-            UI.PrintedAdminMenu();
         }
 
         internal void UserUnlock()
@@ -114,7 +112,7 @@ namespace TDD_Bank
             }
             else
             {
-                Console.WriteLine("No Locked users");
+                UI.PrintMessage("No Locked users");
                 Console.ReadKey();
             }
         }

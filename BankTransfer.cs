@@ -182,7 +182,7 @@ namespace TDD_Bank
         internal static bool TransferToOthers(Client sender)
         { 
             UI.ShowAccounts(sender);
-            UI.PrintMessage("Enter the account number of the account you want to transfer from");
+            UI.PrintMessage("Enter the account number of the account you want to transfer from:");
             string fromInput = Console.ReadLine();
 
             Account fromAccount = sender.Accounts.FirstOrDefault(acc => acc.AccountNumber.ToString() == fromInput);
@@ -202,14 +202,12 @@ namespace TDD_Bank
             {
                 if (user is Client client)
                 {
-
                     toAccount = client.Accounts.FirstOrDefault(acc => acc.AccountNumber.ToString() == toInput);
                     if (toAccount != null)
                     {
                         reciver = client;
                         break;
                     }
-
                 }
             }
 
