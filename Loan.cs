@@ -48,7 +48,7 @@ namespace TDD_Bank
         {
             decimal loanRequest = 0;
             decimal totalBalance = CalculateBalanceInSek(client);
-            UI.PrintMessage($"Your total balance is {CalculateBalanceInSek(client)} SEK");
+            UI.PrintMessage($"Your total balance is {totalBalance} SEK");
             UI.PrintMessage($"You can take a loan of {maxLoan} SEK (five times your balance)");
             //Felmeddelande kring lån som är i fel valuta
 
@@ -77,18 +77,16 @@ namespace TDD_Bank
         internal static Account FindAccount(Client client)
         {
             UI.ShowAccounts(client);
-            bool ok = false;
+
             Account foundAccount = null;
-            while (!ok)
+            while (foundAccount == null)
             {
                 UI.PrintMessage("Enter the account number to deposit the loan into: ");
                 if (!int.TryParse(Console.ReadLine(), out int accountNumberChoice))
                 {
-                    UI.ErrorMesage("Invalid account number");//om jag skriver fel, vill jag få möjlighet att skriv in igen, ej komma till meny igen
+                    UI.ErrorMesage("Invalid account number");
                     continue;
                 }
-
-                //Hitta rätt konto
 
                 foreach (var account in client.Accounts)
                 {
@@ -98,7 +96,6 @@ namespace TDD_Bank
                         break;
                     }
                 }
-
 
                 if (foundAccount == null)
                 {
@@ -110,14 +107,10 @@ namespace TDD_Bank
                 {
                     UI.ErrorMesage("Cannot take loan on a savings account");
                     foundAccount = null;
-                    continue;
                 }
-
-                ok = true;
-
             }
-            return foundAccount;
 
+            return foundAccount;
 
         }
 
@@ -151,7 +144,7 @@ namespace TDD_Bank
             Account selectAccount = FindAccount(client);
             while (selectAccount == null)
             {
-                UI.ErrorMesage("Account not found.");//while?
+                UI.ErrorMesage("Account not found.");
                 return false;
             }
             selectAccount.Deposit(loanRequest);
