@@ -187,7 +187,7 @@ namespace TDD_Bank
                 return false;
             }
 
-            UI.PrintMessage("Enter the account you want to transfer to:");
+            UI.PrintMessage("Enter the account you want to transfer to: ");
             string toInput = Console.ReadLine();
 
             Account toAccount = null;
