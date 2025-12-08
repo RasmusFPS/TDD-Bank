@@ -322,7 +322,7 @@ namespace TDD_Bank
 
         internal static bool AskTryagain()
         {
-            PrintMessage("Do you want to try again? y/n");
+            PrintMessage("Enter y to continue or press any key to exit");
             string input = Console.ReadLine().ToLower();
             return input == "y" || input == "yes";
         }
