@@ -52,7 +52,7 @@ namespace TDD_Bank
                         WaitingForInput = false;
                         break;
                     default:
-                        ErrorMesage("INVALID");
+                        ErrorMessage("INVALID");
                         Thread.Sleep(500);
                         Console.Clear();
                         break;
@@ -80,7 +80,7 @@ namespace TDD_Bank
                 }
                 if (!correctUsername)
                 {
-                    ErrorMesage("Username Dosent Exist\nTry again");
+                    ErrorMessage("Username Dosent Exist\nTry again");
                     Thread.Sleep(800);
                     Console.Clear();
                 }
@@ -100,7 +100,7 @@ namespace TDD_Bank
                 userPassword = Console.ReadLine();
                 if (userPassword.Trim() == "")
                 {
-                    ErrorMesage("Write something before clicking enter");
+                    ErrorMessage("Write something before clicking enter");
                     Thread.Sleep(500);
                     Console.Clear();
                 }
@@ -154,18 +154,23 @@ namespace TDD_Bank
                     case "1":
                         PrintMessage("Update Currency");
                         CurrencyUpdate();
+                        Console.Clear();
                         break;
                     case "2":
                         admin.AddCurrency();
+                        Console.Clear();
                         break;
                     case "3":
                         admin.UserLog();
+                        Console.Clear();
                         break;
                     case "4":
                         admin.CreateNewUser();
+                        Console.Clear();
                         break;
                     case "5":
                         admin.UserUnlock();
+                        Console.Clear();
                         break;
                     case "6":
                         signedIn = false;
@@ -183,7 +188,7 @@ namespace TDD_Bank
 
             if (!client.Accounts.Any())
             {
-                ErrorMesage("You have no accounts");
+                ErrorMessage("You have no accounts");
                 return;
             }
 
@@ -215,7 +220,7 @@ namespace TDD_Bank
             PrintMessage("Enter the Account Number");
             while (!int.TryParse(Console.ReadLine(), out AccountNumber))
             {
-                ErrorMesage("Invalid input");
+                ErrorMessage("Invalid input");
                 PrintMessage("Enter Account Number:");
             }
 
@@ -228,7 +233,7 @@ namespace TDD_Bank
             PrintMessage("Enter Amount:");
             while (!decimal.TryParse(Console.ReadLine(), out amount))
             {
-                ErrorMesage("Invaild Inupt. try again");
+                ErrorMessage("Invaild Inupt. try again");
                 PrintMessage("Enter Amount:");
             }
 
@@ -240,7 +245,7 @@ namespace TDD_Bank
             Console.WriteLine(message);
         }
 
-        internal static void ErrorMesage(string error)
+        internal static void ErrorMessage(string error)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(error);
@@ -256,6 +261,8 @@ namespace TDD_Bank
                 Console.WriteLine($"{log.LogTime}: \n" +
                     $"{log.Amount} {log.Currency}, from account: {log.FromAccount} ({log.FromUser}) --> To account {log.ToAccount} ({log.ToUser})");
             }
+            PrintMessage("Press any key to Continue");
+            Console.ReadKey();
         }
 
         internal static string GetCurrency()
@@ -285,13 +292,13 @@ namespace TDD_Bank
                     }
                     else
                     {
-                        ErrorMesage("Invalid number. Try again.");
+                        ErrorMessage("Invalid number. Try again.");
                         Thread.Sleep(600);
                     }
                 }
                 else
                 {
-                    ErrorMesage("Please enter a number");
+                    ErrorMessage("Please enter a number");
                     Thread.Sleep(600);
                 }
             }
