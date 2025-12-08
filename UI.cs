@@ -68,7 +68,7 @@ namespace TDD_Bank
             bool correctUsername = false;
             while (!correctUsername)
             {
-                Console.Write("User-ID:");
+                Console.Write("User-ID: ");
                 username = Console.ReadLine().ToLower();
 
                 foreach (var user in Data.UserCollection)
@@ -80,7 +80,7 @@ namespace TDD_Bank
                 }
                 if (!correctUsername)
                 {
-                    ErrorMessage("Username Dosent Exist\nTry again");
+                    ErrorMesage("Username Dosen't Exist.\nTry again.");
                     Thread.Sleep(800);
                     Console.Clear();
                 }
@@ -96,11 +96,11 @@ namespace TDD_Bank
             string userPassword = null;
             while (emptyPassword)
             {
-                Console.Write("Password:");
+                Console.Write("Password: ");
                 userPassword = Console.ReadLine();
                 if (userPassword.Trim() == "")
                 {
-                    ErrorMessage("Write something before clicking enter");
+                    ErrorMesage("Write something before clicking enter.");
                     Thread.Sleep(500);
                     Console.Clear();
                 }
@@ -178,11 +178,11 @@ namespace TDD_Bank
         //prints the account balance
         internal static void ShowAccounts(Client client)
         {
-            PrintMessage("Accounts");
+            PrintMessage("Accounts:");
 
             if (!client.Accounts.Any())
             {
-                ErrorMessage("You have no accounts");
+                ErrorMesage("You have no accounts.");
                 return;
             }
 
@@ -211,11 +211,11 @@ namespace TDD_Bank
         internal static int GetAccountNumber()
         {
             int AccountNumber;
-            PrintMessage("Enter the Account Number");
+            PrintMessage("Enter the Account Number: ");
             while (!int.TryParse(Console.ReadLine(), out AccountNumber))
             {
-                ErrorMessage("Invalid input");
-                PrintMessage("Enter Account Number:");
+                ErrorMesage("Invalid Input.");
+                PrintMessage("Enter Account Number: ");
             }
 
             return AccountNumber;
@@ -224,11 +224,11 @@ namespace TDD_Bank
         internal static decimal GetDecimal()
         {
             decimal amount;
-            PrintMessage("Enter Amount:");
+            PrintMessage("Enter Amount: ");
             while (!decimal.TryParse(Console.ReadLine(), out amount))
             {
-                ErrorMessage("Invaild Inupt. try again");
-                PrintMessage("Enter Amount:");
+                ErrorMesage("Invaild Input. Try again.");
+                PrintMessage("Enter Amount: ");
             }
 
             return amount;
@@ -275,7 +275,7 @@ namespace TDD_Bank
                 {
                     Console.WriteLine($"{i + 1}. {listCurrency[i]}");
                 }
-                PrintMessage("Your choice: ");
+                PrintMessage("Your Choice: ");
 
                 if (int.TryParse(Console.ReadLine(), out choice))
                 {
@@ -286,13 +286,13 @@ namespace TDD_Bank
                     }
                     else
                     {
-                        ErrorMessage("Invalid number. Try again.");
+                        ErrorMesage("Invalid Number. Try Again.");
                         Thread.Sleep(600);
                     }
                 }
                 else
                 {
-                    ErrorMessage("Please enter a number");
+                    ErrorMesage("Please Enter a Number: ");
                     Thread.Sleep(600);
                 }
             }
@@ -322,7 +322,7 @@ namespace TDD_Bank
 
         internal static bool AskTryagain()
         {
-            PrintMessage("Do you want to try again y/n");
+            PrintMessage("Do you want to try again? y/n");
             string input = Console.ReadLine().ToLower();
             return input == "y" || input == "yes";
         }
