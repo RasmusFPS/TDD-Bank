@@ -64,9 +64,11 @@ namespace TDD_Bank
         internal void UserLog()
         {
             Console.WriteLine("User Log: ");
+
             foreach (var i in Data.UserCollection)
             {
-                Console.WriteLine($"New Client:\n {i.Username}, Password: {i.Password}\n");
+                string pas = new string('*', i.Password.Length);
+                Console.WriteLine($"New Client:\n {i.Username}, Password: {pas}\n");
             }
             UI.PrintMessage("Press Enter To Continue...");
             Console.ReadKey();
