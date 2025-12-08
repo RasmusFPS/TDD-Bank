@@ -47,7 +47,7 @@ namespace TDD_Bank
         {
             decimal loanRequest = 0;
             decimal totalBalance = CalculateBalanceInSek(client);
-            UI.PrintMessage($"Your total balance is {totalBalance} SEK");
+            UI.PrintMessage($"Your Total Balance is {totalBalance} SEK");
             UI.PrintMessage($"You can take a loan of {maxLoan} SEK (five times your balance)");
             //Felmeddelande kring lån som är i fel valuta
 
@@ -55,8 +55,8 @@ namespace TDD_Bank
 
             while (!decimal.TryParse(Console.ReadLine(), out loanRequest) || loanRequest <= 0 || loanRequest > maxLoan)
             {
-                UI.ErrorMessage("Invalid amount.");
-                UI.ErrorMessage($"Enter valid numbers and choose a loan under {maxLoan} SEK.");
+                UI.ErrorMessage("Invalid Amount.");
+                UI.ErrorMessage($"Enter Valid Numbers and Choose a Loan Under {maxLoan} SEK.");
             }
             return loanRequest;
         }
@@ -66,9 +66,9 @@ namespace TDD_Bank
             decimal interest = newLoan.TotalToPay - newLoan.Amount;
             decimal totalToPay = newLoan.TotalToPay;
 
-            UI.PrintMessage($"Loan amount: {newLoan.Amount} {newLoan.Currency}" +
+            UI.PrintMessage($"Loan Amount: {newLoan.Amount} {newLoan.Currency}" +
                         $"\nInterest: {interest} {newLoan.Currency}" +  //RÄNTAN
-                        $"\nTotal to pay: {totalToPay} {newLoan.Currency}" +
+                        $"\nTotal to Pay: {totalToPay} {newLoan.Currency}" +
                         $"\nDo you want to take the loan? Enter yes or no."); //FELHANTERING
 
         }
@@ -81,10 +81,10 @@ namespace TDD_Bank
             //loop until a valid account is chosen
             while (foundAccount == null)
             {
-                UI.PrintMessage("Enter the account number to deposit the loan into: ");
+                UI.PrintMessage("Enter the Account Number to Deposit the Loan into: ");
                 if (!int.TryParse(Console.ReadLine(), out int accountNumberChoice))
                 {
-                    UI.ErrorMessage("Invalid account number");
+                    UI.ErrorMessage("Invalid Account Number.");
                 }
                 else
                 {
@@ -99,12 +99,12 @@ namespace TDD_Bank
                     }
                   if (foundAccount == null)
                 {
-                    UI.ErrorMessage("Try again...");
+                    UI.ErrorMessage("Try Again...");
                 }
                
                 else if (foundAccount is SavingAccount)
                 {
-                    UI.ErrorMessage("Cannot take loan on a savings account");
+                    UI.ErrorMessage("Can't take loan on a savings account.");
                 }
                 }
 
