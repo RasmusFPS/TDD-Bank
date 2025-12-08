@@ -80,7 +80,7 @@ namespace TDD_Bank
                 }
                 if (!correctUsername)
                 {
-                    ErrorMesage("Username Dosen't Exist.\nTry again.");
+                    ErrorMessage("Username Dosen't Exist.\nTry again.");
                     Thread.Sleep(800);
                     Console.Clear();
                 }
@@ -100,7 +100,7 @@ namespace TDD_Bank
                 userPassword = Console.ReadLine();
                 if (userPassword.Trim() == "")
                 {
-                    ErrorMesage("Write something before clicking enter.");
+                    ErrorMessage("Write something before clicking enter.");
                     Thread.Sleep(500);
                     Console.Clear();
                 }
@@ -187,7 +187,7 @@ namespace TDD_Bank
 
             if (!client.Accounts.Any())
             {
-                ErrorMesage("You have no accounts.");
+                ErrorMessage("You have no accounts.");
                 return;
             }
 
@@ -219,7 +219,7 @@ namespace TDD_Bank
             PrintMessage("Enter the Account Number: ");
             while (!int.TryParse(Console.ReadLine(), out AccountNumber))
             {
-                ErrorMesage("Invalid Input.");
+                ErrorMessage("Invalid Input.");
                 PrintMessage("Enter Account Number: ");
             }
 
@@ -232,7 +232,7 @@ namespace TDD_Bank
             PrintMessage("Enter Amount: ");
             while (!decimal.TryParse(Console.ReadLine(), out amount))
             {
-                ErrorMesage("Invaild Input. Try again.");
+                ErrorMessage("Invaild Input. Try again.");
                 PrintMessage("Enter Amount: ");
             }
 
@@ -291,13 +291,13 @@ namespace TDD_Bank
                     }
                     else
                     {
-                        ErrorMesage("Invalid Number. Try Again.");
+                        ErrorMessage("Invalid Number. Try Again.");
                         Thread.Sleep(600);
                     }
                 }
                 else
                 {
-                    ErrorMesage("Please Enter a Number: ");
+                    ErrorMessage("Please Enter a Number: ");
                     Thread.Sleep(600);
                 }
             }

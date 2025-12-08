@@ -108,7 +108,7 @@ namespace TDD_Bank
                 }
                 else
                 {
-                    UI.ErrorMesage("Error, outside of list.");
+                    UI.ErrorMessage("Error, outside of list.");
                     Console.ReadKey();
                 }
             }
@@ -141,7 +141,7 @@ namespace TDD_Bank
                 }
                 else
                 {
-                    UI.ErrorMesage("Wrong input.");
+                    UI.ErrorMessage("Wrong input.");
                 }
 
             }
@@ -151,7 +151,7 @@ namespace TDD_Bank
             }
             else
             {
-                UI.ErrorMesage("Wrong input.");
+                UI.ErrorMessage("Wrong input.");
             }
         }
         internal void CurrencyUpdate()
@@ -175,11 +175,11 @@ namespace TDD_Bank
             }
             else if (!Data.Currency.ContainsKey(choice))
             {
-                UI.ErrorMesage("Wrong Input.");
+                UI.ErrorMessage("Wrong Input.");
             }
             else if (!Data.Currency.ContainsKey(choice))
             {
-                UI.ErrorMesage("Wrong Input.");
+                UI.ErrorMessage("Wrong Input.");
             }
         }
         internal void CurrencyRemove()

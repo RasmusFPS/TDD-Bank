@@ -51,7 +51,7 @@ namespace TDD_Bank
             }
             else
             {
-                UI.ErrorMesage("Invalid Amount, Couldn't Create Account.");
+                UI.ErrorMessage("Invalid Amount, Couldn't Create Account.");
             }
         }
 
@@ -73,7 +73,7 @@ namespace TDD_Bank
             }
             else
             {
-                UI.ErrorMesage("Invalid Amount, Couldn't Create Account.");
+                UI.ErrorMessage("Invalid Amount, Couldn't Create Account.");
             }
         }
     }
