@@ -12,7 +12,7 @@ namespace TDD_Bank
         public DateTime LoanDate { get; set; }
         public string Currency { get; set; }
 
-
+        //constructor creates a new loan
         public Loan(string clientUsername, decimal amount, decimal interestRate)
         {
             ClientUsername = clientUsername;
@@ -21,16 +21,15 @@ namespace TDD_Bank
             Currency = "SEK";
             TotalToPay = CalculateTotalToPay();
             LoanDate = DateTime.Now;
-
-
         }
 
         private decimal CalculateTotalToPay()
         {
-            //total amount to be repaid
+            //calculate total amount to be repaid
             return Amount + (Amount * InterestRate);
         }
 
+        //Convert all balance to SEK
         internal static decimal CalculateBalanceInSek(Client client)
         {
             decimal totalBalance = 0;
@@ -43,7 +42,7 @@ namespace TDD_Bank
 
             return totalBalance;
         }
-
+        //check how much the user wants to borrow
         internal static decimal Borrow(Client client, decimal maxLoan)
         {
             decimal loanRequest = 0;
@@ -73,12 +72,13 @@ namespace TDD_Bank
                         $"\nDo you want to take the loan? Enter yes or no."); //FELHANTERING
 
         }
-
+        //Ask user which account the loan should be deposited into
         internal static Account FindAccount(Client client)
         {
             UI.ShowAccounts(client);
 
             Account foundAccount = null;
+            //loop until a valid account is chosen
             while (foundAccount == null)
             {
                 UI.PrintMessage("Enter the account number to deposit the loan into: ");
@@ -88,6 +88,7 @@ namespace TDD_Bank
                 }
                 else
                 {
+                    //search throug account 
                     foreach (var account in client.Accounts)
                     {
                         if (account.AccountNumber == accountNumberChoice)
@@ -96,14 +97,16 @@ namespace TDD_Bank
                             break;
                         }
                     }
-
+                    //wrong account number
                     if (foundAccount == null)
                     {
                         UI.ErrorMesage("Account not found, Try again...");
                     }
+                    //loan are not allowes on savings accounts
                     else if (foundAccount is SavingAccount)
                     {
                         UI.ErrorMesage("Cannot take loan on a savings account");
+                        //reset and ask again
                         foundAccount = null;
                     }
                 }      
@@ -115,19 +118,19 @@ namespace TDD_Bank
         internal static bool ApplyForLoan(Client client)
         {
             decimal totalBalance = CalculateBalanceInSek(client);
-
+            //cannot get loan if balance is zero or negative
             if (totalBalance <= 0)
             {
                 UI.ErrorMesage("Insufficient balance. Loan declined");
                 return false;
             }
-
+            //max loan 
             decimal maxLoan = totalBalance * 5;
-
+            //ask how much they want to borrow
             decimal loanRequest = Borrow(client, maxLoan);
-
+            //create a loan object
             var newLoan = new Loan(client.Username, loanRequest, Data._loanInterest);
-
+            //show summary of loan
             ShowSummary(newLoan);
 
             string loanAnswer = Console.ReadLine().ToLower();
@@ -138,14 +141,13 @@ namespace TDD_Bank
                 return true;
             }
 
-
+            //choose deposit account
             Account selectAccount = FindAccount(client);
             
             selectAccount.Deposit(loanRequest);
 
-
             UI.PrintMessage($"The loan ({loanRequest} {newLoan.Currency}) has been deposited {newLoan.LoanDate}");
-
+            //add loan to loanlist
             Data.ActiveLoans.Add(newLoan);
 
             return true;
