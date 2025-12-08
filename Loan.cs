@@ -85,33 +85,31 @@ namespace TDD_Bank
                 if (!int.TryParse(Console.ReadLine(), out int accountNumberChoice))
                 {
                     UI.ErrorMesage("Invalid account number");
-                    continue;
                 }
-
-                foreach (var account in client.Accounts)
+                else
                 {
-                    if (account.AccountNumber == accountNumberChoice)
+                    foreach (var account in client.Accounts)
                     {
-                        foundAccount = account;
-                        break;
+                        if (account.AccountNumber == accountNumberChoice)
+                        {
+                            foundAccount = account;
+                            break;
+                        }
                     }
-                }
 
-                if (foundAccount == null)
-                {
-                    UI.ErrorMesage("Account not found, Try again...");
-                    continue;
-                }
-               
-                if (foundAccount is SavingAccount)
-                {
-                    UI.ErrorMesage("Cannot take loan on a savings account");
-                    foundAccount = null;
-                }
+                    if (foundAccount == null)
+                    {
+                        UI.ErrorMesage("Account not found, Try again...");
+                    }
+                    else if (foundAccount is SavingAccount)
+                    {
+                        UI.ErrorMesage("Cannot take loan on a savings account");
+                        foundAccount = null;
+                    }
+                }      
             }
 
             return foundAccount;
-
         }
 
         internal static bool ApplyForLoan(Client client)
