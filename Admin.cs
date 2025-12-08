@@ -52,7 +52,7 @@ namespace TDD_Bank
 
             else
             {
-                UI.ErrorMesage("Name already taken.");
+                UI.ErrorMessage("Name already taken.");
             }
 
 
@@ -72,6 +72,7 @@ namespace TDD_Bank
             Console.Clear();
             UI.PrintedAdminMenu();
         }
+
         internal void UserUnlock()
         {
             List<string> LockedUsers = new List<string>();
@@ -107,7 +108,7 @@ namespace TDD_Bank
                 }
                 else
                 {
-                    UI.ErrorMesage("Error, outside of list");
+                    UI.ErrorMessage("Error, outside of list");
                     Console.ReadKey();
                 }
             }
@@ -127,7 +128,7 @@ namespace TDD_Bank
                 if (char.IsNumber(i))
                 {
                     isNumber = true;
-                    UI.ErrorMesage("Can't contain numbers.");
+                    UI.ErrorMessage("Can't contain numbers.");
                 }
             }
             if (!Data.Currency.ContainsKey(currency) && currency.Length == 3 && !isNumber)
@@ -140,17 +141,17 @@ namespace TDD_Bank
                 }
                 else
                 {
-                    UI.ErrorMesage("Wrong input");
+                    UI.ErrorMessage("Wrong input");
                 }
 
             }
             else if (Data.Currency.ContainsKey(currency))
             {
-                UI.ErrorMesage("This currency already exists.");
+                UI.ErrorMessage("This currency already exists.");
             }
             else
             {
-                UI.ErrorMesage("Wrong input");
+                UI.ErrorMessage("Wrong input");
             }
         }
         internal void CurrencyUpdate()
@@ -174,11 +175,11 @@ namespace TDD_Bank
             }
             else if (!Data.Currency.ContainsKey(choice))
             {
-                UI.ErrorMesage("Fel Input");
+                UI.ErrorMessage("Fel Input");
             }
             else if (!Data.Currency.ContainsKey(choice))
             {
-                UI.ErrorMesage("Wrong Input");
+                UI.ErrorMessage("Wrong Input");
             }
         }
         internal void CurrencyRemove()

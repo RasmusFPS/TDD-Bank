@@ -68,7 +68,7 @@ namespace TDD_Bank
             UI.PrintMessage("Enter wich account you want to transfer from:");
             if (!int.TryParse(Console.ReadLine(), out int fromAccountNumber))
             {
-                UI.ErrorMesage("Invalid accountnumber.");
+                UI.ErrorMessage("Invalid accountnumber.");
                 return null;
             }
 
@@ -76,7 +76,7 @@ namespace TDD_Bank
 
             if (fromAccount == null)
             {
-                UI.ErrorMesage("Can't find the account.");
+                UI.ErrorMessage("Can't find the account.");
                 return null;
             }
 
@@ -88,7 +88,7 @@ namespace TDD_Bank
             UI.PrintMessage("Enter wich account you want to transfer to:");
             if (!int.TryParse(Console.ReadLine(), out int toAccountNumber))
             {
-                UI.ErrorMesage("Invalid accountnumber.");
+                UI.ErrorMessage("Invalid accountnumber.");
                 return null;
             }
 
@@ -96,7 +96,7 @@ namespace TDD_Bank
 
             if (toAccount == null)
             {
-                UI.ErrorMesage("Can't find the account.");
+                UI.ErrorMessage("Can't find the account.");
                 return null;
             }
 
@@ -107,7 +107,7 @@ namespace TDD_Bank
         {
             if (fromAccount.AccountNumber == toAccount.AccountNumber)
             {
-                UI.ErrorMesage("You can't transfer to the same account.");
+                UI.ErrorMessage("You can't transfer to the same account.");
                 return false;
             }
 
@@ -119,12 +119,12 @@ namespace TDD_Bank
             UI.PrintMessage($"How much do you want to transfer? Balance: {fromAccount.Balance} {fromAccount.Currency}");
             if (!decimal.TryParse(Console.ReadLine(), out decimal amount))
             {
-                UI.ErrorMesage("Invalid input - please enter a number.");
+                UI.ErrorMessage("Invalid input - please enter a number.");
                 return -1;
             }
             else if(amount <= 0)
             {
-                UI.ErrorMesage("Amount must be greater than 0.");
+                UI.ErrorMessage("Amount must be greater than 0.");
                 return -1;
             }
                 return amount;
@@ -134,7 +134,7 @@ namespace TDD_Bank
         {
             if (fromAccount.Balance < amount)
             {
-                UI.ErrorMesage("Insufficient balance.");
+                UI.ErrorMessage("Insufficient balance.");
                 return false;
             }
             return true;
@@ -188,7 +188,7 @@ namespace TDD_Bank
             Account fromAccount = sender.Accounts.FirstOrDefault(acc => acc.AccountNumber.ToString() == fromInput);
             if (fromAccount == null)
             {
-                UI.ErrorMesage("Invalid account");
+                UI.ErrorMessage("Invalid account");
                 return false;
             }
 
@@ -215,26 +215,26 @@ namespace TDD_Bank
 
             if (toAccount == null)
             {
-                UI.ErrorMesage("Account not found.");
+                UI.ErrorMessage("Account not found.");
                 return false;
             }
 
             if (fromAccount.AccountNumber == toAccount.AccountNumber)
             {
-                UI.ErrorMesage("Cannot transfer to the same account.");
+                UI.ErrorMessage("Cannot transfer to the same account.");
                 return false;
             }
            
             UI.PrintMessage("Enter the amount you want to transfer: ");
             if(!decimal.TryParse(Console.ReadLine(), out decimal amount) || amount <= 0)
             {
-                UI.ErrorMesage("Invalid amount.");
+                UI.ErrorMessage("Invalid amount.");
                 return false;
             }
 
             if (fromAccount.Balance < amount)
             {
-                UI.ErrorMesage("Insufficient balance.");
+                UI.ErrorMessage("Insufficient balance.");
                 return false;
             }
 

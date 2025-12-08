@@ -22,7 +22,7 @@ namespace TDD_Bank
 
                     if (_loggedin == null)
                     {
-                        UI.ErrorMesage("Login failed. Returning to main menu.");
+                        UI.ErrorMessage("Login failed. Returning to main menu.");
                         Thread.Sleep(1000);
                         Console.Clear();
                     }
@@ -71,7 +71,7 @@ namespace TDD_Bank
                     }
                     else if (user.Username.ToLower() == username && user.Password != userPassword && user.Tries > 0)
                     {
-                        UI.ErrorMesage("Wrong user-ID or password.");
+                        UI.ErrorMessage("Wrong user-ID or password.");
                         user.Tries--;
                     }
 
@@ -100,27 +100,41 @@ namespace TDD_Bank
                         break;
                     case "2":
                         TypeOfAccount(currentclient);
+                        Console.Clear();
                         break;
                     case "3":
                         HandleDeposit(currentclient);
+                        Console.Clear();
                         break;
                     case "4":
                         HandleWithdraw(currentclient);
+                        Console.Clear();
                         break;
                     case "5":
                         BankTransfer.TransferToMe(currentclient);
+                        Console.Clear();
                         break;
                     case "6":
                         BankTransfer.TransferToOthers(currentclient);
+                        Console.Clear();
                         break;
                     case "7":
                         UI.ShowTransfers();
+                        Console.Clear();
                         break;
                     case "8":
                         Loan.ApplyForLoan(currentclient);
+                        Console.Clear();
                         break;
                     case "9":
+                        Console.Clear();
                         return;
+                    default:
+                        UI.ErrorMessage("Error not valid key");
+                        UI.ErrorMessage("Press any key to continue");
+                        Console.ReadKey();
+                        Console.Clear();
+                        break;
                 }
             }
         }
@@ -145,14 +159,14 @@ namespace TDD_Bank
                     }
                     else
                     {
-                        UI.ErrorMesage("Deposit Failed");
+                        UI.ErrorMessage("Deposit Failed");
                         keepTrying = UI.AskTryagain();
                         Console.Clear();
                     }
                 }
                 else
                 {
-                    UI.ErrorMesage("Account Not Found");
+                    UI.ErrorMessage("Account Not Found");
                     keepTrying = UI.AskTryagain();
                     Console.Clear();
                 }
@@ -179,14 +193,14 @@ namespace TDD_Bank
                     }
                     else
                     {
-                        UI.ErrorMesage("\nWithdrawal failed. Insufficient funds or invalid amount.");
+                        UI.ErrorMessage("\nWithdrawal failed. Insufficient funds or invalid amount.");
                         keepTrying = UI.AskTryagain();
                         Console.Clear();
                     }
                 }
                 else
                 {
-                    UI.ErrorMesage("Account not found");
+                    UI.ErrorMessage("Account not found");
                     keepTrying = UI.AskTryagain();
                     Console.Clear();
                 }
@@ -207,7 +221,7 @@ namespace TDD_Bank
                     client.CreateSavingAccount();
                     break;
                 default:
-                    UI.ErrorMesage("Didnt choose Account correctly");
+                    UI.ErrorMessage("Didnt choose Account correctly");
                     break;
             }
         }
