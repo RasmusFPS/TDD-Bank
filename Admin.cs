@@ -15,7 +15,7 @@ namespace TDD_Bank
         internal void CreateNewUser()
         {
             string name = "Start";
-            Console.Write("Insert name:");
+            Console.Write("Insert name: ");
             name = Console.ReadLine();
 
             List<string> Usernames = new List<string>();
@@ -30,7 +30,7 @@ namespace TDD_Bank
 
             if (!Usernames.Contains(name) && !UsernamesLower.Contains(name.ToLower()))
             {
-                Console.Write("Insert password:");
+                Console.Write("Insert password: ");
                 string password = Console.ReadLine();
 
                 bool isAdmin = false;
@@ -55,14 +55,12 @@ namespace TDD_Bank
                 UI.ErrorMesage("Name already taken.");
             }
 
-
-
         }
 
 
         internal void UserLog()
         {
-            Console.WriteLine("User Log:");
+            Console.WriteLine("User Log: ");
             foreach (var i in Data.UserCollection)
             {
                 Console.WriteLine($"New Client:\n {i.Username}, Password: {i.Password}\n");
@@ -91,7 +89,7 @@ namespace TDD_Bank
                     int nr = 1;
                     Console.WriteLine($" {nr}. {i}");
                 }
-                Console.Write("Lås upp:");
+                Console.Write("Lås upp: ");
                 int.TryParse(Console.ReadLine(), out int choice);
                 if (choice < LockedUsers.Count + 1 && choice > 0)
                 {
@@ -107,13 +105,13 @@ namespace TDD_Bank
                 }
                 else
                 {
-                    UI.ErrorMesage("Error, outside of list");
+                    UI.ErrorMesage("Error, outside of list.");
                     Console.ReadKey();
                 }
             }
             else
             {
-                Console.WriteLine("No Locked users");
+                Console.WriteLine("No Locked users.");
                 Console.ReadKey();
             }
         }
@@ -133,14 +131,14 @@ namespace TDD_Bank
             if (!Data.Currency.ContainsKey(currency) && currency.Length == 3 && !isNumber)
             {
 
-                Console.WriteLine("What is the current exchangerate to SEK from this currency");
+                Console.WriteLine("What is the current exchangerate to SEK from this currency?");
                 if (decimal.TryParse(Console.ReadLine(), out decimal exchange) && exchange > 0)
                 {
                     Data.Currency.Add(currency, exchange);
                 }
                 else
                 {
-                    UI.ErrorMesage("Wrong input");
+                    UI.ErrorMesage("Wrong input.");
                 }
 
             }
@@ -150,7 +148,7 @@ namespace TDD_Bank
             }
             else
             {
-                UI.ErrorMesage("Wrong input");
+                UI.ErrorMesage("Wrong input.");
             }
         }
         internal void CurrencyUpdate()
@@ -174,16 +172,16 @@ namespace TDD_Bank
             }
             else if (!Data.Currency.ContainsKey(choice))
             {
-                UI.ErrorMesage("Fel Input");
+                UI.ErrorMesage("Wrong Input.");
             }
             else if (!Data.Currency.ContainsKey(choice))
             {
-                UI.ErrorMesage("Wrong Input");
+                UI.ErrorMesage("Wrong Input.");
             }
         }
         internal void CurrencyRemove()
         {
-            Console.WriteLine("Choose the Currency you want to remove:");
+            Console.WriteLine("Choose the Currency you want to remove: ");
             foreach(var i in Data.Currency)
             {
                 Console.WriteLine(i.Key);
@@ -191,14 +189,14 @@ namespace TDD_Bank
             string choice = Console.ReadLine().ToUpper();
             if (Data.Currency.ContainsKey(choice))
             {
-                Console.WriteLine($"Are you sure you wanna remove {choice}? y/n");
+                Console.WriteLine($"Are you sure you wanna remove {choice}? y/n ");
                 if (Console.ReadLine().ToUpper() == "Y")
                 {
                     Data.Currency.Remove(choice);
                 }
                 else
                 {
-                    Console.WriteLine("Exiting, press enter to continue");
+                    Console.WriteLine("Exiting, press enter to continue...");
                     Thread.Sleep(500);
                 }
             }
