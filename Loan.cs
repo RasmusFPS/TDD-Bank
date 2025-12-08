@@ -95,7 +95,6 @@ namespace TDD_Bank
                     if (account.AccountNumber == accountNumberChoice)
                     {
                         foundAccount = account;
-                        ok = true;
                         break;
                     }
                 }
@@ -108,8 +107,13 @@ namespace TDD_Bank
                
                 if (foundAccount is SavingAccount)
                 {
-                    UI.ErrorMesage("Cannot take loan on a savings account");    //FELHANTERING
+                    UI.ErrorMesage("Cannot take loan on a savings account");
+                    foundAccount = null;
+                    ok = false;
+                    continue;
                 }
+
+                ok = true;
 
             }
             return foundAccount;
