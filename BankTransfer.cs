@@ -57,7 +57,7 @@ namespace TDD_Bank
                     return true;
                 }
 
-                keepTrying = TryAgain();               
+                keepTrying = UI.AskTryagain();               
                                 
             }
             return false;
@@ -85,7 +85,7 @@ namespace TDD_Bank
 
         private static Account GetToAccount(Client client)
         {
-            UI.PrintMessage("Enter wich account you want to transfer to:");
+            UI.PrintMessage("Enter wich account you want to transfer to: ");
             if (!int.TryParse(Console.ReadLine(), out int toAccountNumber))
             {
                 UI.ErrorMessage("Invalid accountnumber.");
@@ -139,12 +139,7 @@ namespace TDD_Bank
             }
             return true;
         }
-        private static bool TryAgain()
-        {
-            UI.PrintMessage("Do you want to try again? (j/n)");
-            return Console.ReadLine().ToLower() == "j";
-        }
-
+       
         private static void ExecuteTransfer(Account fromAccount, Account toAccount, decimal amount)
         {
             fromAccount.Withdraw(amount);
@@ -182,7 +177,7 @@ namespace TDD_Bank
         internal static bool TransferToOthers(Client sender)
         { 
             UI.ShowAccounts(sender);
-            UI.PrintMessage("Enter the account number of the account you want to transfer from:");
+            UI.PrintMessage("Enter the account number of the account you want to transfer from: ");
             string fromInput = Console.ReadLine();
 
             Account fromAccount = sender.Accounts.FirstOrDefault(acc => acc.AccountNumber.ToString() == fromInput);
@@ -192,7 +187,7 @@ namespace TDD_Bank
                 return false;
             }
 
-            UI.PrintMessage("Enter the account you want to transfer to:");
+            UI.PrintMessage("Enter the account you want to transfer to: ");
             string toInput = Console.ReadLine();
 
             Account toAccount = null;
