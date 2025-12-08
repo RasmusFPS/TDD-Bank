@@ -138,7 +138,11 @@ namespace TDD_Bank
             string loanAnswer = Console.ReadLine().ToLower();
 
             if (loanAnswer != "yes")
+            {
+                UI.PrintMessage("Loan cancelled");
                 return true;
+            }
+
 
             Account selectAccount = FindAccount(client);
             while (selectAccount == null)
