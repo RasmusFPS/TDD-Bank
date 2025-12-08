@@ -138,12 +138,11 @@ namespace TDD_Bank
             while (signedIn)
             {
 
-                PrintMessage("1. Update Currency");
-                PrintMessage("2. Add Currency");
-                PrintMessage("3. User Log");
-                PrintMessage("4. Create New User");
-                PrintMessage("5. Unlock Users");
-                PrintMessage("6. Log Out");
+                PrintMessage("1. Edit Currencies");
+                PrintMessage("2. User Log");
+                PrintMessage("3. Create New User");
+                PrintMessage("4. Unlock Users");
+                PrintMessage("5. Log Out");
 
                 var input = Console.ReadLine();
                 Admin admin = new Admin("", "", true, 3);
@@ -152,27 +151,22 @@ namespace TDD_Bank
                 switch (input)
                 {
                     case "1":
-                        PrintMessage("Update Currency");
                         CurrencyUpdate();
                         Console.Clear();
                         break;
                     case "2":
-                        admin.AddCurrency();
-                        Console.Clear();
-                        break;
-                    case "3":
                         admin.UserLog();
                         Console.Clear();
                         break;
-                    case "4":
+                    case "3":
                         admin.CreateNewUser();
                         Console.Clear();
                         break;
-                    case "5":
+                    case "4":
                         admin.UserUnlock();
                         Console.Clear();
                         break;
-                    case "6":
+                    case "5":
                         signedIn = false;
                         break;
                 }
