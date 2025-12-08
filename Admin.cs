@@ -48,7 +48,7 @@ namespace TDD_Bank
                     Console.WriteLine($"New Client:\n {i.Username}, Password: {pas}\n");
                 }
 
-                UI.PrintMessage("Press Enter To Continue...");
+                UI.PrintMessage("Press Enter to Continue...");
                 Console.ReadKey();
                 Console.Clear();
             }
