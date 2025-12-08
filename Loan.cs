@@ -55,8 +55,8 @@ namespace TDD_Bank
 
             while (!decimal.TryParse(Console.ReadLine(), out loanRequest) || loanRequest <= 0 || loanRequest > maxLoan)
             {
-                UI.ErrorMesage("Invalid amount.");
-                UI.ErrorMesage($"Enter valid numbers and choose a loan under {maxLoan} SEK.");
+                UI.ErrorMessage("Invalid amount.");
+                UI.ErrorMessage($"Enter valid numbers and choose a loan under {maxLoan} SEK.");
             }
             return loanRequest;
         }
@@ -84,7 +84,7 @@ namespace TDD_Bank
                 UI.PrintMessage("Enter the account number to deposit the loan into: ");
                 if (!int.TryParse(Console.ReadLine(), out int accountNumberChoice))
                 {
-                    UI.ErrorMesage("Invalid account number");
+                    UI.ErrorMessage("Invalid account number");
                 }
                 else
                 {
@@ -97,19 +97,20 @@ namespace TDD_Bank
                             break;
                         }
                     }
-                    //wrong account number
-                    if (foundAccount == null)
-                    {
-                        UI.ErrorMesage("Account not found, Try again...");
-                    }
-                    //loan are not allowes on savings accounts
-                    else if (foundAccount is SavingAccount)
-                    {
-                        UI.ErrorMesage("Cannot take loan on a savings account");
-                        //reset and ask again
-                        foundAccount = null;
-                    }
-                }      
+                  if (foundAccount == null)
+                {
+                    UI.ErrorMessage("Try again...");
+                }
+               
+                else if (foundAccount is SavingAccount)
+                {
+                    UI.ErrorMessage("Cannot take loan on a savings account");
+                }
+                }
+
+
+                
+
             }
 
             return foundAccount;
@@ -121,7 +122,7 @@ namespace TDD_Bank
             //cannot get loan if balance is zero or negative
             if (totalBalance <= 0)
             {
-                UI.ErrorMesage("Insufficient balance. Loan declined");
+                UI.ErrorMessage("Insufficient balance. Loan declined");
                 return false;
             }
             //max loan 

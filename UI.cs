@@ -52,7 +52,7 @@ namespace TDD_Bank
                         WaitingForInput = false;
                         break;
                     default:
-                        ErrorMesage("INVALID");
+                        ErrorMessage("INVALID");
                         Thread.Sleep(500);
                         Console.Clear();
                         break;
@@ -68,7 +68,7 @@ namespace TDD_Bank
             bool correctUsername = false;
             while (!correctUsername)
             {
-                Console.Write("User-ID:");
+                Console.Write("User-ID: ");
                 username = Console.ReadLine().ToLower();
 
                 foreach (var user in Data.UserCollection)
@@ -80,7 +80,7 @@ namespace TDD_Bank
                 }
                 if (!correctUsername)
                 {
-                    ErrorMesage("Username Dosent Exist\nTry again");
+                    ErrorMessage("Username Dosen't Exist.\nTry again.");
                     Thread.Sleep(800);
                     Console.Clear();
                 }
@@ -96,11 +96,11 @@ namespace TDD_Bank
             string userPassword = null;
             while (emptyPassword)
             {
-                Console.Write("Password:");
+                Console.Write("Password: ");
                 userPassword = Console.ReadLine();
                 if (userPassword.Trim() == "")
                 {
-                    ErrorMesage("Write something before clicking enter");
+                    ErrorMessage("Write something before clicking enter.");
                     Thread.Sleep(500);
                     Console.Clear();
                 }
@@ -138,12 +138,11 @@ namespace TDD_Bank
             while (signedIn)
             {
 
-                PrintMessage("1. Update Currency");
-                PrintMessage("2. Add Currency");
-                PrintMessage("3. User Log");
-                PrintMessage("4. Create New User");
-                PrintMessage("5. Unlock Users");
-                PrintMessage("6. Log Out");
+                PrintMessage("1. Edit Currencies");
+                PrintMessage("2. User Log");
+                PrintMessage("3. Create New User");
+                PrintMessage("4. Unlock Users");
+                PrintMessage("5. Log Out");
 
                 var input = Console.ReadLine();
                 Admin admin = new Admin("", "", true, 3);
@@ -152,22 +151,22 @@ namespace TDD_Bank
                 switch (input)
                 {
                     case "1":
-                        PrintMessage("Update Currency");
                         CurrencyUpdate();
+                        Console.Clear();
                         break;
                     case "2":
-                        admin.AddCurrency();
+                        admin.UserLog();
+                        Console.Clear();
                         break;
                     case "3":
-                        admin.UserLog();
+                        admin.CreateNewUser();
+                        Console.Clear();
                         break;
                     case "4":
-                        admin.CreateNewUser();
+                        admin.UserUnlock();
+                        Console.Clear();
                         break;
                     case "5":
-                        admin.UserUnlock();
-                        break;
-                    case "6":
                         signedIn = false;
                         break;
                 }
@@ -179,11 +178,11 @@ namespace TDD_Bank
         //prints the account balance
         internal static void ShowAccounts(Client client)
         {
-            PrintMessage("Accounts");
+            PrintMessage("Accounts:");
 
             if (!client.Accounts.Any())
             {
-                ErrorMesage("You have no accounts");
+                ErrorMessage("You have no accounts.");
                 return;
             }
 
@@ -212,11 +211,11 @@ namespace TDD_Bank
         internal static int GetAccountNumber()
         {
             int AccountNumber;
-            PrintMessage("Enter the Account Number");
+            PrintMessage("Enter the Account Number: ");
             while (!int.TryParse(Console.ReadLine(), out AccountNumber))
             {
-                ErrorMesage("Invalid input");
-                PrintMessage("Enter Account Number:");
+                ErrorMessage("Invalid Input.");
+                PrintMessage("Enter Account Number: ");
             }
 
             return AccountNumber;
@@ -225,11 +224,11 @@ namespace TDD_Bank
         internal static decimal GetDecimal()
         {
             decimal amount;
-            PrintMessage("Enter Amount:");
+            PrintMessage("Enter Amount: ");
             while (!decimal.TryParse(Console.ReadLine(), out amount))
             {
-                ErrorMesage("Invaild Inupt. try again");
-                PrintMessage("Enter Amount:");
+                ErrorMessage("Invaild Input. Try again.");
+                PrintMessage("Enter Amount: ");
             }
 
             return amount;
@@ -240,7 +239,7 @@ namespace TDD_Bank
             Console.WriteLine(message);
         }
 
-        internal static void ErrorMesage(string error)
+        internal static void ErrorMessage(string error)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(error);
@@ -256,6 +255,8 @@ namespace TDD_Bank
                 Console.WriteLine($"{log.LogTime}: \n" +
                     $"{log.Amount} {log.Currency}, from account: {log.FromAccount} ({log.FromUser}) --> To account {log.ToAccount} ({log.ToUser})");
             }
+            PrintMessage("Press any key to Continue");
+            Console.ReadKey();
         }
 
         internal static string GetCurrency()
@@ -274,7 +275,7 @@ namespace TDD_Bank
                 {
                     Console.WriteLine($"{i + 1}. {listCurrency[i]}");
                 }
-                PrintMessage("Your choice: ");
+                PrintMessage("Your Choice: ");
 
                 if (int.TryParse(Console.ReadLine(), out choice))
                 {
@@ -285,13 +286,13 @@ namespace TDD_Bank
                     }
                     else
                     {
-                        ErrorMesage("Invalid number. Try again.");
+                        ErrorMessage("Invalid Number. Try Again.");
                         Thread.Sleep(600);
                     }
                 }
                 else
                 {
-                    ErrorMesage("Please enter a number");
+                    ErrorMessage("Please Enter a Number: ");
                     Thread.Sleep(600);
                 }
             }
@@ -321,7 +322,7 @@ namespace TDD_Bank
 
         internal static bool AskTryagain()
         {
-            PrintMessage("Do you want to try again y/n");
+            PrintMessage("Do you want to try again? y/n");
             string input = Console.ReadLine().ToLower();
             return input == "y" || input == "yes";
         }

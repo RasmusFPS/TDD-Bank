@@ -36,9 +36,9 @@ namespace TDD_Bank
         //This takes user input on how much money should be in the account
         public void CreateNewAccount()
         {
-            UI.PrintMessage("Please input the Deposit amount");
+            UI.PrintMessage("Please input the Deposit amount: ");
             string userInput = Console.ReadLine();
-            UI.PrintMessage("Choose Currency:");
+            UI.PrintMessage("Choose Currency: ");
             string input = UI.GetCurrency();
 
             if (decimal.TryParse(userInput, out decimal DepositAmount)&& DepositAmount > 0)
@@ -47,19 +47,19 @@ namespace TDD_Bank
 
                 Accounts.Add(newAccount);
 
-                UI.PrintMessage("Account Created");
+                UI.PrintMessage("Account Created.");
             }
             else
             {
-                UI.ErrorMesage("Invalid Amount, Couldnt Create Account");
+                UI.ErrorMessage("Invalid Amount, Couldn't Create Account.");
             }
         }
 
         public void CreateSavingAccount()
         {
-            UI.PrintMessage("Please input the Deposit amount");
+            UI.PrintMessage("Please input the Deposit amount: ");
             string userInput = Console.ReadLine();
-            UI.PrintMessage("Choose Currency:");
+            UI.PrintMessage("Choose Currency: ");
             string input = UI.GetCurrency();
             if(decimal.TryParse(userInput,out decimal DepositAmount) && DepositAmount > 0)
             {
@@ -69,11 +69,11 @@ namespace TDD_Bank
 
                 UI.PrintMessage($"Intrest per year: 2%\nOne year compund will be {DepositAmount*1.02m} {input}");
 
-                UI.PrintMessage("Saving Account created");
+                UI.PrintMessage("Saving Account Created.");
             }
             else
             {
-                UI.ErrorMesage("Invalid Amount, Couldnt create account");
+                UI.ErrorMessage("Invalid Amount, Couldn't Create Account.");
             }
         }
     }
