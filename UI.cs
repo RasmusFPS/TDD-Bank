@@ -52,7 +52,7 @@ namespace TDD_Bank
                         WaitingForInput = false;
                         break;
                     default:
-                        ErrorMesage("INVALID");
+                        ErrorMessage("INVALID");
                         Thread.Sleep(500);
                         Console.Clear();
                         break;
@@ -153,18 +153,23 @@ namespace TDD_Bank
                     case "1":
                         PrintMessage("Update Currency");
                         CurrencyUpdate();
+                        Console.Clear();
                         break;
                     case "2":
                         admin.AddCurrency();
+                        Console.Clear();
                         break;
                     case "3":
                         admin.UserLog();
+                        Console.Clear();
                         break;
                     case "4":
                         admin.CreateNewUser();
+                        Console.Clear();
                         break;
                     case "5":
                         admin.UserUnlock();
+                        Console.Clear();
                         break;
                     case "6":
                         signedIn = false;
@@ -239,7 +244,7 @@ namespace TDD_Bank
             Console.WriteLine(message);
         }
 
-        internal static void ErrorMesage(string error)
+        internal static void ErrorMessage(string error)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(error);
@@ -255,6 +260,8 @@ namespace TDD_Bank
                 Console.WriteLine($"{log.LogTime}: \n" +
                     $"{log.Amount} {log.Currency}, from account: {log.FromAccount} ({log.FromUser}) --> To account {log.ToAccount} ({log.ToUser})");
             }
+            PrintMessage("Press any key to Continue");
+            Console.ReadKey();
         }
 
         internal static string GetCurrency()

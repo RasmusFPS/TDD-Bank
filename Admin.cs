@@ -39,20 +39,23 @@ namespace TDD_Bank
 
                 Data.UserCollection.Add(new Client(name, password, isAdmin, tries, false));
 
+                
+
                 foreach (var i in Data.UserCollection)
                 {
-                    Console.WriteLine($"New Client:\n {i.Username}, Password: {i.Password}\n");
+                    string pas = new string('*', i.Password.Length);
+
+                    Console.WriteLine($"New Client:\n {i.Username}, Password: {pas}\n");
                 }
 
-                Console.WriteLine("Press Enter To Continue...");
+                UI.PrintMessage("Press Enter To Continue...");
                 Console.ReadKey();
                 Console.Clear();
-                UI.PrintedAdminMenu();
             }
 
             else
             {
-                UI.ErrorMesage("Name already taken.");
+                UI.ErrorMessage("Name already taken.");
             }
 
         }
@@ -65,11 +68,11 @@ namespace TDD_Bank
             {
                 Console.WriteLine($"New Client:\n {i.Username}, Password: {i.Password}\n");
             }
-            Console.WriteLine("Press Enter To Continue...");
+            UI.PrintMessage("Press Enter To Continue...");
             Console.ReadKey();
             Console.Clear();
-            UI.PrintedAdminMenu();
         }
+
         internal void UserUnlock()
         {
             List<string> LockedUsers = new List<string>();
@@ -125,7 +128,7 @@ namespace TDD_Bank
                 if (char.IsNumber(i))
                 {
                     isNumber = true;
-                    UI.ErrorMesage("Can't contain numbers.");
+                    UI.ErrorMessage("Can't contain numbers.");
                 }
             }
             if (!Data.Currency.ContainsKey(currency) && currency.Length == 3 && !isNumber)
@@ -144,7 +147,7 @@ namespace TDD_Bank
             }
             else if (Data.Currency.ContainsKey(currency))
             {
-                UI.ErrorMesage("This currency already exists.");
+                UI.ErrorMessage("This currency already exists.");
             }
             else
             {
@@ -160,7 +163,7 @@ namespace TDD_Bank
                 Console.WriteLine($"{i.Key} | {i.Value}");
             }
 
-            
+
 
             string choice = Console.ReadLine().ToUpper();
             if (Data.Currency.ContainsKey(choice))
