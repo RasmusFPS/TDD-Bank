@@ -39,9 +39,13 @@ namespace TDD_Bank
 
                 Data.UserCollection.Add(new Client(name, password, isAdmin, tries, false));
 
+                
+
                 foreach (var i in Data.UserCollection)
                 {
-                    UI.PrintMessage($"New Client:\n {i.Username}, Password: {i.Password}\n");
+                    string pas = new string('*', i.Password.Length);
+
+                    Console.WriteLine($"New Client:\n {i.Username}, Password: {pas}\n");
                 }
 
                 UI.PrintMessage("Press Enter To Continue...");
@@ -90,7 +94,7 @@ namespace TDD_Bank
                     int nr = 1;
                     Console.WriteLine($" {nr}. {i}");
                 }
-                Console.Write("Lås upp:");
+                Console.Write("Lås upp: ");
                 int.TryParse(Console.ReadLine(), out int choice);
                 if (choice < LockedUsers.Count + 1 && choice > 0)
                 {
@@ -161,7 +165,7 @@ namespace TDD_Bank
                 Console.WriteLine($"{i.Key} | {i.Value}");
             }
 
-            
+
 
             string choice = Console.ReadLine().ToUpper();
             if (Data.Currency.ContainsKey(choice))
@@ -183,7 +187,7 @@ namespace TDD_Bank
         internal void CurrencyRemove()
         {
             Console.WriteLine("Choose the Currency you want to remove:");
-            foreach(var i in Data.Currency)
+            foreach (var i in Data.Currency)
             {
                 Console.WriteLine(i.Key);
             }
