@@ -103,13 +103,13 @@ namespace TDD_Bank
                 if (foundAccount == null)
                 {
                     UI.ErrorMesage("Try again...");
+                    continue;
                 }
                
                 if (foundAccount is SavingAccount)
                 {
                     UI.ErrorMesage("Cannot take loan on a savings account");
                     foundAccount = null;
-                    ok = false;
                     continue;
                 }
 
