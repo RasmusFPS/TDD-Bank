@@ -22,7 +22,6 @@ namespace TDD_Bank
             TotalToPay = CalculateTotalToPay();
             LoanDate = DateTime.Now;
 
-
         }
 
         private decimal CalculateTotalToPay()
