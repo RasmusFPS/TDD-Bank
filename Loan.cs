@@ -99,7 +99,7 @@ namespace TDD_Bank
 
                 if (foundAccount == null)
                 {
-                    UI.ErrorMesage("Try again...");
+                    UI.ErrorMesage("Account not found, Try again...");
                     continue;
                 }
                
@@ -142,11 +142,7 @@ namespace TDD_Bank
 
 
             Account selectAccount = FindAccount(client);
-            while (selectAccount == null)
-            {
-                UI.ErrorMesage("Account not found.");
-                return false;
-            }
+            
             selectAccount.Deposit(loanRequest);
 
 
