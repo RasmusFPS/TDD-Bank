@@ -182,7 +182,7 @@ namespace TDD_Bank
             {
                 UI.ShowAccounts(sender);
 
-                //välj konto att skicka från
+                //choose account to send from
                 Account fromAccount = GetFromAccount(sender);
                 if (fromAccount == null)
                 {
@@ -190,34 +190,34 @@ namespace TDD_Bank
                     continue;
                 }
 
-                //välj konto att skicka till
+                //choose account to send to
                 Client reciver;
                 Account toAccount = GetToAccontOtherClient(out reciver);
                 if (toAccount == null)
                 {
-                    keepTrying = TryAgain();
+                    keepTrying = UI.AskTryagain();
                     continue;
                 }
 
-                //validera konton
+                //calling method to Validates accounts
                 if (!ValidateTransfer(sender, fromAccount, toAccount, reciver))
                 {
-                    keepTrying = TryAgain();
+                    keepTrying = UI.AskTryagain();
                     continue;
                 }
 
-                //Ange belopp att överföra
+                //amount input
                 decimal amount = GetAmount(fromAccount);
                 if (amount <= 0)
                 {
-                    keepTrying = TryAgain();
+                    keepTrying = UI.AskTryagain();
                     continue;
                 }
 
                 //checking balance
                 if (!ValidateBalance(fromAccount, amount))
                 {
-                    keepTrying = TryAgain();
+                    keepTrying = UI.AskTryagain();
                     continue;
                 }
 
@@ -239,14 +239,14 @@ namespace TDD_Bank
                 return false;
             }
 
-            //kollar så det inte är samma konto
+            //check to see if reciver account is same as sender acocunt
             if (fromAccount.AccountNumber == toAccount.AccountNumber)
             {
                 UI.ErrorMessage("Can't transfer to the same account.");
                 return false;
             }
 
-            //kollar att det inte är samma kund
+            //check if sender and reciver accounts belongs to same client
             if (sender == reciver)
             {
                 UI.ErrorMessage("Can't transfer to your own account. Go to Transfer to me.");
