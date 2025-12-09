@@ -67,6 +67,7 @@ namespace TDD_Bank
                         Console.ResetColor();
                         _loggedin = user;
                         signedIn = true;
+                        user.Tries = 3;
                         return;
                     }
                     else if (user.Username.ToLower() == username && user.Password != userPassword && user.Tries > 0)
