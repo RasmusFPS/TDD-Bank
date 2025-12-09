@@ -48,7 +48,7 @@ namespace TDD_Bank
                     Console.WriteLine($"New Client:\n {i.Username}, Password: {pas}\n");
                 }
 
-                UI.PrintMessage("Press Enter to Continue...");
+                UI.PrintMessage("Press Enter to Return to Menu...");
                 Console.ReadKey();
                 Console.Clear();
             }
@@ -70,7 +70,7 @@ namespace TDD_Bank
                 string pas = new string('*', i.Password.Length);
                 Console.WriteLine($"New Client:\n {i.Username}, Password: {pas}\n");
             }
-            UI.PrintMessage("Press Enter To Continue...");
+            UI.PrintMessage("Press Enter To Return to Menu...");
             Console.ReadKey();
             Console.Clear();
         }
