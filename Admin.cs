@@ -50,8 +50,8 @@ namespace TDD_Bank
                 {
                     string pas = new string('*', i.Password.Length);
 
-                    Console.WriteLine($"New Client:\n {i.Username}, Password: {pas}\n");
-                }
+                        Console.WriteLine($"User:\n {i.Username}, Password: {pas}\n");
+                    }
 
                 UI.PrintMessage("Press Enter to Return to Menu...");
                 Console.ReadKey();
@@ -73,7 +73,7 @@ namespace TDD_Bank
             foreach (var i in Data.UserCollection)
             {
                 string pas = new string('*', i.Password.Length);
-                Console.WriteLine($"New Client:\n {i.Username}, Password: {pas}\n");
+                Console.WriteLine($"User:\n {i.Username}, Password: {pas}\n");
             }
             UI.PrintMessage("Press Enter To Return to Menu...");
             Console.ReadKey();
