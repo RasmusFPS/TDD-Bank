@@ -15,7 +15,7 @@ namespace TDD_Bank
         internal void CreateNewUser()
         {
             string name = "Start";
-            Console.Write("Insert name: ");
+            Console.Write("Insert Name: ");
             name = Console.ReadLine();
 
             List<string> Usernames = new List<string>();
@@ -30,7 +30,7 @@ namespace TDD_Bank
 
             if (!Usernames.Contains(name) && !UsernamesLower.Contains(name.ToLower()))
             {
-                Console.Write("Insert password: ");
+                Console.Write("Insert Password: ");
                 string password = Console.ReadLine();
 
                 bool isAdmin = false;
@@ -52,10 +52,9 @@ namespace TDD_Bank
                 Console.ReadKey();
                 Console.Clear();
             }
-
             else
             {
-                UI.ErrorMessage("Name already taken.");
+                UI.ErrorMessage("Name Already Taken.");
                 Thread.Sleep(600);
             }
 
@@ -94,7 +93,7 @@ namespace TDD_Bank
                     int nr = 1;
                     Console.WriteLine($" {nr}. {i}");
                 }
-                Console.Write("Lock up: ");
+                Console.Write("Unlock: ");
                 int.TryParse(Console.ReadLine(), out int choice);
                 if (choice < LockedUsers.Count + 1 && choice > 0)
                 {
@@ -140,24 +139,24 @@ namespace TDD_Bank
                 if (decimal.TryParse(Console.ReadLine(), out decimal exchange) && exchange > 0)
                 {
                     Data.Currency.Add(currency, exchange);
-                    Console.WriteLine($"{currency} was added");
+                    Console.WriteLine($"{currency} Was Added");
                     Thread.Sleep(600);
                 }
                 else
                 {
-                    UI.ErrorMessage("Wrong input.");
+                    UI.ErrorMessage("Wrong Input.");
                     Thread.Sleep(1200);
                 }
 
             }
             else if (Data.Currency.ContainsKey(currency))
             {
-                UI.ErrorMessage("This currency already exists.");
+                UI.ErrorMessage("This Currency Already Exists.");
                 Thread.Sleep(1200);
             }
             else
             {
-                UI.ErrorMessage("Wrong input, must be a valid ISO currency-code.");
+                UI.ErrorMessage("Wrong Input, Must Be a Valid ISO Currency-code.");
                 Thread.Sleep(1200);
             }
         }
@@ -173,17 +172,17 @@ namespace TDD_Bank
 
 
             string choice = Console.ReadLine().ToUpper();
-            if (Data.Currency.ContainsKey(choice))
+            if (Data.Currency.ContainsKey(choice) && choice != "SEK")
             {
-                Console.WriteLine("How Many Percent?");
-                decimal.TryParse(Console.ReadLine(), out decimal percent);
-                Data.Currency[choice] *= (1 + percent / 100);
-                Console.WriteLine($"{choice} was raised with {percent}%");
+                Console.WriteLine("What Is The New Exchangerate From sek?");
+                decimal.TryParse(Console.ReadLine(), out decimal value);
+                Data.Currency[choice] = value;
+                Console.WriteLine($"New Value {choice} - {value}");
                 Thread.Sleep(1200);
             }
             else if (!Data.Currency.ContainsKey(choice))
             {
-                UI.ErrorMessage("Wrong Input, must be a valid ISO currency code.");
+                UI.ErrorMessage("Wrong Input, Must Be a Valid ISO Currency Code.");
                 Thread.Sleep(1200);
             }
             
@@ -202,7 +201,7 @@ namespace TDD_Bank
                 if (Console.ReadLine().ToUpper() == "Y")
                 {
                     Data.Currency.Remove(choice);
-                    Console.WriteLine($"{choice} was successfully removed from our currencies");
+                    Console.WriteLine($"{choice} Was Successfully Removed From Our Supported Currencies");
                     Thread.Sleep(600);
                 }
                 else
@@ -213,10 +212,9 @@ namespace TDD_Bank
             }
             else
             {
-                UI.ErrorMessage($"{choice} does not match any currency supported by TDD");
+                UI.ErrorMessage($"{choice} Does Not Match Any Currency Supported By TDD");
                 Thread.Sleep(600);
             }
         }
     }
 }
-
