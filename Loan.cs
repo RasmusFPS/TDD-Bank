@@ -174,7 +174,7 @@ namespace TDD_Bank
             UI.PrintMessage($"The loan ({loanRequest} {newLoan.Currency}) has been deposited {newLoan.LoanDate}");
             //add loan to loanlist
             Data.ActiveLoans.Add(newLoan);
-
+            Thread.Sleep(1200);
             return true;
         }
 
