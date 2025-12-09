@@ -143,34 +143,42 @@ namespace TDD_Bank
                 PrintMessage("3. Create New User");
                 PrintMessage("4. Unlock Users");
                 PrintMessage("5. Log Out");
-
-                var input = Console.ReadLine();
-                Admin admin = new Admin("", "", true, 3);
-
-
-                switch (input)
+                int input;
+                while (!int.TryParse(Console.ReadLine(), out input))
                 {
-                    case "1":
-                        CurrencyEdit();
-                        Console.Clear();
-                        break;
-                    case "2":
-                        admin.UserLog();
-                        Console.Clear();
-                        break;
-                    case "3":
-                        admin.CreateNewUser();
-                        Console.Clear();
-                        break;
-                    case "4":
-                        admin.UserUnlock();
-                        Console.Clear();
-                        break;
-                    case "5":
-                        signedIn = false;
-                        break;
+                    UI.ErrorMessage("Wrong Input, Please Choose a Valid Option");
                 }
+                Admin admin = new Admin("", "", true, 3);
+                if (input >= 6 && input <= 0)
+                {
+                    switch (input)
+                    {
+                        case 1:
+                            CurrencyEdit();
+                            Console.Clear();
+                            break;
+                        case 2:
+                            admin.UserLog();
+                            Console.Clear();
+                            break;
+                        case 3:
+                            admin.CreateNewUser();
+                            Console.Clear();
+                            break;
+                        case 4:
+                            admin.UserUnlock();
+                            Console.Clear();
+                            break;
+                        case 5:
+                            signedIn = false;
+                            break;
+                    }
 
+                }
+                else
+                {
+                    UI.ErrorMessage("Wrong Input, Please Choose a Valid Option");
+                }
             }
         }
 
@@ -298,39 +306,39 @@ namespace TDD_Bank
             }
             return input;
         }
-         internal static void CurrencyEdit()
+        internal static void CurrencyEdit()
         {
             int choice = 1;
             if (choice < 3 && choice > 0)
             {
                 Admin admin = new Admin("", "", true, 3);
-            Console.WriteLine("Choose your action. \n" +
-                "1. View Currencies. \n" +
-                "2. Update Currency.\n" +
-                "3. Add Currency.\n" +
-                "4. Remove Currency.\n");
-            int.TryParse(Console.ReadLine(), out choice);
-            switch (choice)
-            {
-                case 1:
-                    foreach (var i in Data.Currency)
-                    {
-                        Console.WriteLine($"{i.Key} | {i.Value}");
-                    }
-                    Console.WriteLine("Press any button to continue.");
-                    Console.ReadLine();
-                    break;
-                case 2:
-                    admin.CurrencyUpdate();
-                    break;
-                case 3:
-                    admin.AddCurrency();
-                    break;
-                case 4:
-                    admin.CurrencyRemove();
-                    break;
+                Console.WriteLine("Choose your action. \n" +
+                    "1. View Currencies. \n" +
+                    "2. Update Currency.\n" +
+                    "3. Add Currency.\n" +
+                    "4. Remove Currency.\n");
+                int.TryParse(Console.ReadLine(), out choice);
+                switch (choice)
+                {
+                    case 1:
+                        foreach (var i in Data.Currency)
+                        {
+                            Console.WriteLine($"{i.Key} | {i.Value}");
+                        }
+                        Console.WriteLine("Press any button to continue.");
+                        Console.ReadLine();
+                        break;
+                    case 2:
+                        admin.CurrencyUpdate();
+                        break;
+                    case 3:
+                        admin.AddCurrency();
+                        break;
+                    case 4:
+                        admin.CurrencyRemove();
+                        break;
+                }
             }
-        }
             else
             {
                 UI.ErrorMessage("Please choose a correct option");
