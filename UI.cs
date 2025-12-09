@@ -249,6 +249,10 @@ namespace TDD_Bank
         internal static void ShowTransfers()
         {
             Console.WriteLine("Transfers: ");
+            if (Data.TransferHistory.Count == 0)
+            {
+                Console.WriteLine("You have no transactions to show");
+            }
 
             foreach (var log in Data.TransferHistory)
             {
