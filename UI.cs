@@ -151,7 +151,7 @@ namespace TDD_Bank
                 switch (input)
                 {
                     case "1":
-                        CurrencyUpdate();
+                        CurrencyEdit();
                         Console.Clear();
                         break;
                     case "2":
@@ -298,25 +298,42 @@ namespace TDD_Bank
             }
             return input;
         }
-        internal static void CurrencyUpdate()
+         internal static void CurrencyEdit()
         {
-            Admin admin = new Admin("", "", true, 3);
-            Console.WriteLine("Choose Your Action\n" +
-                "1. Update Currency.\n" +
-                "2. Add Currency.\n" +
-                "3. Remove Currency.\n");
-            int.TryParse(Console.ReadLine(), out int choice);
+            int choice = 1;
+            if (choice < 3 && choice > 0)
+            {
+                Admin admin = new Admin("", "", true, 3);
+            Console.WriteLine("Choose your action. \n" +
+                "1. View Currencies. \n" +
+                "2. Update Currency.\n" +
+                "3. Add Currency.\n" +
+                "4. Remove Currency.\n");
+            int.TryParse(Console.ReadLine(), out choice);
             switch (choice)
             {
                 case 1:
-                    admin.CurrencyUpdate();
+                    foreach (var i in Data.Currency)
+                    {
+                        Console.WriteLine($"{i.Key} | {i.Value}");
+                    }
+                    Console.WriteLine("Press any button to continue.");
+                    Console.ReadLine();
                     break;
                 case 2:
-                    admin.AddCurrency();
+                    admin.CurrencyUpdate();
                     break;
                 case 3:
+                    admin.AddCurrency();
+                    break;
+                case 4:
                     admin.CurrencyRemove();
                     break;
+            }
+        }
+            else
+            {
+                UI.ErrorMessage("Please choose a correct option");
             }
         }
 

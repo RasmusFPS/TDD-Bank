@@ -72,7 +72,11 @@ namespace TDD_Bank
                     else if (user.Username.ToLower() == username && user.Password != userPassword && user.Tries > 0)
                     {
                         UI.ErrorMessage("Wrong user-ID or password.");
-                        user.Tries--;
+
+                        if (!user.IsAdmin)
+                        {
+                            user.Tries--;
+                        }
                     }
 
                 }
