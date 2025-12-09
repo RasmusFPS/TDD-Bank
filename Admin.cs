@@ -32,21 +32,26 @@ namespace TDD_Bank
             {
                 Console.Write("Insert Password: ");
                 string password = Console.ReadLine();
-
-                bool isAdmin = false;
-                int tries = 3;
-                bool isLocked = false;
-
-                Data.UserCollection.Add(new Client(name, password, isAdmin, tries, false));
-
-                
-
-                foreach (var i in Data.UserCollection)
+                if (password.Length > 3)
                 {
-                    string pas = new string('*', i.Password.Length);
 
-                    Console.WriteLine($"New Client:\n {i.Username}, Password: {pas}\n");
+                    bool isAdmin = false;
+                    int tries = 3;
+                    bool isLocked = false;
+
+                    Data.UserCollection.Add(new Client(name, password, isAdmin, tries, false));
                 }
+                else
+                {
+                    UI.ErrorMessage("Password Must Be Atleast 3 Characters");
+                    Thread.Sleep(600);
+                }
+                    foreach (var i in Data.UserCollection)
+                    {
+                        string pas = new string('*', i.Password.Length);
+
+                        Console.WriteLine($"New Client:\n {i.Username}, Password: {pas}\n");
+                    }
 
                 UI.PrintMessage("Press Enter to Return to Menu...");
                 Console.ReadKey();
