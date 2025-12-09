@@ -219,20 +219,27 @@ namespace TDD_Bank
 
         internal void TypeOfAccount(Client client)
         {
-            UI.PrintMessage("What type of Account do you want to make");
-            UI.PrintMessage("1.Bank Account\n2.Saving Account");
-            string input = Console.ReadLine();
-            switch (input)
+            bool tryAgain = true;
+            while (tryAgain)
             {
-                case "1":
-                    client.CreateNewAccount();
-                    break;
-                case "2":
-                    client.CreateSavingAccount();
-                    break;
-                default:
-                    UI.ErrorMessage("Didnt choose Account correctly");
-                    break;
+                UI.PrintMessage("What type of Account do you want to make");
+                UI.PrintMessage("1.Bank Account\n2.Saving Account");
+                string input = Console.ReadLine();
+                switch (input)
+                {
+                    case "1":
+                        client.CreateNewAccount();
+                        tryAgain = false;
+                        break;
+                    case "2":
+                        client.CreateSavingAccount();
+                        tryAgain= false;
+                        break;
+                    default:
+                        UI.ErrorMessage("Invalid input");
+                        UI.AskTryagain();
+                        break;
+                }
             }
         }
     }

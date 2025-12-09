@@ -48,10 +48,15 @@ namespace TDD_Bank
                 Accounts.Add(newAccount);
 
                 UI.PrintMessage("Account Created.");
+                UI.PrintMessage("");
+                UI.PrintMessage("Press Enter to continue");
+                Console.ReadKey();
             }
             else
             {
                 UI.ErrorMessage("Invalid Amount, Couldn't Create Account.");
+                UI.PrintMessage("Press Enter to continue");
+                Console.ReadKey();
             }
         }
 
@@ -70,10 +75,16 @@ namespace TDD_Bank
                 UI.PrintMessage($"Intrest per year: 2%\nOne year compund will be {DepositAmount*1.02m} {input}");
 
                 UI.PrintMessage("Saving Account Created.");
+
+                UI.PrintMessage("");
+                UI.PrintMessage("Press Enter to continue");
+                Console.ReadKey();
             }
             else
             {
                 UI.ErrorMessage("Invalid Amount, Couldn't Create Account.");
+                UI.PrintMessage("Press Enter to continue");
+                Console.ReadKey();
             }
         }
     }
