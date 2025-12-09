@@ -202,12 +202,19 @@ namespace TDD_Bank
                 if (Console.ReadLine().ToUpper() == "Y")
                 {
                     Data.Currency.Remove(choice);
+                    Console.WriteLine($"{choice} was successfully removed from our currencies");
+                    Thread.Sleep(600);
                 }
                 else
                 {
-                    Console.WriteLine("Exiting, Press Enter to Continue...");
-                    Thread.Sleep(500);
+                    Console.WriteLine("Exiting...");
+                    Thread.Sleep(600);
                 }
+            }
+            else
+            {
+                UI.ErrorMessage($"{choice} does not match any currency supported by TDD");
+                Thread.Sleep(600);
             }
         }
     }
