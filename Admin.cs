@@ -46,12 +46,12 @@ namespace TDD_Bank
                     UI.ErrorMessage("Password Must Be Atleast 3 Characters");
                     Thread.Sleep(600);
                 }
-                    foreach (var i in Data.UserCollection)
-                    {
-                        string pas = new string('*', i.Password.Length);
+                foreach (var i in Data.UserCollection)
+                {
+                    string pas = new string('*', i.Password.Length);
 
-                        Console.WriteLine($"New Client:\n {i.Username}, Password: {pas}\n");
-                    }
+                    Console.WriteLine($"New Client:\n {i.Username}, Password: {pas}\n");
+                }
 
                 UI.PrintMessage("Press Enter to Return to Menu...");
                 Console.ReadKey();
@@ -167,7 +167,6 @@ namespace TDD_Bank
         }
         internal void CurrencyUpdate()
         {
-
             Console.WriteLine("Which Currency Do you Want to Edit?");
             foreach (var i in Data.Currency)
             {
@@ -185,17 +184,21 @@ namespace TDD_Bank
                 Console.WriteLine($"New Value {choice} - {value}");
                 Thread.Sleep(1200);
             }
+            else if (choice == "SEK")
+            {
+                UI.ErrorMessage("You Cannot Change This Currency");
+            }
             else if (!Data.Currency.ContainsKey(choice))
             {
                 UI.ErrorMessage("Wrong Input, Must Be a Valid ISO Currency Code.");
                 Thread.Sleep(1200);
             }
-            
+
         }
         internal void CurrencyRemove()
         {
             Console.WriteLine("Choose the Currency You Want to Remove: ");
-            foreach(var i in Data.Currency)
+            foreach (var i in Data.Currency)
             {
                 Console.WriteLine(i.Key);
             }
@@ -211,7 +214,7 @@ namespace TDD_Bank
                 }
                 else
                 {
-                    Console.WriteLine("Exiting...");
+                    Console.WriteLine("Cancelling, Returning To Menu");
                     Thread.Sleep(600);
                 }
             }
