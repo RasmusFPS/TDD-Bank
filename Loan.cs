@@ -67,7 +67,7 @@ namespace TDD_Bank
             decimal totalToPay = newLoan.TotalToPay;
 
             UI.PrintMessage($"Loan Amount: {newLoan.Amount} {newLoan.Currency}" +
-                        $"\nInterest: {interest} {newLoan.Currency}" +  
+                        $"\nInterest Per Year: {interest} {newLoan.Currency}" +  
                         $"\nTotal to Pay: {totalToPay} {newLoan.Currency}" +
                         $"\nDo you want to take the loan? Enter yes or no."); 
 
