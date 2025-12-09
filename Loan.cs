@@ -168,17 +168,12 @@ namespace TDD_Bank
 
             //choose deposit account
             Account selectAccount = FindAccount(client);
-
-            //add loan to loanlist
-            Data.ActiveLoans.Add(newLoan);
-
-            selectAccount.Deposit(loanRequest);
+            
+            selectAccount.Deposit(loanRequest * Data.Currency[selectAccount.Currency]);
 
             UI.PrintMessage($"The loan ({loanRequest} {newLoan.Currency}) has been deposited {newLoan.LoanDate}");
-
-            UI.PrintMessage("Press enter:");
-
-            Console.ReadKey();
+            //add loan to loanlist
+            Data.ActiveLoans.Add(newLoan);
 
             return true;
         }
