@@ -255,7 +255,7 @@ namespace TDD_Bank
                 Console.WriteLine($"{log.LogTime}: \n" +
                     $"{log.Amount} {log.Currency}, From Account: {log.FromAccount} ({log.FromUser}) --> To Account {log.ToAccount} ({log.ToUser})");
             }
-            PrintMessage("Press Any Key to Continue...");
+            PrintMessage("Press Any Key to Return to Menu...");
             Console.ReadKey();
         }
 

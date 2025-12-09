@@ -17,7 +17,7 @@ namespace TDD_Bank
 
         static Data()
         {
-            Runtime = DateTime.Now.AddMinutes(15);
+            Runtime = DateTime.Now.AddMinutes(1);
             carl.Accounts.Add(new Account(500, "SEK"));
             carl.Accounts.Add(new SavingAccount(500, "SEK", 0.02m));
 
