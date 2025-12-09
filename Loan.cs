@@ -124,7 +124,8 @@ namespace TDD_Bank
             {
                 if (l.ClientUsername == client.Username)
                 {
-                    UI.ErrorMessage("You Already Have an Active Loan. Repay Before You Apply For a New Loan.");
+                    UI.ErrorMessage("You Already Have an Active Loan. Repay Before You Apply For a New Loan.\n" +
+                        "Press Any Key to Return to Menu...");
                     Console.ReadKey();
                     return true;
                 }
@@ -133,7 +134,7 @@ namespace TDD_Bank
 
         }
         internal static bool ApplyForLoan(Client client)
-        {
+        {   //EVENTUELLT ÖVERFLÖDIG ERRORMESSAGE?
             if (HasActiveLoan(client))
             {
                 UI.ErrorMessage("You Already Have an Active Loan. Repay Before You Apply For a New Loan.");
@@ -171,13 +172,10 @@ namespace TDD_Bank
             
             selectAccount.Deposit(loanRequest * Data.Currency[selectAccount.Currency]);
 
-            UI.PrintMessage($"The loan ({loanRequest} {newLoan.Currency}) has been deposited {newLoan.LoanDate}");
+            UI.PrintMessage($"The Loan ({loanRequest} {newLoan.Currency}) Has Been Deposited {newLoan.LoanDate}.");
+           
             //add loan to loanlist
             Data.ActiveLoans.Add(newLoan);
-
-            selectAccount.Deposit(loanRequest);
-
-            UI.PrintMessage($"The Loan ({loanRequest} {newLoan.Currency}) Has Been Deposited {newLoan.LoanDate}.");
 
             UI.PrintMessage("Press Any Key to Return to The Menu...");
 
