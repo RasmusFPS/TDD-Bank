@@ -67,9 +67,9 @@ namespace TDD_Bank
             decimal totalToPay = newLoan.TotalToPay;
 
             UI.PrintMessage($"Loan Amount: {newLoan.Amount} {newLoan.Currency}" +
-                        $"\nInterest: {interest} {newLoan.Currency}" +  //RÄNTAN
+                        $"\nInterest: {interest} {newLoan.Currency}" +  
                         $"\nTotal to Pay: {totalToPay} {newLoan.Currency}" +
-                        $"\nDo you want to take the loan? Enter yes or no."); //FELHANTERING
+                        $"\nDo you want to take the loan? Enter yes or no."); 
 
         }
         //Ask user which account the loan should be deposited into
@@ -78,16 +78,18 @@ namespace TDD_Bank
             UI.ShowAccounts(client);
 
             Account foundAccount = null;
+
             //loop until a valid account is chosen
             while (foundAccount == null)
             {
                 UI.PrintMessage("Enter the Account Number to Deposit the Loan into: ");
+                
                 if (!int.TryParse(Console.ReadLine(), out int accountNumberChoice))
                 {
                     UI.ErrorMessage("Invalid Account Number.");
+                    continue;
                 }
-                else
-                {
+                
                     //search throug account 
                     foreach (var account in client.Accounts)
                     {
@@ -97,27 +99,47 @@ namespace TDD_Bank
                             break;
                         }
                     }
-                  if (foundAccount == null)
-                {
-                    UI.ErrorMessage("Try Again...");
-                }
-               
-                else if (foundAccount is SavingAccount)
-                {
-                    UI.ErrorMessage("Can't take loan on a savings account.");
-                }
-                }
 
+                    if (foundAccount == null)
+                    {
+                        UI.ErrorMessage("Try Again...");
+                        continue;
+                    }
 
+                    if (foundAccount is SavingAccount)
+                    {
+                        UI.ErrorMessage("Can't take loan on a savings account.");
+                        foundAccount = null;
+                    }
                 
-
             }
 
             return foundAccount;
         }
 
+        internal static bool HasActiveLoan(Client client)
+        {
+            //check if the loan's username is the same as the user who wants to take out a loan right now
+            foreach (var l in Data.ActiveLoans)
+            {
+                if (l.ClientUsername == client.Username)
+                {
+                    UI.ErrorMessage("You already have an active loan. Repay the loan before a new one can be taken");
+                    Console.ReadKey();
+                    return true;
+                }
+            }
+            return false;
+
+        }
         internal static bool ApplyForLoan(Client client)
         {
+            if (HasActiveLoan(client))
+            {
+                UI.ErrorMessage("You already have an active loan. Repay the loan before a new one can be taken");
+                return false;
+            }
+
             decimal totalBalance = CalculateBalanceInSek(client);
             //cannot get loan if balance is zero or negative
             if (totalBalance <= 0)
@@ -139,17 +161,24 @@ namespace TDD_Bank
             if (loanAnswer != "yes")
             {
                 UI.PrintMessage("Loan cancelled");
-                return true;
+                UI.PrintMessage("Press enter");
+                Console.ReadKey();
+                return false;
             }
 
             //choose deposit account
             Account selectAccount = FindAccount(client);
-            
+
+            //add loan to loanlist
+            Data.ActiveLoans.Add(newLoan);
+
             selectAccount.Deposit(loanRequest);
 
             UI.PrintMessage($"The loan ({loanRequest} {newLoan.Currency}) has been deposited {newLoan.LoanDate}");
-            //add loan to loanlist
-            Data.ActiveLoans.Add(newLoan);
+
+            UI.PrintMessage("Press enter:");
+
+            Console.ReadKey();
 
             return true;
         }
