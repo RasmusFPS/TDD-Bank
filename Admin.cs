@@ -53,7 +53,7 @@ namespace TDD_Bank
                         Console.WriteLine($"User:\n {i.Username}, Password: {pas}\n");
                     }
 
-                UI.PrintMessage("Press Enter to Return to Menu...");
+                UI.PrintMessage("Press Enter to Return to Menu");
                 Console.ReadKey();
                 Console.Clear();
             }
