@@ -161,7 +161,7 @@ namespace TDD_Bank
             if (loanAnswer != "yes")
             {
                 UI.PrintMessage("Loan cancelled");
-                UI.PrintMessage("Press enter");
+                UI.PrintMessage("Press Any Key to Return to Menu...");
                 Console.ReadKey();
                 return false;
             }
@@ -176,7 +176,7 @@ namespace TDD_Bank
 
             UI.PrintMessage($"The loan ({loanRequest} {newLoan.Currency}) has been deposited {newLoan.LoanDate}");
 
-            UI.PrintMessage("Press enter:");
+            UI.PrintMessage("Press Any Key to Return to Menu...");
 
             Console.ReadKey();
 
