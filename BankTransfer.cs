@@ -288,11 +288,17 @@ namespace TDD_Bank
                 FromUser = fromUser.Username,
                 ToUser = toUser.Username,
                 LogTime = DateTime.Now
-
             };
 
-            Data.TransferHistory.Add(log);
+            if(fromUser is Client senderClient)
+            {
+                senderClient.TransferHistory.Add(log);
+            }
 
+            if(toUser is Client receiverClient && receiverClient != fromUser)
+            {
+                receiverClient.TransferHistory.Add(log);
+            }
         }
     }
 }
