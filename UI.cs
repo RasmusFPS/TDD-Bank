@@ -267,7 +267,7 @@ namespace TDD_Bank
             foreach (var log in client.TransferHistory)
             {
                 Console.WriteLine($"{log.LogTime}: \n" +
-                    $"{log.Amount} {log.Currency}, From Account: {log.FromAccount} ({log.FromUser}) --> To Account {log.ToAccount} ({log.ToUser})");
+                    $"{log.Amount} {log.Currency}, From accountnumber: {log.FromAccount} --> To accountnumber {log.ToAccount}");
             }
             PrintMessage("Press Any Key to Return to Menu...");
             Console.ReadKey();
