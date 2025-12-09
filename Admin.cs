@@ -56,6 +56,7 @@ namespace TDD_Bank
             else
             {
                 UI.ErrorMessage("Name already taken.");
+                Thread.Sleep(600);
             }
 
         }
@@ -81,7 +82,6 @@ namespace TDD_Bank
 
                 if (user.Tries == 0)
                 {
-                    //Console.WriteLine($"{i}. {user.Username}");
                     LockedUsers.Add(user.Username);
                 }
             }
@@ -138,20 +138,25 @@ namespace TDD_Bank
                 if (decimal.TryParse(Console.ReadLine(), out decimal exchange) && exchange > 0)
                 {
                     Data.Currency.Add(currency, exchange);
+                    Console.WriteLine($"{currency} was added");
+                    Thread.Sleep(600);
                 }
                 else
                 {
                     UI.ErrorMessage("Wrong input.");
+                    Thread.Sleep(1200);
                 }
 
             }
             else if (Data.Currency.ContainsKey(currency))
             {
                 UI.ErrorMessage("This currency already exists.");
+                Thread.Sleep(1200);
             }
             else
             {
-                UI.ErrorMessage("Wrong input.");
+                UI.ErrorMessage("Wrong input, must be a valid ISO currency-code.");
+                Thread.Sleep(1200);
             }
         }
         internal void CurrencyUpdate()
@@ -171,16 +176,15 @@ namespace TDD_Bank
                 Console.WriteLine("How many percent?");
                 decimal.TryParse(Console.ReadLine(), out decimal percent);
                 Data.Currency[choice] *= (1 + percent / 100);
-                Console.ReadKey();
+                Console.WriteLine($"{choice} was raised with {percent}%");
+                Thread.Sleep(1200);
             }
             else if (!Data.Currency.ContainsKey(choice))
             {
-                UI.ErrorMessage("Wrong Input.");
+                UI.ErrorMessage("Wrong Input, must be a valid ISO currency code.");
+                Thread.Sleep(1200);
             }
-            else if (!Data.Currency.ContainsKey(choice))
-            {
-                UI.ErrorMessage("Wrong Input.");
-            }
+            
         }
         internal void CurrencyRemove()
         {
