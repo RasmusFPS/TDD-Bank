@@ -121,7 +121,7 @@ namespace TDD_Bank
             PrintMessage("2. Create New Account");
             PrintMessage("3. Deposit Money");
             PrintMessage("4. Withdraw Money");
-            PrintMessage("5. Transfer to Me");
+            PrintMessage("5. Internal Transfer");
             PrintMessage("6. Transfer to Others");
             PrintMessage("7. Transferlog");
             PrintMessage("8. Loan");
