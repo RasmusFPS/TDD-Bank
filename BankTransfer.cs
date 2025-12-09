@@ -13,13 +13,13 @@ namespace TDD_Bank
                 bool success = true;
                 UI.ShowAccounts(client);
 
-                Account fromAccount = GetFromAccount(client);
+                Account? fromAccount = GetFromAccount(client);
                 if (fromAccount == null)
                 {
                     success = false;
                 }
 
-                Account toAccount = null;
+                Account? toAccount = null;
                 if (success)
                 {
                     toAccount = GetToAccount(client);
@@ -54,6 +54,8 @@ namespace TDD_Bank
                     ExecuteTransfer(fromAccount, toAccount, amount);
                     AddTransferLog(fromAccount, toAccount, amount, client, client);
                     UI.PrintMessage($"Transfer Successful! {amount} {fromAccount.Currency} Was Transferred From Account {fromAccount.AccountNumber} to Account {toAccount.AccountNumber}.");
+                    UI.PrintMessage("Press Enter to Return to Menu...");
+                    Console.ReadKey();
                     return true;
                 }
 
@@ -63,7 +65,7 @@ namespace TDD_Bank
             return false;
         }
 
-        private static Account GetFromAccount(Client client)
+        private static Account? GetFromAccount(Client client)
         {
             UI.PrintMessage("Enter Wich Account You Want to Transfer From: ");
             if (!int.TryParse(Console.ReadLine(), out int fromAccountNumber))
@@ -72,7 +74,7 @@ namespace TDD_Bank
                 return null;
             }
 
-            Account fromAccount = client.Accounts.Find(firstAccount => firstAccount.AccountNumber == fromAccountNumber);
+            Account? fromAccount = client.Accounts.Find(firstAccount => firstAccount.AccountNumber == fromAccountNumber);
 
             if (fromAccount == null)
             {
@@ -92,7 +94,7 @@ namespace TDD_Bank
                 return null;
             }
 
-            Account toAccount = client.Accounts.Find(firstAccount => firstAccount.AccountNumber == toAccountNumber);
+            Account? toAccount = client.Accounts.Find(firstAccount => firstAccount.AccountNumber == toAccountNumber);
 
             if (toAccount == null)
             {
@@ -184,7 +186,7 @@ namespace TDD_Bank
                 UI.ShowAccounts(sender);
 
                 //choose account to send from
-                Account fromAccount = GetFromAccount(sender);
+                Account? fromAccount = GetFromAccount(sender);
                 if (fromAccount == null)
                 {
                     success = false;
