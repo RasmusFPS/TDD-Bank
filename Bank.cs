@@ -99,6 +99,7 @@ namespace TDD_Bank
                     case "1":
                         UI.PrintMessage("Show Accounts");
                         UI.ShowAccounts(currentclient);
+                        UI.PrintMessage("");
                         UI.PrintMessage("Press Enter to continue");
                         Console.ReadLine();
                         break;
@@ -160,6 +161,9 @@ namespace TDD_Bank
                     {
                         UI.PrintMessage($"Deposit successful. New Balance {account.Balance} {account.Currency}");
                         keepTrying = false;
+                        UI.PrintMessage("Press anykey to continue...");
+                        Console.ReadKey();
+
                     }
                     else
                     {
@@ -194,6 +198,8 @@ namespace TDD_Bank
                     {
                         UI.PrintMessage($"\nWithdrawal successful. New balance for account #{account.AccountNumber} is {account.Balance} {account.Currency}.");
                         keepTrying = false;
+                        UI.PrintMessage("Press anykey to continue...");
+                        Console.ReadKey();
                     }
                     else
                     {

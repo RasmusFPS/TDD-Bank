@@ -46,7 +46,7 @@ namespace TDD_Bank
                         WaitingForInput = false;
                         break;
                     case "2":
-                        UI.PrintMessage("Exiting application...");
+                        UI.PrintMessage("Exiting Application...");
                         Thread.Sleep(500);
                         UserContinue = false;
                         WaitingForInput = false;
@@ -100,7 +100,7 @@ namespace TDD_Bank
                 userPassword = Console.ReadLine();
                 if (userPassword.Trim() == "")
                 {
-                    ErrorMessage("Write something before clicking enter.");
+                    ErrorMessage("Write Something Before Pressing Enter.");
                     Thread.Sleep(500);
                     Console.Clear();
                 }
@@ -182,7 +182,7 @@ namespace TDD_Bank
 
             if (!client.Accounts.Any())
             {
-                ErrorMessage("You have no accounts.");
+                ErrorMessage("You Have No Accounts.");
                 return;
             }
 
@@ -196,7 +196,7 @@ namespace TDD_Bank
                 if (account is SavingAccount)
                 {
                     SavingAccount savingacc = (SavingAccount)account;
-                    accounttype = $"Saving account ({savingacc.IntrestRate:P} interest)";
+                    accounttype = $"Saving Account ({savingacc.IntrestRate:P} Interest)";
                 }
 
                 // This is the only line we changed. It forces each piece of data into a
@@ -253,9 +253,9 @@ namespace TDD_Bank
             foreach (var log in Data.TransferHistory)
             {
                 Console.WriteLine($"{log.LogTime}: \n" +
-                    $"{log.Amount} {log.Currency}, from account: {log.FromAccount} ({log.FromUser}) --> To account {log.ToAccount} ({log.ToUser})");
+                    $"{log.Amount} {log.Currency}, From Account: {log.FromAccount} ({log.FromUser}) --> To Account {log.ToAccount} ({log.ToUser})");
             }
-            PrintMessage("Press any key to Continue");
+            PrintMessage("Press Any Key to Continue...");
             Console.ReadKey();
         }
 
@@ -269,7 +269,7 @@ namespace TDD_Bank
             {
                 Console.Clear();
 
-                PrintMessage("Please choose a currency with index number: ");
+                PrintMessage("Please Choose a Currency With Index Number: ");
 
                 for (int i = 0; i < Data.Currency.Count; i++)
                 {
@@ -339,7 +339,7 @@ namespace TDD_Bank
 
         internal static bool AskTryagain()
         {
-            PrintMessage("Do you want to try again? y/n");
+            PrintMessage("Enter y to Try Again or Press Any Other Key to Exit.");
             string input = Console.ReadLine().ToLower();
             return input == "y" || input == "yes";
         }

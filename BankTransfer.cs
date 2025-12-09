@@ -53,11 +53,11 @@ namespace TDD_Bank
                 {
                     ExecuteTransfer(fromAccount, toAccount, amount);
                     AddTransferLog(fromAccount, toAccount, amount, client, client);
-                    UI.PrintMessage($"Transfer successful! {amount} {fromAccount.Currency} was transferred from account {fromAccount.AccountNumber} to account {toAccount.AccountNumber}.");
+                    UI.PrintMessage($"Transfer Successful! {amount} {fromAccount.Currency} Was Transferred From Account {fromAccount.AccountNumber} to Account {toAccount.AccountNumber}.");
                     return true;
                 }
 
-                keepTrying = TryAgain();               
+                keepTrying = UI.AskTryagain();               
                                 
             }
             return false;
@@ -65,10 +65,10 @@ namespace TDD_Bank
 
         private static Account GetFromAccount(Client client)
         {
-            UI.PrintMessage("Enter wich account you want to transfer from:");
+            UI.PrintMessage("Enter Wich Account You Want to Transfer From: ");
             if (!int.TryParse(Console.ReadLine(), out int fromAccountNumber))
             {
-                UI.ErrorMessage("Invalid accountnumber.");
+                UI.ErrorMessage("Invalid Accountnumber.");
                 return null;
             }
 
@@ -76,7 +76,7 @@ namespace TDD_Bank
 
             if (fromAccount == null)
             {
-                UI.ErrorMessage("Can't find the account.");
+                UI.ErrorMessage("Can't Find the Account.");
                 return null;
             }
 
@@ -85,10 +85,10 @@ namespace TDD_Bank
 
         private static Account GetToAccount(Client client)
         {
-            UI.PrintMessage("Enter wich account you want to transfer to:");
+            UI.PrintMessage("Enter Which Account You Want to Transfer too: ");
             if (!int.TryParse(Console.ReadLine(), out int toAccountNumber))
             {
-                UI.ErrorMessage("Invalid accountnumber.");
+                UI.ErrorMessage("Invalid Accountnumber.");
                 return null;
             }
 
@@ -96,7 +96,7 @@ namespace TDD_Bank
 
             if (toAccount == null)
             {
-                UI.ErrorMessage("Can't find the account.");
+                UI.ErrorMessage("Can't Find the Account.");
                 return null;
             }
 
@@ -107,7 +107,7 @@ namespace TDD_Bank
         {
             if (fromAccount.AccountNumber == toAccount.AccountNumber)
             {
-                UI.ErrorMessage("You can't transfer to the same account.");
+                UI.ErrorMessage("You Can't Transfer to The Same Account.");
                 return false;
             }
 
@@ -116,15 +116,15 @@ namespace TDD_Bank
 
         private static decimal GetAmount(Account fromAccount)
         {
-            UI.PrintMessage($"How much do you want to transfer? Balance: {fromAccount.Balance} {fromAccount.Currency}");
+            UI.PrintMessage($"How Much do You Want to Transfer? Balance: {fromAccount.Balance} {fromAccount.Currency}");
             if (!decimal.TryParse(Console.ReadLine(), out decimal amount))
             {
-                UI.ErrorMessage("Invalid input - please enter a number.");
+                UI.ErrorMessage("Invalid Input - Please Enter a Number.");
                 return -1;
             }
             else if(amount <= 0)
             {
-                UI.ErrorMessage("Amount must be greater than 0.");
+                UI.ErrorMessage("Amount Must be Greater Than 0.");
                 return -1;
             }
                 return amount;
@@ -134,17 +134,12 @@ namespace TDD_Bank
         {
             if (fromAccount.Balance < amount)
             {
-                UI.ErrorMessage("Insufficient balance.");
+                UI.ErrorMessage("Insufficient Balance.");
                 return false;
             }
             return true;
         }
-        private static bool TryAgain()
-        {
-            UI.PrintMessage("Do you want to try again? (j/n)");
-            return Console.ReadLine().ToLower() == "j";
-        }
-
+       
         private static void ExecuteTransfer(Account fromAccount, Account toAccount, decimal amount)
         {
             fromAccount.Withdraw(amount);
@@ -180,70 +175,108 @@ namespace TDD_Bank
 
         //returnerar bool för att se om transaktionen lyckades 
         internal static bool TransferToOthers(Client sender)
-        { 
-            UI.ShowAccounts(sender);
-            UI.PrintMessage("Enter the account number of the account you want to transfer from:");
-            string fromInput = Console.ReadLine();
+        {
+            bool keepTrying = true;
 
-            Account fromAccount = sender.Accounts.FirstOrDefault(acc => acc.AccountNumber.ToString() == fromInput);
-            if (fromAccount == null)
+            while (keepTrying)
             {
-                UI.ErrorMessage("Invalid account");
+                UI.ShowAccounts(sender);
+
+                //choose account to send from
+                Account fromAccount = GetFromAccount(sender);
+                if (fromAccount == null)
+                {
+                    keepTrying = true;
+                    continue;
+                }
+
+                //choose account to send to
+                Client reciver;
+                Account toAccount = GetToAccontOtherClient(out reciver);
+                if (toAccount == null)
+                {
+                    keepTrying = UI.AskTryagain();
+                    continue;
+                }
+
+                //calling method to Validates accounts
+                if (!ValidateTransfer(sender, fromAccount, toAccount, reciver))
+                {
+                    keepTrying = UI.AskTryagain();
+                    continue;
+                }
+
+                //amount input
+                decimal amount = GetAmount(fromAccount);
+                if (amount <= 0)
+                {
+                    keepTrying = UI.AskTryagain();
+                    continue;
+                }
+
+                //checking balance
+                if (!ValidateBalance(fromAccount, amount))
+                {
+                    keepTrying = UI.AskTryagain();
+                    continue;
+                }
+
+                //Go thru with transfer
+                ExecuteTransfer(fromAccount, toAccount, amount);
+                AddTransferLog(fromAccount, toAccount, amount, sender, reciver);
+                
+                UI.PrintMessage($"Transfer Successful! {amount} {fromAccount.Currency} Was Sent From Account {fromAccount.AccountNumber} to Account {toAccount.AccountNumber}.");
+                return true;
+            }
+
+            return false;
+        }
+
+        private static bool ValidateTransfer(Client sender, Account fromAccount, Account toAccount, Client reciver)
+        {
+            if (toAccount == null || reciver == null)
+            {
                 return false;
             }
 
-            UI.PrintMessage("Enter the account you want to transfer to:");
-            string toInput = Console.ReadLine();
+            //check to see if reciver account is same as sender acocunt
+            if (fromAccount.AccountNumber == toAccount.AccountNumber)
+            {
+                UI.ErrorMessage("Can't Transfer to The Same Account.");
+                return false;
+            }
 
-            Account toAccount = null;
-            Client reciver = null;
+            //check if sender and reciver accounts belongs to same client
+            if (sender == reciver)
+            {
+                UI.ErrorMessage("Can't Transfer to Your Own Account. Go to Transfer to Me.");
+                return false;
+            }
+            return true;
+        }
+
+        private static Account GetToAccontOtherClient(out Client reciver)
+        {
+            reciver = null;
+
+            UI.PrintMessage("Enter Which Account You Want to Transfer too: ");
+            string toInput = Console.ReadLine();
 
             foreach (var user in Data.UserCollection)
             {
                 if (user is Client client)
                 {
-                    toAccount = client.Accounts.FirstOrDefault(acc => acc.AccountNumber.ToString() == toInput);
-                    if (toAccount != null)
+                    var toAccount = client.Accounts.FirstOrDefault(acc => acc.AccountNumber.ToString() == toInput);
+                    if (toAccount !=null)
                     {
                         reciver = client;
-                        break;
+                        return toAccount;
                     }
                 }
             }
-
-            if (toAccount == null)
-            {
-                UI.ErrorMessage("Account not found.");
-                return false;
-            }
-
-            if (fromAccount.AccountNumber == toAccount.AccountNumber)
-            {
-                UI.ErrorMessage("Cannot transfer to the same account.");
-                return false;
-            }
-           
-            UI.PrintMessage("Enter the amount you want to transfer: ");
-            if(!decimal.TryParse(Console.ReadLine(), out decimal amount) || amount <= 0)
-            {
-                UI.ErrorMessage("Invalid amount.");
-                return false;
-            }
-
-            if (fromAccount.Balance < amount)
-            {
-                UI.ErrorMessage("Insufficient balance.");
-                return false;
-            }
-
-            ExecuteTransfer(fromAccount, toAccount, amount);
-
-            AddTransferLog(fromAccount, toAccount, amount, sender, reciver);
-
-            UI.PrintMessage($"Transfer successful! {amount} {fromAccount.Currency} was sent from account {fromAccount.AccountNumber} to account {toAccount.AccountNumber}.");
-            return true;
+            UI.ErrorMessage("Account Not Found.");
+            return null;
         }
-
         internal static void AddTransferLog(Account fromAccount, Account toAccount, decimal amount, User fromUser, User toUser)
         {
             TransferLog log = new TransferLog
