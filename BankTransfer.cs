@@ -67,7 +67,7 @@ namespace TDD_Bank
 
         private static Account? GetFromAccount(Client client)
         {
-            UI.PrintMessage("Enter Wich Account You Want to Transfer From: ");
+            UI.PrintMessage("Enter Which Account You Want to Transfer From: ");
             if (!int.TryParse(Console.ReadLine(), out int fromAccountNumber))
             {
                 UI.ErrorMessage("Invalid Accountnumber.");
@@ -87,7 +87,7 @@ namespace TDD_Bank
 
         private static Account GetToAccount(Client client)
         {
-            UI.PrintMessage("Enter Which Account You Want to Transfer too: ");
+            UI.PrintMessage("Enter Which Account You Want to Transfer to: ");
             if (!int.TryParse(Console.ReadLine(), out int toAccountNumber))
             {
                 UI.ErrorMessage("Invalid Accountnumber.");
@@ -267,7 +267,7 @@ namespace TDD_Bank
             //check if sender and reciver accounts belongs to same client
             if (sender == reciver)
             {
-                UI.ErrorMessage("Can't Transfer to Your Own Account. Go to Transfer to Me.");
+                UI.ErrorMessage("Can't Transfer to Your Own Account. Go to Internal Transfer.");
                 return false;
             }
             return true;
@@ -277,7 +277,7 @@ namespace TDD_Bank
         {
             reciver = null;
 
-            UI.PrintMessage("Enter Which Account You Want to Transfer too: ");
+            UI.PrintMessage("Enter Which Account You Want to Transfer to: ");
             string toInput = Console.ReadLine();
 
             foreach (var user in Data.UserCollection)
