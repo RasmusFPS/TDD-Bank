@@ -206,7 +206,7 @@ namespace TDD_Bank
                 if (account is SavingAccount)
                 {
                     SavingAccount savingacc = (SavingAccount)account;
-                    accounttype = $"Saving Account ({savingacc.IntrestRate:P} Interest)";
+                    accounttype = $"Saving Account (2% Interest)";
                 }
 
                 // This is the only line we changed. It forces each piece of data into a
