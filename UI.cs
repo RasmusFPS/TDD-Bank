@@ -248,11 +248,15 @@ namespace TDD_Bank
             Console.ResetColor();
         }
 
-        internal static void ShowTransfers()
+        internal static void ShowTransfers(Client client)
         {
             Console.WriteLine("Transfers: ");
+            if (client.TransferHistory.Count == 0)
+            {
+                ErrorMessage("You have no transactions to show");
+            }
 
-            foreach (var log in Data.TransferHistory)
+            foreach (var log in client.TransferHistory)
             {
                 Console.WriteLine($"{log.LogTime}: \n" +
                     $"{log.Amount} {log.Currency}, From Account: {log.FromAccount} ({log.FromUser}) --> To Account {log.ToAccount} ({log.ToUser})");

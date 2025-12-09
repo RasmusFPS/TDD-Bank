@@ -11,6 +11,7 @@ namespace TDD_Bank
     {
         //internal List<Loan> Loans { get; private set; }
         internal List<Account> Accounts { get; private set; }
+        internal List<TransferLog> TransferHistory { get; set; } = new List<TransferLog>();
         public bool IsLocked { get; set; }
         public Client(string username, string password, bool isAdmin, int tries, bool isLocked) : base(username, password, false, tries)
         {

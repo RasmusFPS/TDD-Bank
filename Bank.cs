@@ -125,7 +125,7 @@ namespace TDD_Bank
                         Console.Clear();
                         break;
                     case "7":
-                        UI.ShowTransfers();
+                        UI.ShowTransfers(currentclient);
                         Console.Clear();
                         break;
                     case "8":
