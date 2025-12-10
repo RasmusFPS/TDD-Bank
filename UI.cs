@@ -22,8 +22,6 @@ namespace TDD_Bank
             Console.WriteLine("                   \\/        \\/          \\/         \\/         \\/        \\/");
             Console.ResetColor();
 
-            Thread.Sleep(1000);
-            Console.Clear();
 
             bool UserContinue = true;
             bool WaitingForInput = true;
