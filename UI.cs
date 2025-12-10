@@ -146,12 +146,11 @@ namespace TDD_Bank
                 PrintMessage("4. Unlock Users");
                 PrintMessage("5. Log Out");
                 int input;
-                while (!int.TryParse(Console.ReadLine(), out input))
+                if (int.TryParse(Console.ReadLine(), out input))
                 {
-                    UI.ErrorMessage("Wrong Input, Please Choose a Valid Option");
-                }
+
                 Admin admin = new Admin("", "", true, 3);
-                if (input >= 6 && input <= 0)
+                if (input <= 5 && input >= 1)
                 {
                     switch (input)
                     {
@@ -175,13 +174,18 @@ namespace TDD_Bank
                             signedIn = false;
                             break;
                     }
-
                 }
                 else
                 {
                     UI.ErrorMessage("Wrong Input, Please Choose a Valid Option");
                 }
+                }
+            else
+            {
+                UI.ErrorMessage("Wrong Input, Please Choose a Valid Option");
             }
+            }
+
         }
 
 
