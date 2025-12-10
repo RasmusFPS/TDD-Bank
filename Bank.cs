@@ -58,7 +58,7 @@ namespace TDD_Bank
                 {
                     if (user.Tries == 0)
                     {
-                        Console.WriteLine("Locked user, ask admin for help");
+                        UI.ErrorMessage("Locked user, ask admin for help");
                     }
                     if (user.Username.ToLower() == username && user.Password == userPassword && user.Tries > 0)
                     {
@@ -77,6 +77,10 @@ namespace TDD_Bank
                         if (!user.IsAdmin)
                         {
                             user.Tries--;
+                        }
+                        if (user.Tries == 0)
+                        {
+                            UI.ErrorMessage("Locked user, ask admin for help");
                         }
                     }
 
