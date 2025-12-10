@@ -22,7 +22,7 @@ namespace TDD_Bank
 
                     if (_loggedin == null)
                     {
-                        UI.ErrorMessage("Login failed. Returning to main menu.");
+                        UI.ErrorMessage("Login Failed. Returning to Main Menu.");
                         Thread.Sleep(1000);
                         Console.Clear();
                     }
@@ -58,7 +58,7 @@ namespace TDD_Bank
                 {
                     if (user.Tries == 0)
                     {
-                        Console.WriteLine("Locked User, Ask Admin For Help");
+                        UI.PrintMessage("Locked User, Ask Admin For Help.");
                     }
                     if (user.Username.ToLower() == username && user.Password == userPassword && user.Tries > 0)
                     {
@@ -136,8 +136,8 @@ namespace TDD_Bank
                         Console.Clear();
                         return;
                     default:
-                        UI.ErrorMessage("Error not valid key");
-                        UI.ErrorMessage("Press Any Key to Return to Menu...");
+                        UI.ErrorMessage("Invalid Input.");
+                        UI.PrintMessage("Press Any Key to Return to Menu...");
                         Console.ReadKey();
                         Console.Clear();
                         break;
