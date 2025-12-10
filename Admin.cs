@@ -14,55 +14,65 @@ namespace TDD_Bank
 
         internal void CreateNewUser()
         {
-            string name = "Start";
-            Console.Write("Insert Name: ");
-            name = Console.ReadLine();
-
-            List<string> Usernames = new List<string>();
-            List<string> UsernamesLower = new List<string>();
-
-            foreach (var i in Data.UserCollection)
+            bool create = true;
+            while (create)
             {
-                Usernames.Add(i.Username);
-                string username = i.Username.ToLower();
-                UsernamesLower.Add(username);
-            }
 
-            if (!Usernames.Contains(name) && !UsernamesLower.Contains(name.ToLower()))
-            {
-                Console.Write("Insert Password: ");
-                string password = Console.ReadLine();
-                if (password.Length > 3)
+                string name = "Start";
+                Console.Write("Insert Name: ");
+                name = Console.ReadLine();
+
+                List<string> Usernames = new List<string>();
+                List<string> UsernamesLower = new List<string>();
+
+                foreach (var i in Data.UserCollection)
                 {
+                    Usernames.Add(i.Username);
+                    string username = i.Username.ToLower();
+                    UsernamesLower.Add(username);
+                }
 
-                    bool isAdmin = false;
-                    int tries = 3;
-                    bool isLocked = false;
+                if (!Usernames.Contains(name) && !UsernamesLower.Contains(name.ToLower()))
+                {
+                    Console.Write("Insert Password: ");
+                    string password = Console.ReadLine();
+                    if (password.Length >= 3)
+                    {
 
-                    Data.UserCollection.Add(new Client(name, password, isAdmin, tries, false));
+                        bool isAdmin = false;
+                        int tries = 3;
+                        bool isLocked = false;
+
+                        Data.UserCollection.Add(new Client(name, password, isAdmin, tries, false));
+
+                        foreach (var i in Data.UserCollection)
+                        {
+                            string pas = new string('*', i.Password.Length);
+
+                            UI.PrintMessage($"User:\n {i.Username}, Password: {pas}\n");
+                        }
+                        create = false;
+                        UI.PrintMessage("Press Enter to Return to Menu");
+                        Console.ReadKey();
+                        Console.Clear();
+                    }
+                    else
+                    {
+                        UI.ErrorMessage("Password Must Be Atleast 3 Characters");
+                        Thread.Sleep(600);
+                    }
                 }
                 else
                 {
-                    UI.ErrorMessage("Password Must Be Atleast 3 Characters");
+                    UI.ErrorMessage("Name Already Taken.");
                     Thread.Sleep(600);
-                }
-                foreach (var i in Data.UserCollection)
-                {
-                    string pas = new string('*', i.Password.Length);
-
-                    UI.PrintMessage($"User:\n {i.Username}, Password: {pas}\n");
+                    if (!UI.AskTryagain())
+                    {
+                        create = false;
                     }
+                }
 
-                UI.PrintMessage("Press Enter to Return to Menu");
-                Console.ReadKey();
-                Console.Clear();
             }
-            else
-            {
-                UI.ErrorMessage("Name Already Taken.");
-                Thread.Sleep(600);
-            }
-
         }
 
 
