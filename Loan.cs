@@ -65,9 +65,10 @@ namespace TDD_Bank
         {
             decimal interest = newLoan.TotalToPay - newLoan.Amount;
             decimal totalToPay = newLoan.TotalToPay;
+            decimal interestProcent = newLoan.InterestRate * 100;
 
             UI.PrintMessage($"Loan Amount: {newLoan.Amount} {newLoan.Currency}" +
-                        $"\nInterest Per Year: {interest} {newLoan.Currency}" +  
+                        $"\nInterest Per Year: {interest} {newLoan.Currency} ({interestProcent} %)" +  
                         $"\nTotal to Pay: {totalToPay} {newLoan.Currency}" +
                         $"\nDo You Want to Take The Loan? Enter Yes or No."); 
 
