@@ -157,7 +157,7 @@ namespace TDD_Bank
                 if (decimal.TryParse(Console.ReadLine(), out decimal exchange) && exchange > 0)
                 {
                     Data.Currency.Add(currency, exchange);
-                    Console.WriteLine($"{currency} Was Added");
+                    UI.SuccessMessage($"{currency} Was Added");
                     Thread.Sleep(600);
                 }
                 else
@@ -222,7 +222,7 @@ namespace TDD_Bank
                 if (Console.ReadLine().ToUpper() == "Y")
                 {
                     Data.Currency.Remove(choice);
-                    UI.PrintMessage($"{choice} Was Successfully Removed From Our Supported Currencies.");
+                    UI.SuccessMessage($"{choice} Was Successfully Removed From Our Supported Currencies.");
                     Thread.Sleep(600);
                 }
                 else
