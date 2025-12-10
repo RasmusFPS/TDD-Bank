@@ -65,9 +65,10 @@ namespace TDD_Bank
         {
             decimal interest = newLoan.TotalToPay - newLoan.Amount;
             decimal totalToPay = newLoan.TotalToPay;
+            decimal interestProcent = newLoan.InterestRate * 100;
 
             UI.PrintMessage($"Loan Amount: {newLoan.Amount} {newLoan.Currency}" +
-                        $"\nInterest Per Year: {interest} {newLoan.Currency}" +  
+                        $"\nInterest Per Year: {interest} {newLoan.Currency} ({interestProcent} %)" +  
                         $"\nTotal to Pay: {totalToPay} {newLoan.Currency}" +
                         $"\nDo You Want to Take The Loan? Enter Yes or No."); 
 
@@ -134,7 +135,7 @@ namespace TDD_Bank
 
         }
         internal static bool ApplyForLoan(Client client)
-        {   //EVENTUELLT ÖVERFLÖDIG ERRORMESSAGE?
+        {
             if (HasActiveLoan(client))
             {
                 return false;
@@ -176,15 +177,13 @@ namespace TDD_Bank
             Account selectAccount = FindAccount(client);
             
             selectAccount.Deposit(loanRequest * Data.Currency[selectAccount.Currency]);
-
-            UI.PrintMessage($"The Loan ({loanRequest} {newLoan.Currency}) Has Been Deposited {newLoan.LoanDate}.");
            
             //add loan to loanlist
             Data.ActiveLoans.Add(newLoan);
 
             selectAccount.Deposit(loanRequest);
 
-            UI.PrintMessage($"The loan ({loanRequest} {newLoan.Currency}) has been deposited {newLoan.LoanDate}");
+            UI.PrintMessage($"The Loan ({loanRequest} {newLoan.Currency}) Has Been Deposited {newLoan.LoanDate}.");
 
             UI.PrintMessage("Press Any Key to Return to Menu...");
 
