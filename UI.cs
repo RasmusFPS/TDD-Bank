@@ -22,8 +22,6 @@ namespace TDD_Bank
             Console.WriteLine("                   \\/        \\/          \\/         \\/         \\/        \\/");
             Console.ResetColor();
 
-            Thread.Sleep(1000);
-            Console.Clear();
 
             bool UserContinue = true;
             bool WaitingForInput = true;
@@ -121,7 +119,7 @@ namespace TDD_Bank
             PrintMessage("2. Create New Account");
             PrintMessage("3. Deposit Money");
             PrintMessage("4. Withdraw Money");
-            PrintMessage("5. Transfer to Me");
+            PrintMessage("5. Internal Transfer");
             PrintMessage("6. Transfer to Others");
             PrintMessage("7. Transferlog");
             PrintMessage("8. Loan");
@@ -146,12 +144,11 @@ namespace TDD_Bank
                 PrintMessage("4. Unlock Users");
                 PrintMessage("5. Log Out");
                 int input;
-                while (!int.TryParse(Console.ReadLine(), out input))
+                if (int.TryParse(Console.ReadLine(), out input))
                 {
-                    UI.ErrorMessage("Wrong Input, Please Choose a Valid Option");
-                }
+
                 Admin admin = new Admin("", "", true, 3);
-                if (input >= 6 && input <= 0)
+                if (input <= 5 && input >= 1)
                 {
                     switch (input)
                     {
@@ -175,13 +172,18 @@ namespace TDD_Bank
                             signedIn = false;
                             break;
                     }
-
                 }
                 else
                 {
                     UI.ErrorMessage("Wrong Input, Please Choose a Valid Option");
                 }
+                }
+            else
+            {
+                UI.ErrorMessage("Wrong Input, Please Choose a Valid Option");
             }
+            }
+
         }
 
 
@@ -206,7 +208,7 @@ namespace TDD_Bank
                 if (account is SavingAccount)
                 {
                     SavingAccount savingacc = (SavingAccount)account;
-                    accounttype = $"Saving Account ({savingacc.IntrestRate:P} Interest)";
+                    accounttype = $"Saving Account (2% Interest)";
                 }
 
                 // This is the only line we changed. It forces each piece of data into a
@@ -216,6 +218,7 @@ namespace TDD_Bank
                     account.AccountNumber,
                     accounttype));
             }
+            Console.WriteLine("");
         }
 
         internal static int GetAccountNumber()

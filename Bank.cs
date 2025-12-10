@@ -58,7 +58,7 @@ namespace TDD_Bank
                 {
                     if (user.Tries == 0)
                     {
-                        Console.WriteLine("Locked user, ask admin for help");
+                        UI.ErrorMessage("Locked user, ask admin for help");
                     }
                     if (user.Username.ToLower() == username && user.Password == userPassword && user.Tries > 0)
                     {
@@ -77,6 +77,10 @@ namespace TDD_Bank
                         if (!user.IsAdmin)
                         {
                             user.Tries--;
+                        }
+                        if (user.Tries == 0)
+                        {
+                            UI.ErrorMessage("Locked user, ask admin for help");
                         }
                     }
 
@@ -100,7 +104,6 @@ namespace TDD_Bank
                     case "1":
                         UI.PrintMessage("Show Accounts");
                         UI.ShowAccounts(currentclient);
-                        UI.PrintMessage("");
                         UI.PrintMessage("Press Enter to continue");
                         Console.ReadLine();
                         break;
@@ -220,20 +223,27 @@ namespace TDD_Bank
 
         internal void TypeOfAccount(Client client)
         {
-            UI.PrintMessage("What type of Account do you want to make");
-            UI.PrintMessage("1.Bank Account\n2.Saving Account");
-            string input = Console.ReadLine();
-            switch (input)
+            bool tryAgain = true;
+            while (tryAgain)
             {
-                case "1":
-                    client.CreateNewAccount();
-                    break;
-                case "2":
-                    client.CreateSavingAccount();
-                    break;
-                default:
-                    UI.ErrorMessage("Didnt choose Account correctly");
-                    break;
+                UI.PrintMessage("What type of Account do you want to make");
+                UI.PrintMessage("1.Bank Account\n2.Saving Account");
+                string input = Console.ReadLine();
+                switch (input)
+                {
+                    case "1":
+                        client.CreateNewAccount();
+                        tryAgain = false;
+                        break;
+                    case "2":
+                        client.CreateSavingAccount();
+                        tryAgain= false;
+                        break;
+                    default:
+                        UI.ErrorMessage("Invalid input");
+                        UI.AskTryagain();
+                        break;
+                }
             }
         }
     }

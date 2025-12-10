@@ -47,11 +47,11 @@ namespace TDD_Bank
         {
             decimal loanRequest = 0;
             decimal totalBalance = CalculateBalanceInSek(client);
-            UI.PrintMessage($"Your Total Balance is {totalBalance} SEK");
-            UI.PrintMessage($"You can take a loan of {maxLoan} SEK (five times your balance)");
+            UI.PrintMessage($"Total Balance: {totalBalance} SEK");
+            UI.PrintMessage($"Maximum Loan Amount: {maxLoan} SEK (five times your balance)");
             //Felmeddelande kring lån som är i fel valuta
 
-            UI.PrintMessage("How much do you want to borrow?");
+            UI.PrintMessage("Select The Loan Amount: ");
 
             while (!decimal.TryParse(Console.ReadLine(), out loanRequest) || loanRequest <= 0 || loanRequest > maxLoan)
             {
@@ -67,9 +67,9 @@ namespace TDD_Bank
             decimal totalToPay = newLoan.TotalToPay;
 
             UI.PrintMessage($"Loan Amount: {newLoan.Amount} {newLoan.Currency}" +
-                        $"\nInterest: {interest} {newLoan.Currency}" +
+                        $"\nInterest Per Year: {interest} {newLoan.Currency}" +  
                         $"\nTotal to Pay: {totalToPay} {newLoan.Currency}" +
-                        $"\nDo you want to take the loan? Enter yes or no.");
+                        $"\nDo You Want to Take The Loan? Enter Yes or No."); 
 
         }
         //Ask user which account the loan should be deposited into
@@ -112,6 +112,12 @@ namespace TDD_Bank
                     foundAccount = null;
                 }
 
+                    if (foundAccount is SavingAccount)
+                    {
+                        UI.ErrorMessage("Can't Apply For Loan on a Savings Account.");
+                        foundAccount = null;
+                    }
+                
             }
 
             return foundAccount;
@@ -134,9 +140,10 @@ namespace TDD_Bank
 
         }
         internal static bool ApplyForLoan(Client client)
-        {
+        {   //EVENTUELLT ÖVERFLÖDIG ERRORMESSAGE?
             if (HasActiveLoan(client))
             {
+                UI.ErrorMessage("You Already Have an Active Loan. Repay Before You Apply For a New Loan.");
                 return false;
             }
 
@@ -144,7 +151,7 @@ namespace TDD_Bank
             //cannot get loan if balance is zero or negative
             if (totalBalance <= 0)
             {
-                UI.ErrorMessage("Insufficient balance. Loan declined");
+                UI.ErrorMessage("Insufficient Balance. Loan Declined.");
                 return false;
             }
             //max loan 
@@ -166,15 +173,19 @@ namespace TDD_Bank
 
             if (loanAnswer == "no")
             {
-                UI.PrintMessage("Loan cancelled");
-                UI.PrintMessage("Press Any Key to Return to Menu...");
+                UI.PrintMessage("Loan Cancelled.");
+                UI.PrintMessage("Press Any Key to Return to The Menu...");
                 Console.ReadKey();
                 return false;
             }
 
             //choose deposit account
             Account selectAccount = FindAccount(client);
+            
+            selectAccount.Deposit(loanRequest * Data.Currency[selectAccount.Currency]);
 
+            UI.PrintMessage($"The Loan ({loanRequest} {newLoan.Currency}) Has Been Deposited {newLoan.LoanDate}.");
+           
             //add loan to loanlist
             Data.ActiveLoans.Add(newLoan);
 
