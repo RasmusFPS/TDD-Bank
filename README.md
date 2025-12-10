@@ -1,6 +1,6 @@
 <h1 align="center"><u>TDD Bank</u></h1>
 
-1. **Start**: When the program starts, test data (clients/accounts) is loaded.
+1. **Start**: When the program starts, test data (clients/accounts/time) is loaded.
 2. **Welcome Message**: The user receives an ASCII art Logo and then a menu to log in or exit the program.
 3. **Login**
    - The user enters Username and password.
