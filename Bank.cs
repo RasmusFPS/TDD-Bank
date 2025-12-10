@@ -97,6 +97,7 @@ namespace TDD_Bank
             while (temp)
             {
                 BankTransfer.CheckQueue();
+                Console.Clear();
 
                 string choice = UI.PrintedSignInMenu(currentclient);
                 switch (choice)
@@ -105,38 +106,30 @@ namespace TDD_Bank
                         UI.PrintMessage("Show Accounts");
                         UI.ShowAccounts(currentclient);
                         UI.PrintMessage("Press Any Key to Return to Menu...");
-                        Console.ReadLine();
+                        Console.ReadKey();
                         break;
                     case "2":
                         TypeOfAccount(currentclient);
-                        Console.Clear();
                         break;
                     case "3":
                         HandleDeposit(currentclient);
-                        Console.Clear();
                         break;
                     case "4":
                         HandleWithdraw(currentclient);
-                        Console.Clear();
                         break;
                     case "5":
                         BankTransfer.TransferToMe(currentclient);
-                        Console.Clear();
                         break;
                     case "6":
                         BankTransfer.TransferToOthers(currentclient);
-                        Console.Clear();
                         break;
                     case "7":
                         UI.ShowTransfers(currentclient);
-                        Console.Clear();
                         break;
                     case "8":
                         Loan.ApplyForLoan(currentclient);
-                        Console.Clear();
                         break;
                     case "9":
-                        Console.Clear();
                         return;
                     default:
                         UI.ErrorMessage("Invalid Input.");
@@ -163,7 +156,7 @@ namespace TDD_Bank
                 {
                     if (account.Deposit(amount))
                     {
-                        UI.PrintMessage($"Deposit Successful. New Balance {account.Balance} {account.Currency}.");
+                        UI.SuccessMessage($"Deposit Successful. New Balance {account.Balance} {account.Currency}.");
                         keepTrying = false;
                         UI.PrintMessage("Press Any Key to Return to Menu...");
                         Console.ReadKey();
@@ -200,7 +193,7 @@ namespace TDD_Bank
                 {
                     if (account.Withdraw(amount))
                     {
-                        UI.PrintMessage($"\nWithdrawal Successful. New Balance For Account #{account.AccountNumber} is {account.Balance} {account.Currency}.");
+                        UI.SuccessMessage($"\nWithdrawal Successful. New Balance For Account #{account.AccountNumber} is {account.Balance} {account.Currency}.");
                         keepTrying = false;
                         UI.PrintMessage("Press Any Key to Return to Menu...");
                         Console.ReadKey();

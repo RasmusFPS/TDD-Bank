@@ -53,7 +53,7 @@ namespace TDD_Bank
                 {
                     ExecuteTransfer(fromAccount, toAccount, amount);
                     AddTransferLog(fromAccount, toAccount, amount, client, client);
-                    UI.PrintMessage($"Transfer Successful! {amount} {fromAccount.Currency} Was Transferred From Account {fromAccount.AccountNumber} to Account {toAccount.AccountNumber}.");
+                    UI.SuccessMessage($"Transfer Successful! {amount} {fromAccount.Currency} Was Transferred From Account {fromAccount.AccountNumber} to Account {toAccount.AccountNumber}.");
                     UI.PrintMessage("Press Any Key to Return to Menu...");
                     Console.ReadKey();
                     return true;
@@ -239,7 +239,7 @@ namespace TDD_Bank
                     ExecuteTransfer(fromAccount, toAccount, amount);
                     AddTransferLog(fromAccount, toAccount, amount, sender, reciver);
 
-                    UI.PrintMessage($"Transfer Successful! {amount} {fromAccount.Currency} Was Sent From Account {fromAccount.AccountNumber} to Account {toAccount.AccountNumber}.");
+                    UI.SuccessMessage($"Transfer Successful! {amount} {fromAccount.Currency} Was Sent From Account {fromAccount.AccountNumber} to Account {toAccount.AccountNumber}.");
                     Console.ReadKey();
                     return true;
                 }

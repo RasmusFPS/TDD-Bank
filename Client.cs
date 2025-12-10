@@ -48,7 +48,7 @@ namespace TDD_Bank
 
                 Accounts.Add(newAccount);
 
-                UI.PrintMessage("Account Created.");
+                UI.SuccessMessage("Account Created.");
                 UI.PrintMessage("");
                 UI.PrintMessage("Press Any Key to Return to Menu...");
                 Console.ReadKey();
@@ -75,7 +75,7 @@ namespace TDD_Bank
 
                 UI.PrintMessage($"Intrest per year: 2%\nOne year compund will be {DepositAmount*1.02m} {input}");
 
-                UI.PrintMessage("Saving Account Created.");
+                UI.SuccessMessage("Saving Account Created.");
 
                 UI.PrintMessage("");
                 UI.PrintMessage("Press Any Key to Return to Menu...");
