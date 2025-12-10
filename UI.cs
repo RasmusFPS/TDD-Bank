@@ -22,8 +22,6 @@ namespace TDD_Bank
             PrintMessage("                   \\/        \\/          \\/         \\/         \\/        \\/");
             Console.ResetColor();
 
-            Thread.Sleep(1000);
-            Console.Clear();
 
             bool UserContinue = true;
             bool WaitingForInput = true;
@@ -147,12 +145,11 @@ namespace TDD_Bank
                 PrintMessage("5. Log Out");
                 Console.Write("Your Choice: ");
                 int input;
-                while (!int.TryParse(Console.ReadLine(), out input))
+                if (int.TryParse(Console.ReadLine(), out input))
                 {
-                    UI.ErrorMessage("Wrong Input, Please Choose a Valid Option");
-                }
+
                 Admin admin = new Admin("", "", true, 3);
-                if (input >= 6 && input <= 0)
+                if (input <= 5 && input >= 1)
                 {
                     switch (input)
                     {
@@ -176,13 +173,18 @@ namespace TDD_Bank
                             signedIn = false;
                             break;
                     }
-
                 }
                 else
                 {
                     ErrorMessage("Wrong Input, Please Choose a Valid Option.");
                 }
+                }
+            else
+            {
+                UI.ErrorMessage("Wrong Input, Please Choose a Valid Option");
             }
+            }
+
         }
 
 
@@ -217,6 +219,7 @@ namespace TDD_Bank
                     account.AccountNumber,
                     accounttype));
             }
+            Console.WriteLine("");
         }
 
         internal static int GetAccountNumber()

@@ -82,29 +82,35 @@ namespace TDD_Bank
             //loop until a valid account is chosen
             while (foundAccount == null)
             {
-                UI.PrintMessage("Enter Which Account Number The Loan Deposit Should be Made to: ");
-                
+                UI.PrintMessage("Enter the Account Number to Deposit the Loan into: ");
+
                 if (!int.TryParse(Console.ReadLine(), out int accountNumberChoice))
                 {
                     UI.ErrorMessage("Invalid Account Number.");
                     continue;
                 }
-                
-                    //search throug account 
-                    foreach (var account in client.Accounts)
-                    {
-                        if (account.AccountNumber == accountNumberChoice)
-                        {
-                            foundAccount = account;
-                            break;
-                        }
-                    }
 
-                    if (foundAccount == null)
+                //search throug account 
+                foreach (var account in client.Accounts)
+                {
+                    if (account.AccountNumber == accountNumberChoice)
                     {
-                        UI.ErrorMessage("Try Again...");
-                        continue;
+                        foundAccount = account;
+                        break;
                     }
+                }
+
+                if (foundAccount == null)
+                {
+                    UI.ErrorMessage("Try Again...");
+                    continue;
+                }
+
+                if (foundAccount is SavingAccount)
+                {
+                    UI.ErrorMessage("Can't take loan on a savings account.");
+                    foundAccount = null;
+                }
 
                     if (foundAccount is SavingAccount)
                     {
@@ -159,7 +165,13 @@ namespace TDD_Bank
 
             string loanAnswer = Console.ReadLine().ToLower();
 
-            if (loanAnswer != "yes")
+            while (loanAnswer != "yes" && loanAnswer != "no")
+            {
+                UI.ErrorMessage("Invalid answer. Please enter 'yes' or 'no'");
+                loanAnswer = Console.ReadLine().ToLower();
+            }
+
+            if (loanAnswer == "no")
             {
                 UI.PrintMessage("Loan Cancelled.");
                 UI.PrintMessage("Press Any Key to Return to The Menu...");
@@ -177,7 +189,11 @@ namespace TDD_Bank
             //add loan to loanlist
             Data.ActiveLoans.Add(newLoan);
 
-            UI.PrintMessage("Press Any Key to Return to The Menu...");
+            selectAccount.Deposit(loanRequest);
+
+            UI.PrintMessage($"The loan ({loanRequest} {newLoan.Currency}) has been deposited {newLoan.LoanDate}");
+
+            UI.PrintMessage("Press Any Key to Return to Menu...");
 
             Console.ReadKey();
 

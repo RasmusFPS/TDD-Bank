@@ -78,6 +78,10 @@ namespace TDD_Bank
                         {
                             user.Tries--;
                         }
+                        if (user.Tries == 0)
+                        {
+                            UI.ErrorMessage("Locked user, ask admin for help");
+                        }
                     }
 
                 }
@@ -100,7 +104,6 @@ namespace TDD_Bank
                     case "1":
                         UI.PrintMessage("Show Accounts");
                         UI.ShowAccounts(currentclient);
-                        UI.PrintMessage("");
                         UI.PrintMessage("Press Any Key to Return to Menu...");
                         Console.ReadLine();
                         break;
