@@ -130,7 +130,7 @@ namespace TDD_Bank
             {
                 if (l.ClientUsername == client.Username)
                 {
-                    UI.ErrorMessage("You already have an active loan. Repay the loan before a new one can be taken");
+                    UI.ErrorMessage("You Already Have an Active Loan. Repay Before You Apply For a New Loan.");
                     UI.PrintMessage("Press Any Key to Return to Menu...");
                     Console.ReadKey();
                     return true;

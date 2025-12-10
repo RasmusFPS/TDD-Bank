@@ -7,19 +7,19 @@ namespace TDD_Bank
         internal static bool WelcomeMSG()
         {
 
-            Console.WriteLine("Welcome to TDD Bank\n");
+            PrintMessage("Welcome to TDD Bank\n");
             Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.WriteLine("___________________  ________    __________    _____    _______   ____  __.");
+            PrintMessage("___________________  ________    __________    _____    _______   ____  __.");
             Thread.Sleep(200);
-            Console.WriteLine("\\__    ___/\\______ \\ \\______ \\   \\______   \\  /  _  \\   \\      \\ |    |/ _|");
+            PrintMessage("\\__    ___/\\______ \\ \\______ \\   \\______   \\  /  _  \\   \\      \\ |    |/ _|");
             Thread.Sleep(200);
-            Console.WriteLine("  |    |    |    |  \\ |    |  \\   |    |  _/ /  /_\\  \\  /   |   \\|      <  ");
+            PrintMessage("  |    |    |    |  \\ |    |  \\   |    |  _/ /  /_\\  \\  /   |   \\|      <  ");
             Thread.Sleep(200);
-            Console.WriteLine("  |    |    |    `   \\|    `   \\  |    |   \\/    |    \\/    |    \\    |  \\ ");
+            PrintMessage("  |    |    |    `   \\|    `   \\  |    |   \\/    |    \\/    |    \\    |  \\ ");
             Thread.Sleep(200);
-            Console.WriteLine("  |____|   /_______  /_______  /  |______  /\\____|__  /\\____|__  /____|__ \\");
+            PrintMessage("  |____|   /_______  /_______  /  |______  /\\____|__  /\\____|__  /____|__ \\");
             Thread.Sleep(200);
-            Console.WriteLine("                   \\/        \\/          \\/         \\/         \\/        \\/");
+            PrintMessage("                   \\/        \\/          \\/         \\/         \\/        \\/");
             Console.ResetColor();
 
 
@@ -29,8 +29,8 @@ namespace TDD_Bank
             while (WaitingForInput)
             {
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("1. Login");
-                Console.WriteLine("2. Exit");
+                PrintMessage("1. Login");
+                PrintMessage("2. Exit");
                 Console.ResetColor();
 
                 var input = Console.ReadLine();
@@ -44,13 +44,13 @@ namespace TDD_Bank
                         WaitingForInput = false;
                         break;
                     case "2":
-                        UI.PrintMessage("Exiting Application...");
+                        PrintMessage("Exiting Application...");
                         Thread.Sleep(500);
                         UserContinue = false;
                         WaitingForInput = false;
                         break;
                     default:
-                        ErrorMessage("INVALID");
+                        ErrorMessage("Invalid Input...");
                         Thread.Sleep(500);
                         Console.Clear();
                         break;
@@ -124,7 +124,7 @@ namespace TDD_Bank
             PrintMessage("7. Transferlog");
             PrintMessage("8. Loan");
             PrintMessage("9. Logout");
-            Console.Write("Your choice: ");
+            Console.Write("Your Choice: ");
             Console.ResetColor();
 
             return Console.ReadLine();
@@ -143,6 +143,7 @@ namespace TDD_Bank
                 PrintMessage("3. Create New User");
                 PrintMessage("4. Unlock Users");
                 PrintMessage("5. Log Out");
+                Console.Write("Your Choice: ");
                 int input;
                 if (int.TryParse(Console.ReadLine(), out input))
                 {
@@ -175,7 +176,7 @@ namespace TDD_Bank
                 }
                 else
                 {
-                    UI.ErrorMessage("Wrong Input, Please Choose a Valid Option");
+                    ErrorMessage("Wrong Input, Please Choose a Valid Option.");
                 }
                 }
             else
@@ -255,22 +256,22 @@ namespace TDD_Bank
         internal static void ErrorMessage(string error)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(error);
+            PrintMessage(error);
             Console.ResetColor();
         }
 
         internal static void ShowTransfers(Client client)
         {
-            Console.WriteLine("Transfers: ");
+            PrintMessage("Transfers: ");
             if (client.TransferHistory.Count == 0)
             {
-                ErrorMessage("You have no transactions to show");
+                ErrorMessage("You Have No Transactions to Show.");
             }
 
             foreach (var log in client.TransferHistory)
             {
-                Console.WriteLine($"{log.LogTime}: \n" +
-                    $"{log.Amount} {log.Currency}, From accountnumber: {log.FromAccount} --> To accountnumber {log.ToAccount}");
+                PrintMessage($"{log.LogTime}: \n" +
+                    $"{log.Amount} {log.Currency}, From Account Number: {log.FromAccount} --> To Account Number {log.ToAccount}");
             }
             PrintMessage("Press Any Key to Return to Menu...");
             Console.ReadKey();
@@ -290,7 +291,7 @@ namespace TDD_Bank
 
                 for (int i = 0; i < Data.Currency.Count; i++)
                 {
-                    Console.WriteLine($"{i + 1}. {listCurrency[i]}");
+                    PrintMessage($"{i + 1}. {listCurrency[i]}");
                 }
                 PrintMessage("Your Choice: ");
 
@@ -321,7 +322,7 @@ namespace TDD_Bank
             if (choice < 3 && choice > 0)
             {
                 Admin admin = new Admin("", "", true, 3);
-                Console.WriteLine("Choose your action. \n" +
+                PrintMessage("Choose Your Action. \n" +
                     "1. View Currencies. \n" +
                     "2. Update Currency.\n" +
                     "3. Add Currency.\n" +
@@ -332,9 +333,9 @@ namespace TDD_Bank
                     case 1:
                         foreach (var i in Data.Currency)
                         {
-                            Console.WriteLine($"{i.Key} | {i.Value}");
+                            PrintMessage($"{i.Key} | {i.Value}");
                         }
-                        Console.WriteLine("Press any button to continue.");
+                        PrintMessage("Press Any Key to Return to Menu...");
                         Console.ReadLine();
                         break;
                     case 2:
@@ -350,13 +351,13 @@ namespace TDD_Bank
             }
             else
             {
-                UI.ErrorMessage("Please choose a correct option");
+                ErrorMessage("Please Choose a Correct Option.");
             }
         }
 
         internal static bool AskTryagain()
         {
-            PrintMessage("Enter y to Try Again or Press Any Other Key to Exit.");
+            PrintMessage("Enter y to Try Again or Press Any Key to Exit.");
             string input = Console.ReadLine().ToLower();
             return input == "y" || input == "yes";
         }
