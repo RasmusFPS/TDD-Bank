@@ -47,8 +47,8 @@ namespace TDD_Bank
         {
             decimal loanRequest = 0;
             decimal totalBalance = CalculateBalanceInSek(client);
-            UI.PrintMessage($"Total Balance: {totalBalance} SEK");
-            UI.PrintMessage($"Maximum Loan Amount: {maxLoan} SEK (five times your balance)");
+            UI.PrintMessage($"Total Balance: {totalBalance} SEK.");
+            UI.PrintMessage($"Maximum Loan Amount: {maxLoan} SEK.");
             //Felmeddelande kring lån som är i fel valuta
 
             UI.PrintMessage("Select The Loan Amount: ");
@@ -106,12 +106,6 @@ namespace TDD_Bank
                     continue;
                 }
 
-                if (foundAccount is SavingAccount)
-                {
-                    UI.ErrorMessage("Can't take loan on a savings account.");
-                    foundAccount = null;
-                }
-
                     if (foundAccount is SavingAccount)
                     {
                         UI.ErrorMessage("Can't Apply For Loan on a Savings Account.");
@@ -143,7 +137,6 @@ namespace TDD_Bank
         {   //EVENTUELLT ÖVERFLÖDIG ERRORMESSAGE?
             if (HasActiveLoan(client))
             {
-                UI.ErrorMessage("You Already Have an Active Loan. Repay Before You Apply For a New Loan.");
                 return false;
             }
 
@@ -167,7 +160,7 @@ namespace TDD_Bank
 
             while (loanAnswer != "yes" && loanAnswer != "no")
             {
-                UI.ErrorMessage("Invalid answer. Please enter 'yes' or 'no'");
+                UI.ErrorMessage("Invalid Answer. Please Enter 'yes' or 'no'");
                 loanAnswer = Console.ReadLine().ToLower();
             }
 
