@@ -82,6 +82,9 @@ namespace TDD_Bank
                         {
                             UI.ErrorMessage("Locked User, Ask Admin For Help.");
                         }
+
+                        Thread.Sleep(1000);
+                        Console.Clear();
                     }
 
                 }
