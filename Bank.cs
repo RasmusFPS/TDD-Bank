@@ -80,7 +80,7 @@ namespace TDD_Bank
                         }
                         if (user.Tries == 0)
                         {
-                            UI.ErrorMessage("Locked user, ask admin for help");
+                            UI.ErrorMessage("Locked User, Ask Admin For Help.");
                         }
                     }
 
