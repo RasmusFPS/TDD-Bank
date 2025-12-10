@@ -54,7 +54,7 @@ namespace TDD_Bank
                     ExecuteTransfer(fromAccount, toAccount, amount);
                     AddTransferLog(fromAccount, toAccount, amount, client, client);
                     UI.PrintMessage($"Transfer Successful! {amount} {fromAccount.Currency} Was Transferred From Account {fromAccount.AccountNumber} to Account {toAccount.AccountNumber}.");
-                    UI.PrintMessage("Press Enter to Return to Menu...");
+                    UI.PrintMessage("Press Any Key to Return to Menu...");
                     Console.ReadKey();
                     return true;
                 }

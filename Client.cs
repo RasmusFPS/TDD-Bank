@@ -37,7 +37,7 @@ namespace TDD_Bank
         //This takes user input on how much money should be in the account
         public void CreateNewAccount()
         {
-            UI.PrintMessage("Please input the Deposit amount: ");
+            UI.PrintMessage("Please Input the Deposit Amount: ");
             string userInput = Console.ReadLine();
             UI.PrintMessage("Choose Currency: ");
             string input = UI.GetCurrency();
@@ -50,20 +50,20 @@ namespace TDD_Bank
 
                 UI.PrintMessage("Account Created.");
                 UI.PrintMessage("");
-                UI.PrintMessage("Press Enter to continue");
+                UI.PrintMessage("Press Any Key to Return to Menu...");
                 Console.ReadKey();
             }
             else
             {
                 UI.ErrorMessage("Invalid Amount, Couldn't Create Account.");
-                UI.PrintMessage("Press Enter to continue");
+                UI.PrintMessage("Press Any Key to Return to Menu...");
                 Console.ReadKey();
             }
         }
 
         public void CreateSavingAccount()
         {
-            UI.PrintMessage("Please input the Deposit amount: ");
+            UI.PrintMessage("Please Input the Deposit amount: ");
             string userInput = Console.ReadLine();
             UI.PrintMessage("Choose Currency: ");
             string input = UI.GetCurrency();
@@ -78,13 +78,13 @@ namespace TDD_Bank
                 UI.PrintMessage("Saving Account Created.");
 
                 UI.PrintMessage("");
-                UI.PrintMessage("Press Enter to continue");
+                UI.PrintMessage("Press Any Key to Return to Menu...");
                 Console.ReadKey();
             }
             else
             {
                 UI.ErrorMessage("Invalid Amount, Couldn't Create Account.");
-                UI.PrintMessage("Press Enter to continue");
+                UI.PrintMessage("Press Any Key to Return to Menu...");
                 Console.ReadKey();
             }
         }

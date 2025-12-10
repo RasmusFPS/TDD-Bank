@@ -53,7 +53,7 @@ namespace TDD_Bank
                         Console.WriteLine($"User:\n {i.Username}, Password: {pas}\n");
                     }
 
-                UI.PrintMessage("Press Enter to Return to Menu");
+                UI.PrintMessage("Press Any Key to Return to Menu...");
                 Console.ReadKey();
                 Console.Clear();
             }
@@ -75,7 +75,7 @@ namespace TDD_Bank
                 string pas = new string('*', i.Password.Length);
                 Console.WriteLine($"User:\n {i.Username}, Password: {pas}\n");
             }
-            UI.PrintMessage("Press Enter To Return to Menu...");
+            UI.PrintMessage("Press Any Key to Return to Menu...");
             Console.ReadKey();
             Console.Clear();
         }
@@ -134,7 +134,7 @@ namespace TDD_Bank
                 if (char.IsNumber(i))
                 {
                     isNumber = true;
-                    UI.ErrorMessage("Can't Contain Numbers.");
+                    UI.ErrorMessage("Can't Contain Numbers. ");
                 }
             }
             if (!Data.Currency.ContainsKey(currency) && currency.Length == 3 && !isNumber)
@@ -156,18 +156,18 @@ namespace TDD_Bank
             }
             else if (Data.Currency.ContainsKey(currency))
             {
-                UI.ErrorMessage("This Currency Already Exists.");
+                UI.ErrorMessage("This Currency Already Exists. ");
                 Thread.Sleep(1200);
             }
             else
             {
-                UI.ErrorMessage("Wrong Input, Must Be a Valid ISO Currency-code.");
+                UI.ErrorMessage("Wrong Input, Must Be a Valid ISO Currency-Code. ");
                 Thread.Sleep(1200);
             }
         }
         internal void CurrencyUpdate()
         {
-            Console.WriteLine("Which Currency Do you Want to Edit?");
+            Console.WriteLine("Which Currency Do you Want to Edit? ");
             foreach (var i in Data.Currency)
             {
                 Console.WriteLine($"{i.Key} | {i.Value}");
@@ -178,7 +178,7 @@ namespace TDD_Bank
             string choice = Console.ReadLine().ToUpper();
             if (Data.Currency.ContainsKey(choice) && choice != "SEK")
             {
-                Console.WriteLine("What Is The New Exchangerate From sek?");
+                Console.WriteLine("What Is The New Exchangerate From SEK? ");
                 decimal.TryParse(Console.ReadLine(), out decimal value);
                 Data.Currency[choice] = value;
                 Console.WriteLine($"New Value {choice} - {value}");
@@ -186,11 +186,11 @@ namespace TDD_Bank
             }
             else if (choice == "SEK")
             {
-                UI.ErrorMessage("You Cannot Change This Currency");
+                UI.ErrorMessage("You Can't Change This Currency. ");
             }
             else if (!Data.Currency.ContainsKey(choice))
             {
-                UI.ErrorMessage("Wrong Input, Must Be a Valid ISO Currency Code.");
+                UI.ErrorMessage("Wrong Input, Must Be a Valid ISO Currency Code. ");
                 Thread.Sleep(1200);
             }
 
@@ -209,18 +209,18 @@ namespace TDD_Bank
                 if (Console.ReadLine().ToUpper() == "Y")
                 {
                     Data.Currency.Remove(choice);
-                    Console.WriteLine($"{choice} Was Successfully Removed From Our Supported Currencies");
+                    Console.WriteLine($"{choice} Was Successfully Removed From Our Supported Currencies. ");
                     Thread.Sleep(600);
                 }
                 else
                 {
-                    Console.WriteLine("Cancelling, Returning To Menu");
+                    Console.WriteLine("Cancelling, Returning To Menu...");
                     Thread.Sleep(600);
                 }
             }
             else
             {
-                UI.ErrorMessage($"{choice} Does Not Match Any Currency Supported By TDD");
+                UI.ErrorMessage($"{choice} Does Not Match Any Currency Supported By TDD. ");
                 Thread.Sleep(600);
             }
         }

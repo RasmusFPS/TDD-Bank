@@ -124,8 +124,8 @@ namespace TDD_Bank
             {
                 if (l.ClientUsername == client.Username)
                 {
-                    UI.ErrorMessage("You Already Have an Active Loan. Repay Before You Apply For a New Loan.\n" +
-                        "Press Any Key to Return to Menu...");
+                    UI.ErrorMessage("You Already Have an Active Loan. Repay Before You Apply For a New Loan.");
+                    UI.PrintMessage("Press Any Key to Return to Menu...");
                     Console.ReadKey();
                     return true;
                 }
