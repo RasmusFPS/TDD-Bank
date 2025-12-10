@@ -260,6 +260,14 @@ namespace TDD_Bank
             Console.ResetColor();
         }
 
+        internal static void SuccessMessage(string success)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(success);
+            Console.ResetColor();
+        }
+
+
         internal static void ShowTransfers(Client client)
         {
             PrintMessage("Transfers: ");
