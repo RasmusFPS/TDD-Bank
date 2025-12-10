@@ -7,8 +7,8 @@
    - The system checks if the user exists and if the password matches.
    - If the user enters the wrong password 3 times, they become locked out and must ask an Admin for help.
 4. **Logged In**
-   - When the Client logs in, they enter a loop where they can view their accounts, deposit/withdraw money, make transfers, create new Bank Accounts/Savings Accounts, and take loans.
-   - If an admin logs in, they enter an alternative menu strictly for Admins, where one can unlock clients, create clients for the bank, and update the value of the bank's currencies.
+   - When the Client logs in, they enter a loop where they can view their accounts, deposit/withdraw money, make transfers, create new Bank Accounts/Savings Accounts,take loans, see transfer logs and loggout.
+   - If an admin logs in, they enter an alternative menu strictly for Admins, where one can unlock clients, create clients for the bank, and update and add/remove currencies from the bank.
 5. **Logout**: When the User selects logout, their user object is set to null and they are returned to Login.
 
 <h2 align="center"><u>Objects and Classes</u></h2>
