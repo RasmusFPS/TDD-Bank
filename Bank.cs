@@ -100,7 +100,6 @@ namespace TDD_Bank
                     case "1":
                         UI.PrintMessage("Show Accounts");
                         UI.ShowAccounts(currentclient);
-                        UI.PrintMessage("");
                         UI.PrintMessage("Press Enter to continue");
                         Console.ReadLine();
                         break;

@@ -216,6 +216,7 @@ namespace TDD_Bank
                     account.AccountNumber,
                     accounttype));
             }
+            Console.WriteLine("");
         }
 
         internal static int GetAccountNumber()
