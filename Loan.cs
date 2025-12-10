@@ -141,10 +141,9 @@ namespace TDD_Bank
 
         }
         internal static bool ApplyForLoan(Client client)
-        {   //EVENTUELLT ÖVERFLÖDIG ERRORMESSAGE?
+        {
             if (HasActiveLoan(client))
             {
-                UI.ErrorMessage("You Already Have an Active Loan. Repay Before You Apply For a New Loan.");
                 return false;
             }
 
