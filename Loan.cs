@@ -5,15 +5,15 @@ namespace TDD_Bank
 {
     internal class Loan
     {
-        public string ClientUsername { get; set; }
-        public decimal Amount { get; set; }
-        public decimal InterestRate { get; set; }
-        public decimal TotalToPay { get; set; }
-        public DateTime LoanDate { get; set; }
-        public string Currency { get; set; }
+        internal string ClientUsername { get; set; }
+        internal decimal Amount { get; set; }
+        internal decimal InterestRate { get; set; }
+        internal decimal TotalToPay { get; set; }
+        internal DateTime LoanDate { get; set; }
+        internal string Currency { get; set; }
 
         //constructor creates a new loan
-        public Loan(string clientUsername, decimal amount, decimal interestRate)
+        internal Loan(string clientUsername, decimal amount, decimal interestRate)
         {
             ClientUsername = clientUsername;
             Amount = amount;
@@ -80,7 +80,7 @@ namespace TDD_Bank
 
 
 
-            Account foundAccount = null;
+            Account? foundAccount = null;
             if (client.Accounts.Count == 0)
             {
                 Thread.Sleep(3000);

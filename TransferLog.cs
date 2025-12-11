@@ -8,12 +8,12 @@ namespace TDD_Bank
 {
     internal class TransferLog
     {
-        public int FromAccount { get; set; }
-        public int ToAccount { get; set; }
-        public decimal Amount { get; set; }
-        public string Currency { get; set; }
-        public string FromUser { get; set; }
-        public string ToUser { get; set; }
-        public DateTime LogTime { get; set; }
+        internal int FromAccount { get; set; }
+        internal int ToAccount { get; set; }
+        internal decimal Amount { get; set; }
+        internal string? Currency { get; set; }
+        internal string? FromUser { get; set; }
+        internal string? ToUser { get; set; }
+        internal DateTime LogTime { get; set; }
     }
 }

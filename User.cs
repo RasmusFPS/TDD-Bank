@@ -2,13 +2,12 @@
 {
     internal class User
     {
-        
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public bool IsAdmin { get; set; }
-        public int Tries { get; set; }
+        internal string Username { get; set; }
+        internal string Password { get; set; }
+        internal bool IsAdmin { get; set; }
+        internal int Tries { get; set; }
 
-        public User(string username, string password, bool isAdmin, int tries)
+        internal User(string username, string password, bool isAdmin, int tries)
         {
             Username = username;
             Password = password;
@@ -16,6 +15,5 @@
             Tries = tries;
         }
         //changed to return to User insted of Bool we need to know what user is logged in
-       
     }
 }

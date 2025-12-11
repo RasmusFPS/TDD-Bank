@@ -8,7 +8,7 @@ namespace TDD_Bank
 {
     internal class PendingTrans
     {
-        public Account ToAccount { get; set; }
-        public decimal Amount  { get; set; }
+        internal Account? ToAccount { get; set; }
+        internal decimal Amount  { get; set; }
     }
 }
