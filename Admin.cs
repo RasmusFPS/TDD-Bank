@@ -72,9 +72,6 @@ namespace TDD_Bank
                     }
                 }
 
-                UI.PrintMessage("Press Any Key to Return to Menu...");
-                Console.ReadKey();
-                Console.Clear();
             }
         }
 

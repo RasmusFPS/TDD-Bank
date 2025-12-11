@@ -148,6 +148,7 @@ namespace TDD_Bank
                 int input;
                 if (int.TryParse(Console.ReadLine(), out input))
                 {
+                    Console.Clear();
 
                     Admin admin = new Admin("", "", true, 3);
                     if (input <= 5 && input >= 1)
@@ -174,14 +175,15 @@ namespace TDD_Bank
                     else
                     {
                         ErrorMessage("Wrong Input, Please Choose a Valid Option.");
+                        Thread.Sleep(2000);
                     }
                 }
                 else
                 {
-                    UI.ErrorMessage("Wrong Input, Please Choose a Valid Option");
+                    ErrorMessage("Wrong Input, Please Choose a Valid Option");
+                    Thread.Sleep(2000);
                 }
             }
-
         }
 
 
@@ -298,7 +300,7 @@ namespace TDD_Bank
                 {
                     PrintMessage($"{i + 1}. {listCurrency[i]}");
                 }
-                PrintMessage("Your Choice: ");
+                Console.Write("Your Choice: ");
 
                 if (int.TryParse(Console.ReadLine(), out choice))
                 {
@@ -331,7 +333,7 @@ namespace TDD_Bank
                     "1. View Currencies. \n" +
                     "2. Update Currency.\n" +
                     "3. Add Currency.\n" +
-                    "4. Remove Currency.\n");
+                    "4. Remove Currency.");
                 int.TryParse(Console.ReadLine(), out choice);
                 switch (choice)
                 {
@@ -362,7 +364,7 @@ namespace TDD_Bank
 
         internal static bool AskTryagain()
         {
-            PrintMessage("Enter y to Try Again or Press Any Key to Exit.");
+            PrintMessage("Enter y to Try Again or Press Any Key to Return to menu.");
             string input = Console.ReadLine().ToLower();
             return input == "y" || input == "yes";
         }

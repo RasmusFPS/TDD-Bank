@@ -240,6 +240,7 @@ namespace TDD_Bank
                     AddTransferLog(fromAccount, toAccount, amount, sender, reciver);
 
                     UI.SuccessMessage($"Transfer Successful! {amount} {fromAccount.Currency} Was Sent From Account {fromAccount.AccountNumber} to Account {toAccount.AccountNumber}.");
+                    UI.PrintMessage("Press enter to return to menu");
                     Console.ReadKey();
                     return true;
                 }
