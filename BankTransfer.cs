@@ -171,7 +171,7 @@ namespace TDD_Bank
 
                 Data.TransferQueue.Clear();
 
-                Data.Runtime = DateTime.Now.AddMinutes(15);
+                Data.Runtime = DateTime.Now.AddMinutes(1);
             }
         }
 
