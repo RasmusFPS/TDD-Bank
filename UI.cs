@@ -329,14 +329,19 @@ namespace TDD_Bank
 
             while (choice != 5)
             {
+                Console.Clear();
+
                     Admin admin = new Admin("", "", true, 3);
-                PrintMessage("Choose Your Action. \n" +
-                    "1. View Currencies. \n" +
-                    "2. Update Currency.\n" +
-                    "3. Add Currency.\n" +
-                    "4. Remove Currency.\n" +
-                    "5. Go Back.");
+                PrintMessage(
+                    "1. View Currencies \n" +
+                    "2. Update Currency\n" +
+                    "3. Add Currency\n" +
+                    "4. Remove Currency\n" +
+                    "5. Return to menu");
+
+                Console.Write("Your choice: ");
                 int.TryParse(Console.ReadLine(), out choice);
+                Console.Clear();
                 switch (choice)
                 {
                     case 1:
