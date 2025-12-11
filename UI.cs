@@ -375,6 +375,7 @@ namespace TDD_Bank
         {
             PrintMessage("Enter y to Try Again or Press Any Key to Return to Menu.");
             string input = Console.ReadLine().ToLower();
+            Console.Clear();
             return input == "y" || input == "yes";
         }
 
