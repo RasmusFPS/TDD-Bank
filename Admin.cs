@@ -59,13 +59,13 @@ namespace TDD_Bank
                     else
                     {
                         UI.ErrorMessage("Password Must Be Atleast 3 Characters");
-                        Thread.Sleep(600);
+                        Thread.Sleep(1200);
                     }
                 }
                 else
                 {
                     UI.ErrorMessage("Name Already Taken.");
-                    Thread.Sleep(600);
+                    Thread.Sleep(1200);
                     if (!UI.AskTryagain())
                     {
                         create = false;
@@ -145,6 +145,7 @@ namespace TDD_Bank
                 {
                     isNumber = true;
                     UI.ErrorMessage("Can't Contain Numbers. ");
+                    Thread.Sleep(1200);
                 }
             }
             if (!Data.Currency.ContainsKey(currency) && currency.Length == 3 && !isNumber)
@@ -155,7 +156,13 @@ namespace TDD_Bank
                 {
                     Data.Currency.Add(currency, exchange);
                     UI.SuccessMessage($"{currency} Was Added");
-                    Thread.Sleep(600);
+                    Thread.Sleep(1200);
+                }
+                else if (exchange == 0)
+                {
+                    UI.ErrorMessage("Can't Have 0 As a Exchangerate");
+                    Thread.Sleep(1200);
+
                 }
                 else
                 {
@@ -196,7 +203,8 @@ namespace TDD_Bank
             }
             else if (choice == "SEK")
             {
-                UI.ErrorMessage("You Can't Change This Currency. ");
+                UI.ErrorMessage("You Cannot Change This Currency");
+                Thread.Sleep(1200);
             }
             else if (!Data.Currency.ContainsKey(choice))
             {
@@ -220,18 +228,18 @@ namespace TDD_Bank
                 {
                     Data.Currency.Remove(choice);
                     UI.SuccessMessage($"{choice} Was Successfully Removed From Our Supported Currencies.");
-                    Thread.Sleep(600);
+                    Thread.Sleep(1200);
                 }
                 else
                 {
                     UI.PrintMessage("Cancelling, Returning To Menu...");
-                    Thread.Sleep(600);
+                    Thread.Sleep(1200);
                 }
             }
             else
             {
                 UI.ErrorMessage($"{choice} Does Not Match Any Currency Supported By TDD. ");
-                Thread.Sleep(600);
+                Thread.Sleep(1200);
             }
         }
     }

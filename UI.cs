@@ -325,8 +325,9 @@ namespace TDD_Bank
         }
         internal static void CurrencyEdit()
         {
-            int choice = 1;
-            if (choice < 3 && choice > 0)
+            int choice = 0;
+
+            while (choice != 5)
             {
                 Admin admin = new Admin("", "", true, 3);
                 PrintMessage("Choose Your Action. \n" +
@@ -337,28 +338,41 @@ namespace TDD_Bank
                 int.TryParse(Console.ReadLine(), out choice);
                 switch (choice)
                 {
-                    case 1:
-                        foreach (var i in Data.Currency)
-                        {
-                            PrintMessage($"{i.Key} | {i.Value}");
-                        }
-                        PrintMessage("Press Any Key to Return to Menu...");
-                        Console.ReadLine();
-                        break;
-                    case 2:
-                        admin.CurrencyUpdate();
-                        break;
-                    case 3:
-                        admin.AddCurrency();
-                        break;
-                    case 4:
-                        admin.CurrencyRemove();
-                        break;
+                    Admin admin = new Admin("", "", true, 3);
+                    PrintMessage("Choose Your Action. \n" +
+                        "1. View Currencies. \n" +
+                        "2. Update Currency.\n" +
+                        "3. Add Currency.\n" +
+                        "4. Remove Currency.\n" +
+                        "5. Go Back.");
+                    int.TryParse(Console.ReadLine(), out choice);
+                    switch (choice)
+                    {
+                        case 1:
+                            foreach (var i in Data.Currency)
+                            {
+                                PrintMessage($"{i.Key} | {i.Value}");
+                            }
+                            PrintMessage("Press Any Key to Return to Menu...");
+                            Console.ReadLine();
+                            break;
+                        case 2:
+                            admin.CurrencyUpdate();
+                            break;
+                        case 3:
+                            admin.AddCurrency();
+                            break;
+                        case 4:
+                            admin.CurrencyRemove();
+                            break;
+                        case 5:
+                            break;
+                        default:
+                            ErrorMessage("Please Choose a Correct Option.");
+                            break;
+                    }
                 }
-            }
-            else
-            {
-                ErrorMessage("Please Choose a Correct Option.");
+                
             }
         }
 
