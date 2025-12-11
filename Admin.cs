@@ -8,7 +8,7 @@ namespace TDD_Bank
 {
     internal class Admin : User
     {
-        public Admin(string username, string password, bool isAdmin, int tries) : base(username, password, isAdmin, tries)
+        internal Admin(string username, string password, bool isAdmin, int tries) : base(username, password, isAdmin, tries)
         {
         }
 
@@ -18,7 +18,7 @@ namespace TDD_Bank
             while (create)
             {
 
-                string name = "Start";
+                string? name = "Start";
                 Console.Write("Insert Name: ");
                 name = Console.ReadLine();
 
@@ -35,7 +35,7 @@ namespace TDD_Bank
                 if (!Usernames.Contains(name) && !UsernamesLower.Contains(name.ToLower()))
                 {
                     Console.Write("Insert Password: ");
-                    string password = Console.ReadLine();
+                    string? password = Console.ReadLine();
                     if (password.Length >= 3)
                     {
 

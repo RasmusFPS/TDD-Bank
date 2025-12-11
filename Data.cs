@@ -9,12 +9,12 @@ namespace TDD_Bank
     //Made Data Static to work in user class
     internal static class Data
     {
-        public static DateTime Runtime;
-        public static decimal _loanInterest = 0.05m;
+        internal static DateTime Runtime;
+        internal static decimal _loanInterest = 0.05m;
 
-        public static Client carl = new Client("Carl", "Hawaa", false, 3, false);
-        public static Client bob = new Client("Bob", "123", false, 3, false);
-        public static Client rasmu = new Client("Rasmu","123",false,3,false);
+        internal static Client carl = new Client("Carl", "Hawaa", false, 3, false);
+        internal static Client bob = new Client("Bob", "123", false, 3, false);
+        internal static Client rasmu = new Client("Rasmu","123",false,3,false);
 
         static Data()
         {
@@ -25,17 +25,17 @@ namespace TDD_Bank
             bob.Accounts.Add(new Account(500, "SEK"));
             bob.Accounts.Add(new SavingAccount(500, "SEK", 0.02m));
         }
-        
-        public static List<User> UserCollection = new List<User>()
+
+        internal static List<User> UserCollection = new List<User>()
         {
             new Admin( "Admin-Johan", "1234", true, 3),
             bob,
             carl,
             rasmu
         };
-        
+
         //Dicitonary containing all currencies
-        public static Dictionary<string, decimal> Currency = new()
+        internal static Dictionary<string, decimal> Currency = new()
         {
             {"SEK", 1 },
             {"EUR", 0.09m },
@@ -44,6 +44,6 @@ namespace TDD_Bank
         };
 
         internal static List<Loan> ActiveLoans = new List<Loan>();
-        public static List<PendingTrans> TransferQueue = new List<PendingTrans>();
+        internal static List<PendingTrans> TransferQueue = new List<PendingTrans>();
     }
 }

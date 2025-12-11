@@ -10,12 +10,12 @@ namespace TDD_Bank
     {
         private static int NextAccountNumber = 1000;
 
-        public int AccountNumber { get; private set; }
-        public decimal Balance { get; set; }//Removed private to be able to use it in banktransfer class.
-        public string Currency { get; set; }
+        internal int AccountNumber { get; private set; }
+        internal decimal Balance { get; set; }//Removed private to be able to use it in banktransfer class.
+        internal string Currency { get; set; }
 
         //AccountNumber and Account Balance
-        public Account(decimal initalbalance, string currency)
+        internal Account(decimal initalbalance, string currency)
         {
             AccountNumber = NextAccountNumber++;
             Balance = initalbalance;

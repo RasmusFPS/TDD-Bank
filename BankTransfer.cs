@@ -296,7 +296,7 @@ namespace TDD_Bank
             reciver = null;
 
             UI.PrintMessage("Enter Which Account You Want to Transfer to: ");
-            string toInput = Console.ReadLine();
+            string? toInput = Console.ReadLine();
 
             foreach (var user in Data.UserCollection)
             {

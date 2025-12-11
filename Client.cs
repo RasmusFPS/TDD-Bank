@@ -9,11 +9,10 @@ namespace TDD_Bank
 {
     internal class Client : User
     {
-        //internal List<Loan> Loans { get; private set; }
         internal List<Account> Accounts { get; private set; }
         internal List<TransferLog> TransferHistory { get; set; } = new List<TransferLog>();
-        public bool IsLocked { get; set; }
-        public Client(string username, string password, bool isAdmin, int tries, bool isLocked) : base(username, password, false, tries)
+        internal bool IsLocked { get; set; }
+        internal Client(string username, string password, bool isAdmin, int tries, bool isLocked) : base(username, password, false, tries)
         {
             //new makes sure the account is fresh and created for the object
             Accounts = new List<Account>();
@@ -21,7 +20,7 @@ namespace TDD_Bank
             //Loans = new List<Loan>();
         }
 
-        public Account GetAccount(int accountNumber)
+        internal Account? GetAccount(int accountNumber)
         {
             foreach (var account in Accounts)
             {
@@ -33,14 +32,14 @@ namespace TDD_Bank
 
             return null;
         }
-        
+
         //This takes user input on how much money should be in the account
-        public void CreateNewAccount()
+        internal void CreateNewAccount()
         {
             UI.PrintMessage("Please Input the Deposit Amount: ");
-            string userInput = Console.ReadLine();
+            string? userInput = Console.ReadLine();
             UI.PrintMessage("Choose Currency: ");
-            string input = UI.GetCurrency();
+            string? input = UI.GetCurrency();
 
             if (decimal.TryParse(userInput, out decimal DepositAmount)&& DepositAmount > 0)
             {
@@ -61,12 +60,12 @@ namespace TDD_Bank
             }
         }
 
-        public void CreateSavingAccount()
+        internal void CreateSavingAccount()
         {
             UI.PrintMessage("Please Input the Deposit amount: ");
-            string userInput = Console.ReadLine();
+            string? userInput = Console.ReadLine();
             UI.PrintMessage("Choose Currency: ");
-            string input = UI.GetCurrency();
+            string? input = UI.GetCurrency();
             if(decimal.TryParse(userInput,out decimal DepositAmount) && DepositAmount > 0)
             {
                 SavingAccount newAccount = new SavingAccount(DepositAmount,input,1.02m);
