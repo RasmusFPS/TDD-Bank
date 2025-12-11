@@ -68,7 +68,7 @@ namespace TDD_Bank
             decimal interestProcent = newLoan.InterestRate * 100;
 
             UI.PrintMessage($"Loan Amount: {newLoan.Amount} {newLoan.Currency}" +
-                        $"\nInterest Per Year: {interest} {newLoan.Currency} ({interestProcent} %)" +  
+                        $"\nInterest Per Year: {interestProcent} %" +  
                         $"\nTotal to Pay: {totalToPay} {newLoan.Currency}" +
                         $"\nDo You Want to Take The Loan? Enter Yes or No."); 
 
@@ -183,6 +183,9 @@ namespace TDD_Bank
 
             selectAccount.Deposit(loanRequest);
 
+            Console.Clear();
+
+            UI.SuccessMessage("Loan was successful");
             UI.PrintMessage($"The Loan ({loanRequest} {newLoan.Currency}) Has Been Deposited {newLoan.LoanDate}.");
 
             UI.PrintMessage("Press Any Key to Return to Menu...");

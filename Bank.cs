@@ -103,6 +103,7 @@ namespace TDD_Bank
                 Console.Clear();
 
                 string choice = UI.PrintedSignInMenu(currentclient);
+                Console.Clear();
                 switch (choice)
                 {
                     case "1":
@@ -159,7 +160,7 @@ namespace TDD_Bank
                 {
                     if (account.Deposit(amount))
                     {
-                        UI.SuccessMessage($"Deposit Successful. New Balance {account.Balance} {account.Currency}.");
+                        UI.SuccessMessage($"Deposit Successful. New Balance For Account {account.AccountNumber} is {account.Balance} {account.Currency}.");
                         keepTrying = false;
                         UI.PrintMessage("Press Any Key to Return to Menu...");
                         Console.ReadKey();
@@ -196,7 +197,7 @@ namespace TDD_Bank
                 {
                     if (account.Withdraw(amount))
                     {
-                        UI.SuccessMessage($"\nWithdrawal Successful. New Balance For Account #{account.AccountNumber} is {account.Balance} {account.Currency}.");
+                        UI.SuccessMessage($"\nWithdrawal Successful. New Balance For Account {account.AccountNumber} is {account.Balance} {account.Currency}.");
                         keepTrying = false;
                         UI.PrintMessage("Press Any Key to Return to Menu...");
                         Console.ReadKey();
@@ -237,7 +238,7 @@ namespace TDD_Bank
                         break;
                     default:
                         UI.ErrorMessage("Invalid Input.");
-                        UI.AskTryagain();
+                        tryAgain = UI.AskTryagain();
                         break;
                 }
             }
