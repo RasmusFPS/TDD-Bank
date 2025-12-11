@@ -368,7 +368,7 @@ namespace TDD_Bank
 
         internal static bool AskTryagain()
         {
-            PrintMessage("Enter y to Try Again or Press Any Key to Return to menu.");
+            PrintMessage("Enter y to Try Again or Press Any Key to Return to Menu.");
             string input = Console.ReadLine().ToLower();
             return input == "y" || input == "yes";
         }
