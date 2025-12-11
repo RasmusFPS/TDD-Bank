@@ -128,8 +128,8 @@ namespace TDD_Bank
             Console.ResetColor();
 
             return Console.ReadLine();
-        
-        
+
+
         }
 
         internal static void PrintedAdminMenu()
@@ -137,6 +137,7 @@ namespace TDD_Bank
             bool signedIn = true;
             while (signedIn)
             {
+                Console.Clear();
 
                 PrintMessage("1. Edit Currencies");
                 PrintMessage("2. User Log");
@@ -148,41 +149,37 @@ namespace TDD_Bank
                 if (int.TryParse(Console.ReadLine(), out input))
                 {
 
-                Admin admin = new Admin("", "", true, 3);
-                if (input <= 5 && input >= 1)
-                {
-                    switch (input)
+                    Admin admin = new Admin("", "", true, 3);
+                    if (input <= 5 && input >= 1)
                     {
-                        case 1:
-                            CurrencyEdit();
-                            Console.Clear();
-                            break;
-                        case 2:
-                            admin.UserLog();
-                            Console.Clear();
-                            break;
-                        case 3:
-                            admin.CreateNewUser();
-                            Console.Clear();
-                            break;
-                        case 4:
-                            admin.UserUnlock();
-                            Console.Clear();
-                            break;
-                        case 5:
-                            signedIn = false;
-                            break;
+                        switch (input)
+                        {
+                            case 1:
+                                CurrencyEdit();
+                                break;
+                            case 2:
+                                admin.UserLog();
+                                break;
+                            case 3:
+                                admin.CreateNewUser();
+                                break;
+                            case 4:
+                                admin.UserUnlock();
+                                break;
+                            case 5:
+                                signedIn = false;
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        ErrorMessage("Wrong Input, Please Choose a Valid Option.");
                     }
                 }
                 else
                 {
-                    ErrorMessage("Wrong Input, Please Choose a Valid Option.");
+                    UI.ErrorMessage("Wrong Input, Please Choose a Valid Option");
                 }
-                }
-            else
-            {
-                UI.ErrorMessage("Wrong Input, Please Choose a Valid Option");
-            }
             }
 
         }
