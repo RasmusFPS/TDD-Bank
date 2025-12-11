@@ -22,7 +22,7 @@ namespace TDD_Bank
 
                     if (_loggedin == null)
                     {
-                        UI.ErrorMessage("Login failed. Returning to main menu.");
+                        UI.ErrorMessage("Login Failed. Returning to Main Menu.");
                         Thread.Sleep(1000);
                         Console.Clear();
                     }
@@ -58,7 +58,7 @@ namespace TDD_Bank
                 {
                     if (user.Tries == 0)
                     {
-                        UI.ErrorMessage("Locked user, ask admin for help");
+                        UI.PrintMessage("Locked User, Ask Admin For Help.");
                     }
                     if (user.Username.ToLower() == username && user.Password == userPassword && user.Tries > 0)
                     {
@@ -72,7 +72,7 @@ namespace TDD_Bank
                     }
                     else if (user.Username.ToLower() == username && user.Password != userPassword && user.Tries > 0)
                     {
-                        UI.ErrorMessage("Wrong user-ID or password.");
+                        UI.ErrorMessage("Wrong User-ID or Password.");
 
                         if (!user.IsAdmin)
                         {
@@ -80,8 +80,11 @@ namespace TDD_Bank
                         }
                         if (user.Tries == 0)
                         {
-                            UI.ErrorMessage("Locked user, ask admin for help");
+                            UI.ErrorMessage("Locked User, Ask Admin For Help.");
                         }
+
+                        Thread.Sleep(1000);
+                        Console.Clear();
                     }
 
                 }
@@ -97,6 +100,7 @@ namespace TDD_Bank
             while (temp)
             {
                 BankTransfer.CheckQueue();
+                Console.Clear();
 
                 string choice = UI.PrintedSignInMenu(currentclient);
                 switch (choice)
@@ -104,44 +108,35 @@ namespace TDD_Bank
                     case "1":
                         UI.PrintMessage("Show Accounts");
                         UI.ShowAccounts(currentclient);
-                        UI.PrintMessage("");
-                        UI.PrintMessage("Press Enter to continue");
-                        Console.ReadLine();
+                        UI.PrintMessage("Press Any Key to Return to Menu...");
+                        Console.ReadKey();
                         break;
                     case "2":
                         TypeOfAccount(currentclient);
-                        Console.Clear();
                         break;
                     case "3":
                         HandleDeposit(currentclient);
-                        Console.Clear();
                         break;
                     case "4":
                         HandleWithdraw(currentclient);
-                        Console.Clear();
                         break;
                     case "5":
                         BankTransfer.TransferToMe(currentclient);
-                        Console.Clear();
                         break;
                     case "6":
                         BankTransfer.TransferToOthers(currentclient);
-                        Console.Clear();
                         break;
                     case "7":
                         UI.ShowTransfers(currentclient);
-                        Console.Clear();
                         break;
                     case "8":
                         Loan.ApplyForLoan(currentclient);
-                        Console.Clear();
                         break;
                     case "9":
-                        Console.Clear();
                         return;
                     default:
-                        UI.ErrorMessage("Error not valid key");
-                        UI.ErrorMessage("Press any key to continue");
+                        UI.ErrorMessage("Invalid Input.");
+                        UI.PrintMessage("Press Any Key to Return to Menu...");
                         Console.ReadKey();
                         Console.Clear();
                         break;
@@ -164,22 +159,22 @@ namespace TDD_Bank
                 {
                     if (account.Deposit(amount))
                     {
-                        UI.PrintMessage($"Deposit successful. New Balance {account.Balance} {account.Currency}");
+                        UI.SuccessMessage($"Deposit Successful. New Balance {account.Balance} {account.Currency}.");
                         keepTrying = false;
-                        UI.PrintMessage("Press anykey to continue...");
+                        UI.PrintMessage("Press Any Key to Return to Menu...");
                         Console.ReadKey();
 
                     }
                     else
                     {
-                        UI.ErrorMessage("Deposit Failed");
+                        UI.ErrorMessage("Deposit Failed.");
                         keepTrying = UI.AskTryagain();
                         Console.Clear();
                     }
                 }
                 else
                 {
-                    UI.ErrorMessage("Account Not Found");
+                    UI.ErrorMessage("Account Not Found.");
                     keepTrying = UI.AskTryagain();
                     Console.Clear();
                 }
@@ -201,21 +196,21 @@ namespace TDD_Bank
                 {
                     if (account.Withdraw(amount))
                     {
-                        UI.PrintMessage($"\nWithdrawal successful. New balance for account #{account.AccountNumber} is {account.Balance} {account.Currency}.");
+                        UI.SuccessMessage($"\nWithdrawal Successful. New Balance For Account #{account.AccountNumber} is {account.Balance} {account.Currency}.");
                         keepTrying = false;
-                        UI.PrintMessage("Press anykey to continue...");
+                        UI.PrintMessage("Press Any Key to Return to Menu...");
                         Console.ReadKey();
                     }
                     else
                     {
-                        UI.ErrorMessage("\nWithdrawal failed. Insufficient funds or invalid amount.");
+                        UI.ErrorMessage("\nWithdrawal Failed. Insufficient Funds or Invalid Amount.");
                         keepTrying = UI.AskTryagain();
                         Console.Clear();
                     }
                 }
                 else
                 {
-                    UI.ErrorMessage("Account not found");
+                    UI.ErrorMessage("Account Not Found.");
                     keepTrying = UI.AskTryagain();
                     Console.Clear();
                 }
@@ -227,7 +222,7 @@ namespace TDD_Bank
             bool tryAgain = true;
             while (tryAgain)
             {
-                UI.PrintMessage("What type of Account do you want to make");
+                UI.PrintMessage("What Type of Account do You Want to Open?");
                 UI.PrintMessage("1.Bank Account\n2.Saving Account");
                 string input = Console.ReadLine();
                 switch (input)
@@ -241,7 +236,7 @@ namespace TDD_Bank
                         tryAgain= false;
                         break;
                     default:
-                        UI.ErrorMessage("Invalid input");
+                        UI.ErrorMessage("Invalid Input.");
                         UI.AskTryagain();
                         break;
                 }

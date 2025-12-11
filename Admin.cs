@@ -72,20 +72,23 @@ namespace TDD_Bank
                     }
                 }
 
+                UI.PrintMessage("Press Any Key to Return to Menu...");
+                Console.ReadKey();
+                Console.Clear();
             }
         }
 
 
         internal void UserLog()
         {
-            Console.WriteLine("User Log: ");
+            UI.PrintMessage("User Log: ");
 
             foreach (var i in Data.UserCollection)
             {
                 string pas = new string('*', i.Password.Length);
                 UI.PrintMessage($"User:\n {i.Username}, Password: {pas}\n");
             }
-            UI.PrintMessage("Press Enter To Return to Menu...");
+            UI.PrintMessage("Press Any Key to Return to Menu...");
             Console.ReadKey();
             Console.Clear();
         }
@@ -144,7 +147,7 @@ namespace TDD_Bank
                 if (char.IsNumber(i))
                 {
                     isNumber = true;
-                    UI.ErrorMessage("Can't Contain Numbers.");
+                    UI.ErrorMessage("Can't Contain Numbers. ");
                 }
             }
             if (!Data.Currency.ContainsKey(currency) && currency.Length == 3 && !isNumber)
@@ -154,7 +157,7 @@ namespace TDD_Bank
                 if (decimal.TryParse(Console.ReadLine(), out decimal exchange) && exchange > 0)
                 {
                     Data.Currency.Add(currency, exchange);
-                    Console.WriteLine($"{currency} Was Added");
+                    UI.SuccessMessage($"{currency} Was Added");
                     Thread.Sleep(600);
                 }
                 else
@@ -166,12 +169,12 @@ namespace TDD_Bank
             }
             else if (Data.Currency.ContainsKey(currency))
             {
-                UI.ErrorMessage("This Currency Already Exists.");
+                UI.ErrorMessage("This Currency Already Exists. ");
                 Thread.Sleep(1200);
             }
             else
             {
-                UI.ErrorMessage("Wrong Input, Must Be a Valid ISO Currency-code.");
+                UI.ErrorMessage("Wrong Input, Must Be a Valid ISO Currency-Code. ");
                 Thread.Sleep(1200);
             }
         }
@@ -188,7 +191,7 @@ namespace TDD_Bank
             string choice = Console.ReadLine().ToUpper();
             if (Data.Currency.ContainsKey(choice) && choice != "SEK")
             {
-                UI.PrintMessage("What Is The New Exchangerate From sek?");
+                UI.PrintMessage("What Is The New Exchangerate From SEK?");
                 decimal.TryParse(Console.ReadLine(), out decimal value);
                 Data.Currency[choice] = value;
                 UI.PrintMessage($"New Value {choice} - {value}");
@@ -201,7 +204,7 @@ namespace TDD_Bank
             }
             else if (!Data.Currency.ContainsKey(choice))
             {
-                UI.ErrorMessage("Wrong Input, Must Be a Valid ISO Currency Code.");
+                UI.ErrorMessage("Wrong Input, Must Be a Valid ISO Currency Code. ");
                 Thread.Sleep(1200);
             }
 
@@ -220,18 +223,18 @@ namespace TDD_Bank
                 if (Console.ReadLine().ToUpper() == "Y")
                 {
                     Data.Currency.Remove(choice);
-                    UI.PrintMessage($"{choice} Was Successfully Removed From Our Supported Currencies");
+                    UI.SuccessMessage($"{choice} Was Successfully Removed From Our Supported Currencies.");
                     Thread.Sleep(600);
                 }
                 else
                 {
-                    UI.PrintMessage("Cancelling, Returning To Menu");
+                    UI.PrintMessage("Cancelling, Returning To Menu...");
                     Thread.Sleep(600);
                 }
             }
             else
             {
-                UI.ErrorMessage($"{choice} Does Not Match Any Currency Supported By TDD");
+                UI.ErrorMessage($"{choice} Does Not Match Any Currency Supported By TDD. ");
                 Thread.Sleep(600);
             }
         }

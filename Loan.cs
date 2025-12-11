@@ -47,8 +47,8 @@ namespace TDD_Bank
         {
             decimal loanRequest = 0;
             decimal totalBalance = CalculateBalanceInSek(client);
-            UI.PrintMessage($"Total Balance: {totalBalance} SEK");
-            UI.PrintMessage($"Maximum Loan Amount: {maxLoan} SEK (five times your balance)");
+            UI.PrintMessage($"Total Balance: {totalBalance} SEK.");
+            UI.PrintMessage($"Maximum Loan Amount: {maxLoan} SEK.");
             //Felmeddelande kring lån som är i fel valuta
 
             UI.PrintMessage("Select The Loan Amount: ");
@@ -65,9 +65,10 @@ namespace TDD_Bank
         {
             decimal interest = newLoan.TotalToPay - newLoan.Amount;
             decimal totalToPay = newLoan.TotalToPay;
+            decimal interestProcent = newLoan.InterestRate * 100;
 
             UI.PrintMessage($"Loan Amount: {newLoan.Amount} {newLoan.Currency}" +
-                        $"\nInterest Per Year: {interest} {newLoan.Currency}" +  
+                        $"\nInterest Per Year: {interest} {newLoan.Currency} ({interestProcent} %)" +  
                         $"\nTotal to Pay: {totalToPay} {newLoan.Currency}" +
                         $"\nDo You Want to Take The Loan? Enter Yes or No."); 
 
@@ -82,29 +83,29 @@ namespace TDD_Bank
             //loop until a valid account is chosen
             while (foundAccount == null)
             {
-                UI.PrintMessage("Enter Which Account Number The Loan Deposit Should be Made to: ");
-                
+                UI.PrintMessage("Enter the Account Number to Deposit the Loan into: ");
+
                 if (!int.TryParse(Console.ReadLine(), out int accountNumberChoice))
                 {
                     UI.ErrorMessage("Invalid Account Number.");
                     continue;
                 }
-                
-                    //search throug account 
-                    foreach (var account in client.Accounts)
-                    {
-                        if (account.AccountNumber == accountNumberChoice)
-                        {
-                            foundAccount = account;
-                            break;
-                        }
-                    }
 
-                    if (foundAccount == null)
+                //search throug account 
+                foreach (var account in client.Accounts)
+                {
+                    if (account.AccountNumber == accountNumberChoice)
                     {
-                        UI.ErrorMessage("Try Again...");
-                        continue;
+                        foundAccount = account;
+                        break;
                     }
+                }
+
+                if (foundAccount == null)
+                {
+                    UI.ErrorMessage("Try Again...");
+                    continue;
+                }
 
                     if (foundAccount is SavingAccount)
                     {
@@ -124,8 +125,8 @@ namespace TDD_Bank
             {
                 if (l.ClientUsername == client.Username)
                 {
-                    UI.ErrorMessage("You Already Have an Active Loan. Repay Before You Apply For a New Loan.\n" +
-                        "Press Any Key to Return to Menu...");
+                    UI.ErrorMessage("You Already Have an Active Loan. Repay Before You Apply For a New Loan.");
+                    UI.PrintMessage("Press Any Key to Return to Menu...");
                     Console.ReadKey();
                     return true;
                 }
@@ -134,10 +135,9 @@ namespace TDD_Bank
 
         }
         internal static bool ApplyForLoan(Client client)
-        {   //EVENTUELLT ÖVERFLÖDIG ERRORMESSAGE?
+        {
             if (HasActiveLoan(client))
             {
-                UI.ErrorMessage("You Already Have an Active Loan. Repay Before You Apply For a New Loan.");
                 return false;
             }
 
@@ -159,7 +159,13 @@ namespace TDD_Bank
 
             string loanAnswer = Console.ReadLine().ToLower();
 
-            if (loanAnswer != "yes")
+            while (loanAnswer != "yes" && loanAnswer != "no")
+            {
+                UI.ErrorMessage("Invalid Answer. Please Enter 'yes' or 'no'");
+                loanAnswer = Console.ReadLine().ToLower();
+            }
+
+            if (loanAnswer == "no")
             {
                 UI.PrintMessage("Loan Cancelled.");
                 UI.PrintMessage("Press Any Key to Return to The Menu...");
@@ -171,13 +177,15 @@ namespace TDD_Bank
             Account selectAccount = FindAccount(client);
             
             selectAccount.Deposit(loanRequest * Data.Currency[selectAccount.Currency]);
-
-            UI.PrintMessage($"The Loan ({loanRequest} {newLoan.Currency}) Has Been Deposited {newLoan.LoanDate}.");
            
             //add loan to loanlist
             Data.ActiveLoans.Add(newLoan);
 
-            UI.PrintMessage("Press Any Key to Return to The Menu...");
+            selectAccount.Deposit(loanRequest);
+
+            UI.PrintMessage($"The Loan ({loanRequest} {newLoan.Currency}) Has Been Deposited {newLoan.LoanDate}.");
+
+            UI.PrintMessage("Press Any Key to Return to Menu...");
 
             Console.ReadKey();
 

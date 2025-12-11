@@ -41,11 +41,7 @@ namespace TDD_Bank
             {"DKK",  0.68m}
         };
 
-        //internal static List<TransferLog> TransferHistory = new List<TransferLog>();
         internal static List<Loan> ActiveLoans = new List<Loan>();
-        //internal static List<Loan> ActiveLoans = new List<Loan>();
         public static List<PendingTrans> TransferQueue = new List<PendingTrans>();
-        
-
     }
 }
