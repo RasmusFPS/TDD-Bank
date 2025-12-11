@@ -81,7 +81,7 @@ namespace TDD_Bank
 
         internal void UserLog()
         {
-            Console.WriteLine("User Log: ");
+            UI.PrintMessage("User Log: ");
 
             foreach (var i in Data.UserCollection)
             {
