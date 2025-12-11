@@ -219,7 +219,7 @@ namespace TDD_Bank
                     account.AccountNumber,
                     accounttype));
             }
-            Console.WriteLine("");
+            UI.PrintMessage("");
         }
 
         internal static int GetAccountNumber()
