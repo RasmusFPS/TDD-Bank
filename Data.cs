@@ -14,6 +14,7 @@ namespace TDD_Bank
 
         public static Client carl = new Client("Carl", "Hawaa", false, 3, false);
         public static Client bob = new Client("Bob", "123", false, 3, false);
+        public static Client rasmu = new Client("Rasmu","123",false,3,false);
 
         static Data()
         {
@@ -29,7 +30,8 @@ namespace TDD_Bank
         {
             new Admin( "Admin-Johan", "1234", true, 3),
             bob,
-            carl
+            carl,
+            rasmu
         };
         
         //Dicitonary containing all currencies

@@ -152,6 +152,14 @@ namespace TDD_Bank
             {
 
                 UI.ShowAccounts(client);
+                Console.Clear();
+                if(client.Accounts.Count == 0)
+                {
+                    UI.ErrorMessage("You Have no Accounts, Can't Use This Function.");
+                    Thread.Sleep(3000);
+                    keepTrying = false;
+                    break;
+                }
                 var accountNumber = UI.GetAccountNumber();
                 var amount = UI.GetDecimal();
                 Account account = client.GetAccount(accountNumber);
@@ -189,6 +197,15 @@ namespace TDD_Bank
             {
 
                 UI.ShowAccounts(client);
+                Console.Clear();
+                if (client.Accounts.Count == 0)
+                {
+                    UI.ErrorMessage("You Have no Accounts, Can't Use This Function.");
+                    Thread.Sleep(3000);
+                    keepTrying = false;
+                    break;
+                }
+
                 var accountNumber = UI.GetAccountNumber();
                 var amount = UI.GetDecimal();
                 Account account = client.GetAccount(accountNumber);

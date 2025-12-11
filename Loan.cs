@@ -78,7 +78,15 @@ namespace TDD_Bank
         {
             UI.ShowAccounts(client);
 
+
+
             Account foundAccount = null;
+            if (client.Accounts.Count == 0)
+            {
+                Thread.Sleep(3000);
+                return foundAccount;
+            }
+
 
             //loop until a valid account is chosen
             while (foundAccount == null)
@@ -91,7 +99,7 @@ namespace TDD_Bank
                     continue;
                 }
 
-                //search throug account 
+                //search through account 
                 foreach (var account in client.Accounts)
                 {
                     if (account.AccountNumber == accountNumberChoice)
@@ -136,6 +144,12 @@ namespace TDD_Bank
         }
         internal static bool ApplyForLoan(Client client)
         {
+            if(client.Accounts.Count == 0)
+            {
+                UI.ErrorMessage("You Have no Accounts, Can't Use This Function.");
+                Thread.Sleep(2000);
+                return false;
+            }
             if (HasActiveLoan(client))
             {
                 return false;
