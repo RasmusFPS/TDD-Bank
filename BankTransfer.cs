@@ -12,6 +12,15 @@ namespace TDD_Bank
             {
                 bool success = true;
                 UI.ShowAccounts(client);
+                Console.Clear();
+                if (client.Accounts.Count == 0)
+                {
+                    UI.ErrorMessage("You Have no Accounts, Can't Use This Function.");
+                    Thread.Sleep(3000);
+                    keepTrying = false;
+                    break;
+                }
+
 
                 Account? fromAccount = GetFromAccount(client);
                 if (fromAccount == null)
@@ -184,6 +193,14 @@ namespace TDD_Bank
             {
                 bool success = true;
                 UI.ShowAccounts(sender);
+                Console.Clear();
+                if (sender.Accounts.Count == 0)
+                {
+                    UI.ErrorMessage("You Have no Accounts, Can't Use This Function.");
+                    Thread.Sleep(3000);
+                    keepTrying = false;
+                    break;
+                }
 
                 //choose account to send from
                 Account? fromAccount = GetFromAccount(sender);
