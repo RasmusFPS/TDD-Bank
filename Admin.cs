@@ -199,7 +199,8 @@ namespace TDD_Bank
             }
             else if (choice == "SEK")
             {
-                UI.ErrorMessage("You Can't Change This Currency. ");
+                UI.ErrorMessage("You Cannot Change This Currency");
+                Thread.Sleep(600);
             }
             else if (!Data.Currency.ContainsKey(choice))
             {
