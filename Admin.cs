@@ -239,7 +239,7 @@ namespace TDD_Bank
             else
             {
                 UI.ErrorMessage($"{choice} Does Not Match Any Currency Supported By TDD. ");
-                Thread.Sleep(1200);
+                Thread.Sleep(3000);
             }
         }
     }
