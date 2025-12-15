@@ -12,26 +12,28 @@ namespace TDD_Bank
         public static DateTime Runtime;
         public static decimal _loanInterest = 0.05m;
 
-        public static Client carl = new Client("Carl", "Hawaa", false, 3, false);
+        public static Client anna = new Client("Anna", "123", false, 3, false);
         public static Client bob = new Client("Bob", "123", false, 3, false);
-        public static Client rasmu = new Client("Rasmu","123",false,3,false);
+        public static Client louise = new Client("Louise","123",false,3,false);
 
         static Data()
         {
             Runtime = DateTime.Now.AddMinutes(1);
-            carl.Accounts.Add(new Account(500, "SEK"));
-            carl.Accounts.Add(new SavingAccount(500, "SEK", 0.02m));
+            anna.Accounts.Add(new Account(500, "SEK"));
+            anna.Accounts.Add(new SavingAccount(500, "SEK", 0.02m));
 
             bob.Accounts.Add(new Account(500, "SEK"));
             bob.Accounts.Add(new SavingAccount(500, "SEK", 0.02m));
+
+            louise.Accounts.Add(new Account(100, "SEK"));
         }
         
         public static List<User> UserCollection = new List<User>()
         {
-            new Admin( "Admin-Johan", "1234", true, 3),
+            new Admin( "Admin-Fanny", "1234", true, 3),
             bob,
-            carl,
-            rasmu
+            anna,
+            louise
         };
         
         //Dicitonary containing all currencies
