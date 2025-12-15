@@ -6,10 +6,10 @@ namespace TDD_Bank
 {
     internal class Bank
     {
-        public int attempts = 0;
+        internal int attempts = 0;
         private User _loggedin;
 
-        public void Run()
+        internal void Run()
         {
             bool exit = false;
             while (!exit)
@@ -53,7 +53,7 @@ namespace TDD_Bank
             while (!signedIn)
             {
                 string username = UI.GetUsername();
-                string userPassword = UI.GetPassword();
+                string? userPassword = UI.GetPassword();
                 foreach (User user in Data.UserCollection)
                 {
                     if (user.Tries == 0)
@@ -95,7 +95,7 @@ namespace TDD_Bank
 
         private void RunClientDashboard()
         {
-            Client currentclient = _loggedin as Client;
+            Client? currentclient = _loggedin as Client;
 
             if (currentclient == null) return;
             bool temp = true;
@@ -104,7 +104,7 @@ namespace TDD_Bank
                 BankTransfer.CheckQueue();
                 Console.Clear();
 
-                string choice = UI.PrintedSignInMenu(currentclient);
+                string? choice = UI.PrintedSignInMenu(currentclient);
                 Console.Clear();
                 switch (choice)
                 {
@@ -164,7 +164,7 @@ namespace TDD_Bank
                 }
                 var accountNumber = UI.GetAccountNumber();
                 var amount = UI.GetDecimal();
-                Account account = client.GetAccount(accountNumber);
+                Account? account = client.GetAccount(accountNumber);
 
                 if (account != null)
                 {
@@ -211,7 +211,7 @@ namespace TDD_Bank
 
                 var accountNumber = UI.GetAccountNumber();
                 var amount = UI.GetDecimal();
-                Account account = client.GetAccount(accountNumber);
+                Account? account = client.GetAccount(accountNumber);
 
                 if (account != null)
                 {
@@ -245,7 +245,7 @@ namespace TDD_Bank
             {
                 UI.PrintMessage("What Type of Account do You Want to Open?");
                 UI.PrintMessage("1.Bank Account\n2.Saving Account");
-                string input = Console.ReadLine();
+                string? input = Console.ReadLine();
                 switch (input)
                 {
                     case "1":

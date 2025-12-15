@@ -9,8 +9,8 @@ namespace TDD_Bank
 {
     internal class SavingAccount : Account
     {
-        public decimal IntrestRate = 1.02m;
-        public SavingAccount(decimal initalbalance, string Currency, decimal intrestrate) : base(initalbalance, Currency)
+        internal decimal IntrestRate = 1.02m;
+        internal SavingAccount(decimal initalbalance, string Currency, decimal intrestrate) : base(initalbalance, Currency)
         {
             IntrestRate = intrestrate;
         }

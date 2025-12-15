@@ -62,7 +62,7 @@ namespace TDD_Bank
 
         internal static string GetUsername()
         {
-            string username = null;
+            string? username = null;
             bool correctUsername = false;
             while (!correctUsername)
             {
@@ -88,10 +88,10 @@ namespace TDD_Bank
             return username;
         }
 
-        internal static string GetPassword()
+        internal static string? GetPassword()
         {
             bool emptyPassword = true;
-            string userPassword = null;
+            string? userPassword = null;
             while (emptyPassword)
             {
                 Console.Write("Password: ");
@@ -112,7 +112,7 @@ namespace TDD_Bank
             return userPassword;
         }
 
-        public static string PrintedSignInMenu(Client client)
+        internal static string? PrintedSignInMenu(Client client)
         {
             Console.ForegroundColor = ConsoleColor.White;
             PrintMessage("1. Show My Accounts");
@@ -284,11 +284,11 @@ namespace TDD_Bank
             Console.ReadKey();
         }
 
-        internal static string GetCurrency()
+        internal static string? GetCurrency()
         {
             int choice;
             var listCurrency = Data.Currency.Keys.ToList();
-            string input = null;
+            string? input = null;
             bool validInput = false;
             while (!validInput)
             {
